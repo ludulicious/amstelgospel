@@ -1,0 +1,47 @@
+title: Amstel Gospel Choir — Voel de muziek. Deel de energie.
+description: Gospel, pop en soul uit Amstelveen. Ontdek Amstel Gospel Choir, bezoek onze concerten of boek ons voor jouw bijzondere moment.
+eyebrow: Amstelveen • Gospel, pop & soul
+headline:
+  - Voel de
+  - muziek.
+  - Deel de energie.
+intro: Van de eerste noot tot dat ene kippenvelmoment. Wij zijn Amstel Gospel Choir. En samen maken we er een feestje van.
+hero:
+  src: /images/gallery-06.jpg
+  alt: Zangers van Amstel Gospel Choir met hun armen omhoog tijdens een energiek kerstconcert
+imageLabel: Dit is hoe plezier klinkt.
+primary:
+  label: Beleef ons live
+  to: /agenda
+secondary:
+  label: Ontdek het koor
+  to: /over-ons
+strip:
+  - Gospel met een groove
+  - Pop met een ziel
+  - Samen klinkt het beter
+about:
+  title: Veel stemmen. Eén groot hart.
+  text: Swingende gospel, pop met een gospeltintje en ballads die je even stil maken. Onder leiding van Vladimir Pairel zingen we met alles wat we hebben. Voor elkaar. Voor jou. Voor het plezier.
+  image:
+    src: /images/gallery-11.jpg
+    alt: De leden van Amstel Gospel Choir samen buiten in de lente van 2026
+  link:
+    label: Dit zijn wij
+    to: /over-ons
+concert:
+  eyebrow: 18 & 19 december 2026 · Amstelveen
+  title: A Season of Kindness.
+  text: In december brengen we onze kerstconcerten naar de Urbanuskerk in Amstelveen. Warmte, samenzang en een flinke dosis gospel. Zet 18 en 19 december alvast in je agenda.
+  image:
+    src: /images/gallery-10.jpg
+    alt: Amstel Gospel Choir zingt tijdens een kerstconcert
+  link:
+    label: Alles over de concerten
+    to: /agenda/kerstconcerten-2026
+join:
+  title: Jouw dinsdag kan wel wat gospel gebruiken.
+  text: Samen zingen geeft energie. Kom luisteren, zing mee en ontdek of onze AGC-familie bij je past. Er is nu een wachtlijst, maar een repetitie bezoeken kan altijd.
+  link:
+    label: Kom een keer meezingen
+    to: /meezingen

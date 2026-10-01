@@ -1,0 +1,30 @@
+---
+title: Veel stemmen. Eén groot hart.
+description: Ontmoet Amstel Gospel Choir uit Amstelveen. Gospel, pop, soul en ballads onder leiding van Vladimir Pairel.
+eyebrow: Aangenaam, wij zijn AGC
+layout: story
+image:
+  src: /images/gallery-11.jpg
+  alt: Amstel Gospel Choir samen in het groen in april 2026
+action:
+  label: Kom een keer meezingen
+  to: /meezingen
+---
+
+## Muziek die je meeneemt.
+
+Wij zijn Amstel Gospel Choir. Ons repertoire gaat van swingende gospelsongs en moderne pop met een gospeltintje tot ballads met een warme gospelsound. Muziek om op te bewegen én muziek die raakt.
+
+Op het podium maken we van een evenement een belevenis. Een feest, een bruiloft of een bijzonder afscheid: we kiezen de songs die bij het moment passen.
+
+## Onder leiding van Vladimir Pairel.
+
+Onze gepassioneerde dirigent Vladimir Pairel leert ons gospel zingen. Tijdens de repetities werken we samen aan stemtechniek, ademsteun en beleving. Met enthousiasme, aandacht en vooral heel veel plezier.
+
+Elke dinsdagavond repeteren we in Amstelveen. Een avond samen zingen geeft energie en ontspanning. Dat gevoel nemen we mee het podium op.
+
+## Iedereen verstaat muziek.
+
+Ook als je geen Nederlands spreekt, ben je welkom. Er zingen Engelstalige leden mee in ons koor. We noemen het niet voor niets onze AGC-familie.
+
+**English speaking?** You are welcome to join a rehearsal. We sing gospel and pop music together every Tuesday evening in Amstelveen. Visit our [joining page](/meezingen#english) for the practical details.

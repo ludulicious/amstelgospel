@@ -1,0 +1,29 @@
+/* Hallmark · macrostructure: Manifesto · theme: Carnival · tone: joyful live music · anchor hue: plum · nav: N7 · footer: Ft5 */
+:root {
+  --color-paper: oklch(97% 0.018 88);
+  --color-ink: oklch(25% 0.045 310);
+  --color-muted: oklch(45% 0.035 310);
+  --color-accent: oklch(93% 0.16 120);
+  --color-accent-2: oklch(78% 0.14 32);
+  --color-pink: oklch(92% 0.042 350);
+  --color-rule: oklch(82% 0.025 80);
+  --color-ink-soft: oklch(34% 0.045 310);
+  --color-overlay: oklch(25% 0.045 310 / 0.2);
+  --color-focus: oklch(50% 0.2 295);
+  --font-display: 'Big Shoulders Variable', 'Arial Narrow', sans-serif;
+  --font-body: 'DM Sans Variable', Arial, sans-serif;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --page-gutter: clamp(20px, 4.5vw, 80px);
+}

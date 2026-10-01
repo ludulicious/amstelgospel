@@ -1,0 +1,18 @@
+{
+  "content/home.yml": "/",
+  "content/faq.yml": ["/veelgestelde-vragen", "/boeken"],
+  "content/settings/site.yml": ["/", "/meezingen", "/boeken", "/steun-ons"],
+  "content/media/photos.yml": "/kijk-en-luister",
+  "content/media/videos.yml": "/kijk-en-luister",
+  "content/pages/agenda.md": "/agenda",
+  "content/pages/boeken.md": "/boeken",
+  "content/pages/kijk-en-luister.md": "/kijk-en-luister",
+  "content/pages/meezingen.md": "/meezingen",
+  "content/pages/over-ons.md": "/over-ons",
+  "content/pages/privacy.md": "/privacy",
+  "content/pages/steun-ons.md": "/steun-ons",
+  "content/pages/veelgestelde-vragen.md": "/veelgestelde-vragen",
+  "content/events/avond-vol-herinneringen.md": "/agenda/avond-vol-herinneringen",
+  "content/events/kerstconcerten-2026.md": "/agenda/kerstconcerten-2026",
+  "content/events/ride-for-the-roses.md": "/agenda/ride-for-the-roses"
+}
