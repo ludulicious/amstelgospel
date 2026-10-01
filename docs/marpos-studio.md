@@ -29,7 +29,7 @@ Maak een document in **Events**. Gebruik de datumvorm `2026-12-18` en vul bij me
 
 Een bestand `content/events/mijn-concert.md` krijgt de route `/agenda/mijn-concert`. De build neemt alle concertbestanden mee, ook concerten uit het verleden.
 
-De homepage-concertpromotie is bewust redactioneel: pas ook het blok `concert` in **Home** aan wanneer je een volgend evenement wilt uitlichten.
+De homepage opent met het concertblok. Deze concertpromotie is bewust redactioneel: pas ook het blok `concert` in **Home** aan wanneer je een volgend evenement wilt uitlichten.
 
 ## Nieuwe pagina
 

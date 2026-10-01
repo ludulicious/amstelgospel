@@ -7,23 +7,42 @@ useSeoMeta({
   description: () => home.value?.description,
   ogTitle: () => home.value?.title,
   ogDescription: () => home.value?.description,
-  ogImage: () => home.value?.hero.src,
+  ogImage: () => home.value?.concert.image.src,
   twitterCard: 'summary_large_image',
 })
 </script>
 <template>
   <div v-if="home">
+    <section class="concert-feature page-pad">
+      <div class="concert-copy">
+        <p class="eyebrow">{{ home.concert.eyebrow }}</p>
+        <h1>{{ home.concert.title }}</h1>
+        <p>{{ home.concert.text }}</p>
+        <NuxtLink class="button button-lime" :to="home.concert.link.to"
+          >{{ home.concert.link.label }}<UIcon name="i-lucide-arrow-up-right"
+        /></NuxtLink>
+      </div>
+      <div class="concert-photo">
+        <img
+          :src="home.concert.image.src"
+          :alt="home.concert.image.alt"
+          width="800"
+          height="534"
+          fetchpriority="high"
+        /><span class="concert-label">KERST MET AGC</span>
+      </div>
+    </section>
     <section class="home-hero page-pad">
       <div class="hero-copy">
         <p class="eyebrow"><span class="live-dot" />{{ home.eyebrow }}</p>
-        <h1>
+        <h2>
           <span
             v-for="(line, i) in home.headline"
             :key="line"
             :class="{ 'hero-highlight': i === 2 }"
             >{{ line }}</span
           >
-        </h1>
+        </h2>
         <p class="hero-intro">{{ home.intro }}</p>
         <div class="hero-actions">
           <NuxtLink class="button button-ink" :to="home.primary.to"
@@ -41,7 +60,7 @@ useSeoMeta({
             :alt="home.hero.alt"
             width="800"
             height="533"
-            fetchpriority="high"
+            loading="lazy"
           /><span class="photo-number" aria-hidden="true">AGC / LIVE</span>
         </div>
         <div class="hero-sticker" aria-hidden="true">
@@ -74,25 +93,6 @@ useSeoMeta({
         <NuxtLink class="text-link" :to="home.about.link.to"
           >{{ home.about.link.label }}<UIcon name="i-lucide-arrow-up-right"
         /></NuxtLink>
-      </div>
-    </section>
-    <section class="concert-feature page-pad">
-      <div class="concert-copy">
-        <p class="eyebrow">{{ home.concert.eyebrow }}</p>
-        <h2>{{ home.concert.title }}</h2>
-        <p>{{ home.concert.text }}</p>
-        <NuxtLink class="button button-lime" :to="home.concert.link.to"
-          >{{ home.concert.link.label }}<UIcon name="i-lucide-arrow-up-right"
-        /></NuxtLink>
-      </div>
-      <div class="concert-photo">
-        <img
-          :src="home.concert.image.src"
-          :alt="home.concert.image.alt"
-          width="800"
-          height="534"
-          loading="lazy"
-        /><span class="concert-label">KERST MET AGC</span>
       </div>
     </section>
     <section class="agenda-section page-pad">

@@ -248,15 +248,15 @@ p {
   background: var(--color-ink);
   border-radius: 100%;
 }
-.hero-copy h1 {
+.hero-copy h2 {
   font-size: clamp(80px, 10vw, 156px);
   margin: var(--space-6) 0 var(--space-8);
   letter-spacing: -0.035em;
 }
-.hero-copy h1 > span {
+.hero-copy h2 > span {
   display: block;
 }
-.hero-copy h1 .hero-highlight {
+.hero-copy h2 .hero-highlight {
   font-size: 0.37em;
   letter-spacing: -0.01em;
   background: var(--color-accent);
@@ -400,7 +400,7 @@ p {
   gap: var(--space-20);
   align-items: center;
 }
-.concert-copy h2 {
+.concert-copy h1 {
   font-size: clamp(56px, 6.5vw, 96px);
   max-width: 10ch;
   margin: var(--space-5) 0 var(--space-6);
@@ -932,7 +932,7 @@ dd {
   .home-hero {
     gap: var(--space-8);
   }
-  .hero-copy h1 {
+  .hero-copy h2 {
     font-size: 112px;
   }
   .hero-photo {
@@ -981,7 +981,7 @@ dd {
     padding-bottom: var(--space-12);
     gap: var(--space-6);
   }
-  .hero-copy h1 {
+  .hero-copy h2 {
     font-size: clamp(68px, 12vw, 100px);
   }
   .hero-photo {
@@ -997,7 +997,7 @@ dd {
   .hero-sticker {
     top: 4px;
   }
-  .hero-copy h1 .hero-highlight {
+  .hero-copy h2 .hero-highlight {
     font-size: 0.36em;
   }
   .music-strip {
@@ -1014,7 +1014,7 @@ dd {
     gap: var(--space-10);
     padding-block: var(--space-16);
   }
-  .concert-copy h2 {
+  .concert-copy h1 {
     font-size: 64px;
   }
   .concert-feature .button {
@@ -1057,7 +1057,7 @@ dd {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-10);
   }
-  .hero-copy h1 {
+  .hero-copy h2 {
     font-size: clamp(90px, 23vw, 132px);
     margin-top: var(--space-5);
     margin-bottom: var(--space-6);
@@ -1112,7 +1112,7 @@ dd {
   .concert-photo img {
     aspect-ratio: 1.25;
   }
-  .concert-copy h2 {
+  .concert-copy h1 {
     font-size: 72px;
   }
   .concert-label {
