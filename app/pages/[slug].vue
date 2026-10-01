@@ -3,7 +3,7 @@ definePageMeta({ key: (route) => route.path })
 const route = useRoute()
 const contentPath = route.path.replace(/\/+$/, '') || '/'
 const { data: page } = await useAsyncData(`page-${contentPath}`, () =>
-  queryCollection('pages').path(contentPath).first(),
+  queryCollection('information').path(contentPath).first(),
 )
 if (!page.value)
   throw createError({
@@ -12,7 +12,12 @@ if (!page.value)
   })
 const { data: site } = await useChoir()
 const { data: faq } = await useAsyncData('faq', () =>
-  queryCollection('faq').first(),
+  queryCollection('faq').order('order', 'ASC').order('id', 'ASC').all(),
+)
+const faqItems = computed(() =>
+  (faq.value || [])
+    .filter((item) => page.value?.layout !== 'booking' || item.showOnBooking)
+    .map((item) => ({ label: item.title, content: item.content })),
 )
 const showPast = ref(false)
 useSeoMeta({
@@ -185,9 +190,7 @@ useSeoMeta({
       >
         <h2 v-if="page.layout === 'booking'">Alvast een antwoord.</h2>
         <UAccordion
-          :items="
-            page.layout === 'booking' ? faq?.items.slice(0, 4) : faq?.items
-          "
+          :items="faqItems"
           :ui="{
             trigger: 'text-lg py-5 cursor-pointer font-bold',
             body: 'text-base pb-5 leading-relaxed',

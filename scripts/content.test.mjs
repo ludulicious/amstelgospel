@@ -8,10 +8,14 @@ const read = (file) =>
 const files = [
   'content/home.yml',
   'content/settings/site.yml',
-  'content/faq.yml',
-  'content/media/photos.yml',
-  'content/media/videos.yml',
-  ...['pages', 'events'].flatMap((dir) =>
+  ...[
+    'information',
+    'events',
+    'photos',
+    'videos',
+    'faq',
+    'photo-categories',
+  ].flatMap((dir) =>
     readdirSync(new URL(`../content/${dir}`, import.meta.url)).map(
       (file) => `content/${dir}/${file}`,
     ),
@@ -73,11 +77,37 @@ test('concerts have ISO dates, chronological ranges and no ticket link for priva
 })
 test('all 30 source gallery photos and 8 source videos were migrated', () => {
   assert.equal(
-    docs.find((d) => d.file.endsWith('photos.yml')).data.photos.length,
+    docs.filter((d) => d.file.startsWith('content/photos/')).length,
     30,
   )
   assert.equal(
-    docs.find((d) => d.file.endsWith('videos.yml')).data.videos.length,
+    docs.filter((d) => d.file.startsWith('content/videos/')).length,
     8,
   )
+})
+
+test('photo categories have unique keys and every photo uses a defined category', () => {
+  const categories = docs.filter((d) =>
+    d.file.startsWith('content/photo-categories/'),
+  )
+  const keys = new Set(categories.map((d) => d.data.key))
+  assert.equal(keys.size, categories.length)
+  for (const { file, data } of categories)
+    assert.match(data.key, /^[a-z0-9]+(?:-[a-z0-9]+)*$/, file)
+  for (const { file, data } of docs.filter((d) =>
+    d.file.startsWith('content/photos/'),
+  ))
+    assert.ok(
+      keys.has(data.category),
+      `${file}: unknown category ${data.category}`,
+    )
+})
+test('FAQ migration keeps ten questions and four booking answers', () => {
+  const questions = docs.filter((d) => d.file.startsWith('content/faq/'))
+  assert.equal(questions.length, 10)
+  assert.equal(questions.filter((d) => d.data.showOnBooking).length, 4)
+  for (const { data } of questions) {
+    assert.ok(data.title && data.content)
+    assert.equal(typeof data.showOnBooking, 'boolean')
+  }
 })

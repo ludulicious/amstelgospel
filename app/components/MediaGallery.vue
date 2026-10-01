@@ -1,12 +1,21 @@
 <script setup lang="ts">
 const { data: data } = await useAsyncData('photos', () =>
-  queryCollection('photos').first(),
+  queryCollection('photos').order('order', 'ASC').order('id', 'ASC').all(),
 )
-const category = ref('Alles')
-const categories = ['Alles', 'Concerten', 'Samen', 'Achter de schermen']
+const { data: photoCategories } = await useAsyncData('photo-categories', () =>
+  queryCollection('photo_categories')
+    .order('order', 'ASC')
+    .order('id', 'ASC')
+    .all(),
+)
+const category = ref('')
+const categories = computed(() => [
+  { key: '', title: 'Alles' },
+  ...(photoCategories.value || []),
+])
 const photos = computed(() =>
-  (data.value?.photos || []).filter(
-    (p) => category.value === 'Alles' || p.category === category.value,
+  (data.value || []).filter(
+    (p) => !category.value || p.category === category.value,
   ),
 )
 const isOpen = ref(false)
@@ -34,12 +43,12 @@ watch(category, () => {
     <div class="filter-buttons" aria-label="Filter foto's">
       <UButton
         v-for="item in categories"
-        :key="item"
-        :variant="category === item ? 'solid' : 'outline'"
+        :key="item.key"
+        :variant="category === item.key ? 'solid' : 'outline'"
         color="neutral"
-        :aria-pressed="category === item"
-        @click="category = item"
-        >{{ item }}</UButton
+        :aria-pressed="category === item.key"
+        @click="category = item.key"
+        >{{ item.title }}</UButton
       >
     </div>
     <div class="photo-grid">
@@ -57,13 +66,13 @@ watch(category, () => {
           loading="lazy"
           width="800"
           height="533"
-        /><span>{{ photo.caption }} <UIcon name="i-lucide-expand" /></span>
+        /><span>{{ photo.title }} <UIcon name="i-lucide-expand" /></span>
       </button>
     </div>
     <UModal
       v-if="isOpen"
       v-model:open="isOpen"
-      :title="selected?.caption"
+      :title="selected?.title"
       :description="selected?.credit || 'Amstel Gospel Choir'"
       :ui="{ content: 'max-w-5xl' }"
       ><template #body

@@ -5,6 +5,8 @@ const image = z.object({
   alt: z.string(),
 })
 const link = z.object({ label: z.string(), to: z.string() })
+// Nuxt Content maps integer schemas to TEXT; use number for numeric SQL sorting.
+const sortOrder = z.number().nonnegative().default(0)
 export default defineContentConfig({
   collections: {
     home: defineCollection({
@@ -32,9 +34,9 @@ export default defineContentConfig({
         join: z.object({ title: z.string(), text: z.string(), link }),
       }),
     }),
-    pages: defineCollection({
+    information: defineCollection({
       type: 'page',
-      source: { include: 'pages/*.md', prefix: '/' },
+      source: { include: 'information/*.md', prefix: '/' },
       schema: z.object({
         title: z.string(),
         description: z.string(),
@@ -73,32 +75,45 @@ export default defineContentConfig({
     }),
     photos: defineCollection({
       type: 'data',
-      source: 'media/photos.yml',
+      source: 'photos/*.yml',
       schema: z.object({
-        photos: z.array(
-          z.object({
-            image,
-            caption: z.string(),
-            category: z.enum(['Concerten', 'Samen', 'Achter de schermen']),
-            credit: z.string().optional(),
-          }),
-        ),
+        title: z.string().min(1),
+        order: sortOrder,
+        image,
+        category: z
+          .string()
+          .min(1)
+          .describe('Key from Photo Categories, e.g. concerten'),
+        credit: z.string().optional(),
+      }),
+    }),
+    photo_categories: defineCollection({
+      type: 'data',
+      source: 'photo-categories/*.yml',
+      schema: z.object({
+        title: z.string().min(1),
+        key: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+        order: sortOrder,
       }),
     }),
     videos: defineCollection({
       type: 'data',
-      source: 'media/videos.yml',
+      source: 'videos/*.yml',
       schema: z.object({
-        videos: z.array(
-          z.object({ title: z.string(), youtubeId: z.string(), image }),
-        ),
+        title: z.string().min(1),
+        order: sortOrder,
+        youtubeId: z.string().regex(/^[A-Za-z0-9_-]{11}$/),
+        image,
       }),
     }),
     faq: defineCollection({
       type: 'data',
-      source: 'faq.yml',
+      source: 'faq/*.yml',
       schema: z.object({
-        items: z.array(z.object({ label: z.string(), content: z.string() })),
+        title: z.string().min(1),
+        content: z.string().min(1),
+        order: sortOrder,
+        showOnBooking: z.boolean().default(false),
       }),
     }),
     site: defineCollection({

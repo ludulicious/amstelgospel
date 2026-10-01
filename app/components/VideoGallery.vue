@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data: data } = await useAsyncData('videos', () =>
-  queryCollection('videos').first(),
+  queryCollection('videos').order('order', 'ASC').order('id', 'ASC').all(),
 )
 const active = ref<number | null>(null)
 </script>
@@ -16,7 +16,7 @@ const active = ref<number | null>(null)
     </p>
     <div class="video-grid">
       <div
-        v-for="(video, index) in data?.videos"
+        v-for="(video, index) in data"
         :key="video.youtubeId"
         class="video-item"
       >

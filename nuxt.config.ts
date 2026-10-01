@@ -2,7 +2,7 @@ import { readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
 const contentRoot = fileURLToPath(new URL('./content/', import.meta.url))
-const contentRoutes = ['pages', 'events'].flatMap((folder) =>
+const contentRoutes = ['information', 'events'].flatMap((folder) =>
   readdirSync(`${contentRoot}${folder}`)
     .filter((file) => file.endsWith('.md'))
     .map(
