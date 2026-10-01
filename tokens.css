@@ -3,7 +3,14 @@
   --color-paper: oklch(97% 0.018 88);
   --color-ink: oklch(25% 0.045 310);
   --color-muted: oklch(45% 0.035 310);
-  --color-accent: oklch(93% 0.16 120);
+  --color-accent: oklch(80% 0.135 85);
+  --color-gold-light: oklch(93% 0.075 88);
+  --color-gold-deep: oklch(70% 0.125 78);
+  --color-gold-dust: oklch(80% 0.135 85 / 0.22);
+  --color-clear: transparent;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-reveal: 900ms;
+  --dur-hover: 240ms;
   --color-accent-2: oklch(78% 0.14 32);
   --color-pink: oklch(92% 0.042 350);
   --color-rule: oklch(82% 0.025 80);

@@ -40,7 +40,13 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'nl' },
-      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/images/amstel-gospel-choir-logo.png',
+        },
+      ],
       meta: [{ name: 'theme-color', content: '#291b32' }],
     },
   },

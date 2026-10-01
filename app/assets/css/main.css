@@ -1256,3 +1256,480 @@ dd {
     transition: none !important;
   }
 }
+
+/* Hallmark · pre-emit critique: P4 H5 E4 S5 R4 V3
+ * Festive homepage refresh · existing Manifesto layout · plum + warm gold
+ */
+.button-gold,
+.homepage .concert-label,
+.homepage .hero-highlight {
+  background: linear-gradient(
+    115deg,
+    var(--color-gold-deep),
+    var(--color-accent) 28%,
+    var(--color-gold-light) 48%,
+    var(--color-accent) 68%,
+    var(--color-gold-deep)
+  );
+  color: var(--color-ink);
+}
+.homepage .concert-feature {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background-image: radial-gradient(
+    ellipse at 82% 24%,
+    var(--color-gold-dust),
+    var(--color-clear) 65%
+  );
+}
+.homepage .concert-copy {
+  position: relative;
+  z-index: 3;
+}
+.homepage .concert-photo {
+  position: relative;
+  z-index: 1;
+}
+.homepage .concert-copy h1 {
+  color: var(--color-gold-light);
+}
+.homepage .concert-copy .eyebrow {
+  color: var(--color-accent);
+}
+.homepage .concert-photo::before,
+.homepage .concert-photo::after {
+  content: '';
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  background: var(--color-gold-light);
+  clip-path: polygon(
+    50% 0,
+    58% 42%,
+    100% 50%,
+    58% 58%,
+    50% 100%,
+    42% 58%,
+    0 50%,
+    42% 42%
+  );
+  pointer-events: none;
+}
+.homepage .concert-photo::before {
+  top: -29px;
+  right: var(--space-6);
+}
+.homepage .concert-photo::after {
+  width: 30px;
+  height: 30px;
+  bottom: var(--space-10);
+  left: -15px;
+}
+.homepage .concert-label {
+  bottom: -16px;
+}
+.concert-sparkles {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.concert-sparkle {
+  position: absolute;
+  left: var(--star-x);
+  top: var(--star-y);
+  width: var(--star-size);
+  height: var(--star-size);
+  background: var(--color-accent);
+  clip-path: polygon(
+    50% 0,
+    58% 42%,
+    100% 50%,
+    58% 58%,
+    50% 100%,
+    42% 58%,
+    0 50%,
+    42% 42%
+  );
+  opacity: 0.35;
+  animation: golden-twinkle 5s ease-in-out var(--star-delay) infinite;
+}
+.motion-toggle {
+  position: absolute;
+  bottom: var(--space-4);
+  left: var(--page-gutter);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-2) 0;
+  color: var(--color-paper);
+  font-size: 11px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.motion-toggle span {
+  color: var(--color-accent);
+  font-size: 13px;
+}
+.homepage .button {
+  position: relative;
+  overflow: clip;
+}
+.homepage .button-gold::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    var(--color-clear) 30%,
+    var(--color-gold-light) 50%,
+    var(--color-clear) 70%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+.homepage .button-gold:hover::after,
+.homepage .button-gold:focus-visible::after {
+  animation: gold-sheen 850ms var(--ease-out);
+}
+.homepage .button .iconify,
+.homepage .event-arrow {
+  transition: transform var(--dur-hover) var(--ease-out);
+}
+.homepage .button:hover .iconify,
+.homepage .event-row:hover .event-arrow {
+  transform: translate(3px, -3px);
+}
+.homepage .hero-sticker {
+  background: var(--color-accent);
+  animation: sticker-sway 7s ease-in-out infinite;
+}
+.homepage .is-revealed {
+  animation: stage-entrance var(--dur-reveal) var(--ease-out) both;
+}
+.homepage .intro-photo.is-revealed {
+  animation-name: photo-entrance;
+}
+.homepage.motion-paused *,
+.homepage.motion-paused *::before,
+.homepage.motion-paused *::after {
+  animation-play-state: paused !important;
+}
+/* Keep copy visible even when an entrance is paused before its first frame. */
+.homepage.motion-paused .is-revealed {
+  animation: none;
+}
+@keyframes golden-twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+}
+@keyframes gold-sheen {
+  to {
+    transform: translateX(120%);
+  }
+}
+@keyframes sticker-sway {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-12deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-7deg);
+  }
+}
+@keyframes stage-entrance {
+  from {
+    opacity: 0.25;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes photo-entrance {
+  from {
+    opacity: 0.25;
+    transform: translateY(22px) rotate(-3deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(-3deg);
+  }
+}
+@media (max-width: 600px) {
+  .homepage .concert-photo::before {
+    width: 42px;
+    height: 42px;
+    top: -21px;
+  }
+  .homepage .concert-feature {
+    padding-bottom: var(--space-24);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .homepage *,
+  .homepage *::before,
+  .homepage *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .motion-toggle {
+    display: none;
+  }
+}
+
+/* Concert motion: drifting gold, rhythmic type, and a continuous music ribbon. */
+.homepage .concert-sparkle {
+  animation: gold-drift 8s ease-in-out var(--star-delay) infinite;
+}
+.homepage .concert-sparkle:nth-child(3n) {
+  background: var(--color-gold-light);
+  animation-duration: 11s;
+}
+.homepage .concert-sparkle:nth-child(4n + 1) {
+  clip-path: none;
+  border-radius: 50%;
+}
+.concert-photo-viewport {
+  overflow: clip;
+}
+.homepage .concert-label {
+  animation: concert-tag 6s ease-in-out infinite;
+}
+.homepage .concert-photo::before {
+  animation: star-turn 12s ease-in-out infinite;
+}
+.homepage .concert-photo::after {
+  animation: star-turn 9s ease-in-out -3s infinite;
+}
+.entrance-word {
+  display: inline-block;
+  white-space: pre;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.homepage .concert-copy.is-revealed .entrance-word {
+  animation: headline-arrival 1100ms var(--ease-out) var(--word-delay) both;
+}
+.homepage .hero-copy.is-revealed h2 > span:not(.hero-highlight) {
+  animation: headline-arrival 1100ms var(--ease-out) both;
+}
+.homepage .hero-copy.is-revealed h2 > span:nth-child(2) {
+  animation-delay: 150ms;
+}
+.homepage .hero-copy.is-revealed .hero-highlight {
+  animation: highlight-arrival 1100ms var(--ease-out) 300ms both;
+}
+.homepage .hero-sticker {
+  animation-duration: 4s;
+}
+.sound-bars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 32px;
+  margin-bottom: var(--space-2);
+}
+.sound-bars i {
+  display: block;
+  width: 4px;
+  height: 28px;
+  background: var(--color-ink);
+  border-radius: 2px;
+  animation: sound-beat 950ms ease-in-out var(--bar-delay) infinite alternate;
+}
+.sound-bars i:nth-child(2n) {
+  height: 20px;
+}
+.homepage .music-strip {
+  display: block;
+  overflow: clip;
+  padding-inline: 0;
+}
+.music-track {
+  display: flex;
+  width: max-content;
+  animation: music-flow 26s linear infinite;
+}
+.music-track-group {
+  min-width: 100vw;
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  padding-right: var(--space-12);
+  flex-shrink: 0;
+}
+.music-track-group > span {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(24px, 2.5vw, 36px);
+  font-weight: 650;
+  white-space: nowrap;
+}
+.music-track-group > span > span {
+  color: var(--color-accent);
+  display: inline-block;
+  animation: ribbon-star 10s linear infinite;
+}
+.homepage .join-word {
+  animation: join-sway 5s ease-in-out infinite;
+}
+.homepage .is-revealed {
+  animation-duration: 1100ms;
+}
+.homepage.motion-paused .entrance-word,
+.homepage.motion-paused .hero-copy h2 > span {
+  animation: none !important;
+}
+@keyframes gold-drift {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translate3d(0, 12px, 0) rotate(0deg) scale(0.6);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translate3d(16px, -28px, 0) rotate(45deg) scale(1.15);
+  }
+}
+@keyframes concert-tag {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-2deg);
+  }
+}
+@keyframes star-turn {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(0.85);
+  }
+  50% {
+    transform: rotate(90deg) scale(1.15);
+  }
+}
+@keyframes headline-arrival {
+  from {
+    opacity: 0.15;
+    transform: translateY(60px) rotate(4deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+@keyframes highlight-arrival {
+  from {
+    opacity: 0.15;
+    transform: translateX(-48px) rotate(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotate(-2deg);
+  }
+}
+@keyframes sound-beat {
+  from {
+    transform: scaleY(0.25);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes music-flow {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes ribbon-star {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes join-sway {
+  0%,
+  100% {
+    transform: rotate(7deg);
+  }
+  50% {
+    transform: rotate(2deg) translateY(-10px);
+  }
+}
+@media (max-width: 600px) {
+  .music-track-group,
+  .music-track-group > span {
+    gap: var(--space-6);
+  }
+  .music-track-group {
+    padding-right: var(--space-6);
+  }
+  .music-track-group > span {
+    font-size: 24px;
+  }
+  .entrance-word {
+    white-space: normal;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .homepage *,
+  .homepage *::before,
+  .homepage *::after {
+    animation: none !important;
+  }
+  .music-track {
+    width: auto;
+  }
+  .music-track-group {
+    flex-wrap: wrap;
+    padding: 0 var(--page-gutter);
+    gap: var(--space-3) var(--space-6);
+  }
+  .music-track-group[aria-hidden='true'] {
+    display: none;
+  }
+}
+
+/* Original choir artwork; crop its outer black padding without altering the asset. */
+.choir-mark-official {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  overflow: clip;
+}
+.choir-mark-official img {
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  max-width: none;
+  top: -25%;
+  left: -25%;
+  object-fit: contain;
+}
+.site-header:has(.choir-mark-official) {
+  padding-block: var(--space-3);
+}
+@media (max-width: 850px) {
+  .site-header .choir-mark-official {
+    width: 96px;
+    height: 96px;
+  }
+}

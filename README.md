@@ -2,6 +2,10 @@
 
 A standalone Dutch choir website built with Nuxt 4, Nuxt UI 4 and Nuxt Content 3. Content and photography were migrated from [amstelgospel.nl](https://www.amstelgospel.nl/) on 1 October 2026. The design uses a festival-poster style, locally bundled fonts, the real choir gallery and a responsive layout.
 
+## Logo source
+
+The original Amstel Gospel Choir logo in `public/images/amstel-gospel-choir-logo.png` was retrieved on 1 October 2026 from the choir's [public Clubspace listing](https://app.use-space.com/public/location/53dcbf80-cb43-4e4c-adbf-f572d2a39d44). The listing identifies the asset as the choir's logo and links to `amstelgospel.nl`. The source artwork is retained unchanged and is used in the header, footer, and favicon.
+
 ## Develop
 
 Requires Node.js 22 and pnpm 10 (the exact package-manager version is in `package.json`).

@@ -1,6 +1,14 @@
 [
   {
     "date": "2026-10-01",
+    "macrostructure": "Manifesto (existing layout retained)",
+    "theme": "Carnival \u2014 festive gold variant",
+    "enrichment": "CSS golden stars and foil accents",
+    "brief": "Replace lime with warm gold and add accessible homepage motion",
+    "scope": "homepage refresh and shared accent token"
+  },
+  {
+    "date": "2026-10-01",
     "macrostructure": "Manifesto",
     "theme": "Carnival",
     "palette": "choir festival: cream, plum, lime, coral",
