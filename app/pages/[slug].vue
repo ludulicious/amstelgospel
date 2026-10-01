@@ -1,8 +1,9 @@
 <script setup lang="ts">
 definePageMeta({ key: (route) => route.path })
 const route = useRoute()
-const { data: page } = await useAsyncData(`page-${route.path}`, () =>
-  queryCollection('pages').path(route.path).first(),
+const contentPath = route.path.replace(/\/+$/, '') || '/'
+const { data: page } = await useAsyncData(`page-${contentPath}`, () =>
+  queryCollection('pages').path(contentPath).first(),
 )
 if (!page.value)
   throw createError({

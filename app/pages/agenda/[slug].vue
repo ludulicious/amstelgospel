@@ -1,8 +1,9 @@
 <script setup lang="ts">
 definePageMeta({ key: (route) => route.path })
 const route = useRoute()
-const { data: event } = await useAsyncData(`event-${route.path}`, () =>
-  queryCollection('events').path(route.path).first(),
+const contentPath = route.path.replace(/\/+$/, '') || '/'
+const { data: event } = await useAsyncData(`event-${contentPath}`, () =>
+  queryCollection('events').path(contentPath).first(),
 )
 if (!event.value)
   throw createError({

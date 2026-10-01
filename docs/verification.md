@@ -6,6 +6,7 @@
 - `pnpm generate`: production static export succeeds, including all 12 content routes and content query payloads. Upstream bundler annotation/unused import warnings do not prevent the build.
 - Marpos Studio `scripts/inspect-project.mjs`: seven editable collections, no warnings. Pages and events support new documents; all media fields expose the media editor hint.
 - Production browser checks: homepage visually reviewed at 320, 375, 414, 768 pixels and desktop. No horizontal overflow on the tested widths.
+- Direct content URLs are normalized with or without trailing slashes, including archived concert routes.
 - Mobile menu opens, navigates and closes. Booking form shows inline validation, creates an encoded email draft, and clears that draft after edits. No email was sent.
 - FAQ accordion expands. Gallery filters to three `Samen` photos; modal opens, advances and closes with Escape. Video iframe is absent until play, then uses the original YouTube ID on the privacy-enhanced domain.
 
