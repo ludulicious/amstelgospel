@@ -24,7 +24,7 @@ const { data: site } = await useChoir()
     </div>
     <div class="footer-bottom">
       <NuxtLink to="/" aria-label="Amstel Gospel Choir homepage"
-        ><ChoirMark
+        ><ChoirMark surface="dark"
       /></NuxtLink>
       <nav aria-label="Footernavigatie">
         <NuxtLink to="/steun-ons">Steun ons</NuxtLink

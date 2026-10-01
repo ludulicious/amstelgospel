@@ -1,1 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#291b32"/><path d="M12 39V25M22 48V16M32 54V10M42 46V18M52 37V27" stroke="#dbf577" stroke-width="5" stroke-linecap="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Amstel Gospel Choir</title>
+  <rect width="64" height="64" rx="13" fill="#291e35"/>
+  <g transform="translate(18 5) scale(.36)" fill="none" stroke="#e6b947" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M49 97 C36 105 23 96 25 83 C27 66 50 61 61 74 C77 92 64 116 43 117 C20 119 7 103 10 85 C12 66 31 50 43 34 C53 21 58 10 53 4 C48 -2 41 3 38 14 C34 30 39 48 43 69 L52 126 C54 139 46 146 36 146 C28 146 23 141 23 134"/>
+    <circle cx="23" cy="132" r="5.5" fill="#e6b947" stroke="none"/>
+  </g>
+</svg>

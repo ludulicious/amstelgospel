@@ -1,371 +1,299 @@
 <script setup lang="ts">
-import type { WebsiteLogoVariant } from '~/assets/branding/website-logo'
-
 const concepts = [
   {
-    id: 'classic' as const,
-    title: 'Classic rule',
+    id: 'signature',
+    name: 'Signature',
     description:
-      'A fine line between Amstel and Gospel Choir. My pick for the website.',
+      'A flowing clef, a fine rule, and generous lettering. A balanced signature for the main website header.',
+    width: 520,
+    height: 154,
+    headerWidth: 260,
   },
   {
-    id: 'aligned' as const,
-    title: 'Open & aligned',
+    id: 'duet',
+    name: 'Duet',
     description:
-      'Two lines of equal width. Airy, simple, and a little more contemporary.',
+      'Amstel and Gospel share a line, separated by a slim bar. A wider option for desktop navigation.',
+    width: 680,
+    height: 134,
+    headerWidth: 340,
   },
   {
-    id: 'compact' as const,
-    title: 'Vertical bar',
+    id: 'unison',
+    name: 'Unison',
     description:
-      'A shorter clef with a vertical divider. A tidy, understated signature.',
+      'Two aligned lines with room to breathe. A compact option with a little more presence at smaller sizes.',
+    width: 470,
+    height: 154,
+    headerWidth: 240,
   },
 ]
-const surfaces = [
-  { id: 'cream', label: 'Plum & gold on cream' },
-  { id: 'plum', label: 'Cream & gold on plum' },
-  { id: 'gold', label: 'Plum on gold' },
-] as const
-const selected = ref<WebsiteLogoVariant>('classic')
+const colours = [
+  { id: 'cream', name: 'Plum & bronze on cream' },
+  { id: 'plum', name: 'Cream & gold on plum' },
+  { id: 'gold', name: 'Plum on gold' },
+]
 useSeoMeta({
-  title: 'Website logo options · Amstel Gospel Choir',
+  title: 'New logo directions · Amstel Gospel Choir',
   robots: 'noindex, nofollow',
 })
 </script>
 
 <template>
-  <div class="logo-workshop page-pad" lang="en">
-    <header class="logo-workshop-heading">
-      <h1>The logo, made for the web.</h1>
+  <div class="identity-workshop page-pad" lang="en">
+    <div class="identity-toolbar">
+      <NuxtLink to="/">← Back to the website</NuxtLink>
+      <a href="/images/website-identity/comparison.png" download
+        >Download comparison ↓</a
+      >
+    </div>
+    <header class="identity-intro">
+      <h1>A new website signature.</h1>
       <p>
-        The familiar treble clef on the left, the original lettering on the
-        right. Three arrangements in the website’s cream, plum, and gold.
+        Three fresh directions. A flowing treble clef, clean geometric
+        lettering, and the warm colours of Amstel Gospel Choir.
       </p>
     </header>
-    <div class="logo-comparison">
-      <section
-        v-for="concept in concepts"
-        :key="concept.id"
-        class="logo-option"
-        :aria-labelledby="`logo-${concept.id}`"
-      >
-        <div class="logo-option-heading">
-          <h2 :id="`logo-${concept.id}`">{{ concept.title }}</h2>
-          <p>{{ concept.description }}</p>
-        </div>
-        <div class="logo-colourways">
-          <figure
-            v-for="surface in surfaces"
-            :key="surface.id"
-            :class="`logo-surface logo-surface-${surface.id}`"
-          >
-            <div class="logo-sample"><StageLogo :variant="concept.id" /></div>
-            <figcaption>
-              <span>{{ surface.label }}</span>
-              <a
-                :href="`/images/logo-options/amstel-${concept.id}-${surface.id}.svg`"
-                :download="`amstel-${concept.id}-${surface.id}.svg`"
-                :aria-label="`Download ${concept.title}, ${surface.label}, as SVG`"
-                >SVG ↓</a
-              >
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-    </div>
-    <section class="logo-context" aria-labelledby="header-preview-title">
-      <div class="logo-context-heading">
-        <div>
-          <h2 id="header-preview-title">In the website header</h2>
-          <p>Try each option at a practical website size.</p>
-        </div>
-        <label class="logo-picker"
-          >Logo layout
-          <select v-model="selected">
-            <option
-              v-for="concept in concepts"
-              :key="concept.id"
-              :value="concept.id"
-            >
-              {{ concept.title }}
-            </option>
-          </select>
-        </label>
+    <section
+      v-for="concept in concepts"
+      :key="concept.id"
+      class="identity-direction"
+      :aria-labelledby="`${concept.id}-title`"
+    >
+      <div class="identity-direction-heading">
+        <h2 :id="`${concept.id}-title`">{{ concept.name }}</h2>
+        <p>{{ concept.description }}</p>
       </div>
-      <div class="logo-context-frame">
-        <div class="logo-header-preview logo-surface-cream">
-          <StageLogo :variant="selected" class="logo-at-header-size" />
-          <div class="logo-preview-nav" aria-hidden="true">
-            <span>Het koor</span><span>Agenda</span><span>Kijk & luister</span
-            ><span>Meezingen</span>
+      <div class="identity-colours">
+        <figure
+          v-for="colour in colours"
+          :key="colour.id"
+          :class="['identity-sample', `identity-${colour.id}`]"
+        >
+          <div class="identity-artwork">
+            <img
+              :src="`/images/website-identity/${concept.id}-${colour.id}.svg`"
+              :alt="`Amstel Gospel Choir — ${concept.name}`"
+              :width="concept.width"
+              :height="concept.height"
+            />
           </div>
-          <NuxtLink to="/boeken" class="button button-ink"
-            >Boek het koor ↗</NuxtLink
-          >
-        </div>
-        <div class="logo-context-hero">
-          <div>
-            <p>18 & 19 december 2026 · Amstelveen</p>
-            <h3>A Season of Kindness.</h3>
-          </div>
-          <img
-            src="/images/gallery-10.jpg"
-            alt="Amstel Gospel Choir tijdens een kerstconcert"
-            loading="lazy"
-            width="800"
-            height="534"
-          />
-        </div>
+          <figcaption>
+            <span>{{ colour.name }}</span>
+            <a
+              :href="`/images/website-identity/${concept.id}-${colour.id}.svg`"
+              :download="`amstel-gospel-choir-${concept.id}-${colour.id}.svg`"
+              :aria-label="`Download ${concept.name}, ${colour.name}, as SVG`"
+              >SVG ↓</a
+            >
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <p class="logo-artwork-note">
-      Each download is a transparent SVG; the coloured backgrounds are for
-      comparison. The lettering is traced from the supplied 500px logo and the
-      clef is smoothed for the web. These are close reconstructions, not the
-      original vector master.
-    </p>
+    <section class="identity-scale" aria-labelledby="identity-scale-title">
+      <h2 id="identity-scale-title">At header size</h2>
+      <p>
+        The same vector artwork at practical display sizes. Duet needs more
+        horizontal room; Signature and Unison suit a compact header.
+      </p>
+      <div class="identity-scale-options">
+        <figure v-for="concept in concepts" :key="concept.id">
+          <div class="identity-small-artwork">
+            <img
+              :src="`/images/website-identity/${concept.id}-cream.svg`"
+              :alt="`${concept.name} at website header size`"
+              :width="concept.width"
+              :height="concept.height"
+              :style="{ width: `${concept.headerWidth}px` }"
+            />
+          </div>
+          <figcaption>
+            {{ concept.name }} · {{ concept.headerWidth }}px
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+    <footer class="identity-note">
+      Drawn from scratch as smooth vector paths. Every SVG has a transparent
+      background and includes its own lettering, so it renders consistently
+      without a font download.
+    </footer>
   </div>
 </template>
 
 <style scoped>
-/* Hallmark · component: logo comparison · theme: existing cream / plum / gold
- * pre-emit critique: P5 H5 E4 S5 R5 V4 · no added motion
+/* Hallmark · component: identity comparison · theme: existing cream / plum / gold
+ * pre-emit critique: P5 H5 E5 S5 R5 V4 · static artwork, no added motion
  */
-.logo-workshop {
-  padding-block: var(--space-10) var(--space-16);
+.identity-workshop {
+  padding-block: var(--space-5) var(--space-16);
+  max-width: 1760px;
+  margin-inline: auto;
 }
-.logo-workshop-heading {
-  margin-bottom: var(--space-8);
-}
-.logo-workshop-heading h1 {
-  font-size: clamp(40px, 4vw, 60px);
-  margin: 0 0 var(--space-4);
-}
-.logo-workshop-heading p {
-  max-width: 75ch;
-  color: var(--color-muted);
-}
-.logo-option {
-  display: grid;
-  grid-template-columns: minmax(150px, 0.55fr) minmax(0, 3fr);
-  gap: var(--space-6);
-  padding-block: var(--space-5);
-  border-top: 1px solid var(--color-rule);
-}
-.logo-option-heading {
-  padding-top: var(--space-3);
-}
-.logo-option-heading h2 {
-  font-size: 27px;
-  margin: 0 0 var(--space-3);
-}
-.logo-option-heading p {
-  font-size: 13px;
-  color: var(--color-muted);
-}
-.logo-colourways {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-.logo-surface {
-  margin: 0;
-  padding: var(--space-4) var(--space-5) 0;
-  border: 1px solid var(--color-rule);
-}
-.logo-surface-cream {
-  background: var(--color-paper);
-  color: var(--color-ink);
-  --logo-clef: var(--color-gold-deep);
-}
-.logo-surface-plum {
-  background: var(--color-ink);
-  color: var(--color-paper);
-  --logo-clef: var(--color-accent);
-}
-.logo-surface-gold {
-  background: var(--color-accent);
-  color: var(--color-ink);
-  --logo-clef: var(--color-ink);
-}
-.logo-sample {
-  min-height: 104px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.logo-sample :deep(svg) {
-  max-width: 340px;
-}
-.logo-surface figcaption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-2);
-  font-size: 10px;
-  line-height: 1.3;
-}
-.logo-surface a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding-inline: var(--space-1);
-  white-space: nowrap;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.logo-surface-plum a:focus-visible {
-  outline-color: var(--color-paper);
-}
-.logo-context {
-  margin-top: var(--space-12);
-  border-top: 1px solid var(--color-rule);
-  padding-top: var(--space-8);
-}
-.logo-context-heading {
+.identity-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: var(--space-5);
-  margin-bottom: var(--space-6);
+  gap: var(--space-2) var(--space-6);
+  font-size: 12px;
 }
-.logo-context-heading h2 {
+.identity-toolbar a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.identity-intro {
+  padding-block: var(--space-10) var(--space-12);
+}
+.identity-intro h1 {
+  font-size: clamp(46px, 5vw, 76px);
+  margin: 0 0 var(--space-5);
+}
+.identity-intro p {
+  max-width: 65ch;
+  color: var(--color-muted);
+}
+.identity-direction {
+  border-top: 1px solid var(--color-rule);
+  padding-block: var(--space-6) var(--space-10);
+}
+.identity-direction-heading h2 {
   font-size: 32px;
   margin: 0 0 var(--space-2);
 }
-.logo-context-heading p,
-.logo-picker {
-  font-size: 13px;
+.identity-direction-heading p {
+  max-width: 75ch;
+  font-size: 14px;
   color: var(--color-muted);
 }
-.logo-picker {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  white-space: nowrap;
+.identity-colours {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: var(--space-6);
 }
-.logo-picker select {
-  min-height: 44px;
-  padding: var(--space-2) var(--space-3);
-  background: var(--color-paper);
-  color: var(--color-ink);
-  border: 1px solid var(--color-muted);
-  border-radius: 0;
-  font: inherit;
-  cursor: pointer;
-}
-.logo-picker select:hover {
-  border-color: var(--color-ink);
-}
-.logo-picker select:active {
-  background: var(--color-pink);
-}
-.logo-picker select:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 4px;
-}
-.logo-picker select:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-  background: var(--color-rule);
-}
-.logo-context-frame {
+.identity-sample {
+  margin: 0;
+  padding: var(--space-6) var(--space-6) var(--space-2);
   border: 1px solid var(--color-rule);
 }
-.logo-header-preview {
+.identity-cream {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+.identity-plum {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+.identity-gold {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+.identity-artwork {
+  min-height: 136px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.identity-artwork img {
+  width: 100%;
+  height: auto;
+  max-width: 440px;
+  object-fit: contain;
+}
+.identity-sample figcaption {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-8);
-  padding: var(--space-4) var(--space-8);
-}
-.logo-at-header-size {
-  width: 240px;
-  flex-shrink: 0;
-}
-.logo-preview-nav {
-  display: flex;
-  align-items: center;
-  gap: var(--space-6);
-  margin-left: auto;
-  font-size: 12px;
-  font-weight: 650;
-  white-space: nowrap;
-}
-.logo-header-preview .button {
-  font-size: 12px;
-}
-.logo-context-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  background: var(--color-ink);
-  color: var(--color-gold-light);
-  gap: var(--space-8);
-  padding: var(--space-8);
-  align-items: center;
-}
-.logo-context-hero p {
-  color: var(--color-accent);
+  gap: var(--space-2);
   font-size: 11px;
 }
-.logo-context-hero h3 {
-  font-size: clamp(40px, 5vw, 76px);
-  max-width: 12ch;
-  margin: var(--space-3) 0 0;
+.identity-sample a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
-.logo-context-hero img {
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
+.identity-plum a:focus-visible {
+  outline-color: var(--color-paper);
 }
-.logo-artwork-note {
-  max-width: 75ch;
-  margin-top: var(--space-8);
-  font-size: 13px;
+.identity-scale {
+  border-top: 1px solid var(--color-rule);
+  padding-block: var(--space-8);
+}
+.identity-scale h2 {
+  font-size: 36px;
+  margin: 0 0 var(--space-3);
+}
+.identity-scale > p {
+  font-size: 14px;
   color: var(--color-muted);
+  max-width: 75ch;
 }
-@media (max-width: 1100px) {
-  .logo-option {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-4);
+.identity-scale-options {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-12);
+  margin-top: var(--space-6);
+}
+.identity-scale-options figure {
+  margin: 0;
+  max-width: 100%;
+}
+.identity-small-artwork {
+  min-height: 104px;
+  display: flex;
+  align-items: center;
+}
+.identity-small-artwork img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.identity-scale-options figcaption {
+  font-size: 12px;
+  color: var(--color-muted);
+  margin-top: var(--space-2);
+}
+.identity-note {
+  max-width: 75ch;
+  color: var(--color-muted);
+  font-size: 13px;
+  border-top: 1px solid var(--color-rule);
+  padding-top: var(--space-6);
+  margin-top: var(--space-5);
+}
+@media (max-width: 950px) {
+  .identity-sample {
+    padding-inline: var(--space-4);
   }
-  .logo-option-heading {
-    padding: 0;
+  .identity-artwork {
+    min-height: 104px;
   }
-  .logo-option-heading h2 {
-    margin-bottom: var(--space-2);
-  }
-  .logo-preview-nav {
-    display: none;
+  .identity-sample figcaption {
+    font-size: 10px;
   }
 }
-@media (max-width: 600px) {
-  .logo-colourways {
+@media (max-width: 700px) {
+  .identity-colours {
     grid-template-columns: minmax(0, 1fr);
   }
-  .logo-sample {
-    min-height: 120px;
+  .identity-artwork {
+    min-height: 140px;
   }
-  .logo-header-preview,
-  .logo-context-hero {
-    padding: var(--space-4);
+  .identity-sample {
+    padding-inline: var(--space-6);
   }
-  .logo-header-preview .button {
-    display: none;
+  .identity-intro {
+    padding-block: var(--space-8) var(--space-10);
   }
-  .logo-at-header-size {
-    width: 220px;
-    max-width: 100%;
-  }
-  .logo-context-hero {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-6);
-  }
-  .logo-context-hero img {
-    height: 180px;
-  }
-  .logo-context-heading {
-    align-items: flex-start;
+  .identity-scale-options {
     flex-direction: column;
   }
 }

@@ -54,3 +54,33 @@ watch(
     </nav>
   </header>
 </template>
+
+<style scoped>
+/* Give the horizontal wordmark room without crowding the navigation. */
+.site-header {
+  padding-block: var(--space-4);
+}
+.brand {
+  display: block;
+  flex-shrink: 0;
+  line-height: 0;
+}
+@media (max-width: 1024px) {
+  .desktop-nav,
+  .header-book {
+    display: none;
+  }
+  .menu-trigger {
+    display: inline-flex;
+    margin-left: auto;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+@media (max-width: 600px) {
+  .site-header {
+    --choir-logo-width: 200px;
+    gap: var(--space-4);
+  }
+}
+</style>

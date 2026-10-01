@@ -43,11 +43,29 @@ export default defineNuxtConfig({
       link: [
         {
           rel: 'icon',
+          type: 'image/x-icon',
+          sizes: '16x16 32x32 48x48',
+          href: '/favicon.ico',
+        },
+        {
+          rel: 'icon',
           type: 'image/png',
-          href: '/images/amstel-gospel-choir-logo.png',
+          sizes: '32x32',
+          href: '/favicon-32x32.png',
+        },
+        {
+          rel: 'icon',
+          type: 'image/svg+xml',
+          sizes: 'any',
+          href: '/favicon.svg?v=unison',
+        },
+        {
+          rel: 'apple-touch-icon',
+          sizes: '180x180',
+          href: '/apple-touch-icon.png',
         },
       ],
-      meta: [{ name: 'theme-color', content: '#291b32' }],
+      meta: [{ name: 'theme-color', content: '#291e35' }],
     },
   },
   nitro: {
