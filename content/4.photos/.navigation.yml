@@ -1,2 +1,8 @@
 title: Photos
 icon: i-lucide-images
+studio:
+  view: media
+  media:
+    directory: images
+    formats: [jpg, jpeg, png, webp, gif]
+    maxBytes: 10485760

@@ -127,6 +127,7 @@ export default defineContentConfig({
       source: { include: '4.photos/*.yml', exclude: ['**/.navigation.yml'] },
       schema: z.object({
         title: z.string().min(1),
+        visible: z.boolean().default(true),
         order: sortOrder,
         image,
         categories: z.array(z.string().trim().min(1)).default([]),
