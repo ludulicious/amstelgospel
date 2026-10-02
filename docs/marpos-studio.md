@@ -13,7 +13,8 @@ Deze website is gemaakt voor **Marpos Studio**, de desktopeditor. Er is geen Nux
 
 | Sectie in Studio        | Bestand(en)                 | Wat je kunt aanpassen                                                                   |
 | ----------------------- | --------------------------- | --------------------------------------------------------------------------------------- |
-| Pages → Home            | `content/home.yml`          | Koppen, intro, foto's, knoppen, concertpromotie en meezingblok                          |
+| Pages → Home            | `content/home.yml`          | Koppen, intro, foto's, knoppen, meezingblok en zichtbaarheid van alle homepageblokken   |
+| Pages → Home Concert    | `content/home/concert.md`   | Concertpromotie in Markdown, titel, afbeelding, label en knop                           |
 | Pages → Settings → Site | `content/settings/site.yml` | Navigatie, socials, contactgegevens, repetities, donaties en footer                     |
 | Information             | `content/information/*.md`  | Paginatitels, beschrijvingen, headerfoto, indeling en opgemaakte tekst                  |
 | Events                  | `content/events/*.md`       | Concerten, datums, tijden, locatie, kaartverkoop en omschrijving                        |
@@ -31,7 +32,13 @@ Maak een document in **Events**. Gebruik de datumvorm `2026-12-18` en vul bij me
 
 Een bestand `content/events/mijn-concert.md` krijgt de route `/agenda/mijn-concert`. De build neemt alle concertbestanden mee, ook concerten uit het verleden.
 
-De homepage opent met het concertblok. Deze concertpromotie is bewust redactioneel: pas ook het blok `concert` in **Home** aan wanneer je een volgend evenement wilt uitlichten.
+## Homepageblokken tonen of verbergen
+
+Open **Home** en gebruik de ja/nee-velden onder `visibility`: `concert` (concertpromotie), `hero` (introductie), `strip` (muziekstrook), `about` (over het koor), `agenda` en `join` (meezingen). Zet een veld op `false` om dat blok te verbergen; de inhoud blijft bewaard. Zet het op `true` om het weer te tonen.
+
+Bewerk de homepageconcertpromotie in **Home Concert** (`content/home/concert.md`). De tekst onder de frontmatter is Markdown en ondersteunt alinea's, nadruk, links en lijsten. Titel, omschrijving, datumregel (`eyebrow`), foto, fotolabel en knop staan in de velden erboven. Dit document heeft de homepage als preview en maakt geen losse publieke pagina.
+
+Zet na de concerten `visibility.concert` in **Home** op `false`. De introductie wordt dan de eerste sectie; de paginatitel, omschrijving en social-afbeelding gebruiken de algemene homepagegegevens. Je hoeft de concerttekst niet te verwijderen. Werk voor een volgend concert de Markdownpromotie en de bijbehorende agendapagina apart bij.
 
 ## Nieuwe pagina
 
@@ -53,7 +60,7 @@ Bestaande documenten hebben expliciete preview-adressen in `studio.preview.json`
 
 ## Gecontroleerd
 
-De projectinspectie van Marpos Studio herkent alle zeven collecties zonder waarschuwingen. Pagina's, concerten, foto's, video's en vragen ondersteunen aanmaken; vaste bestanden worden op hun plek bewerkt. Voor een lokale controle:
+De projectinspectie van Marpos Studio herkent alle acht collecties zonder waarschuwingen. Pagina's, concerten, foto's, video's en vragen ondersteunen aanmaken; vaste bestanden worden op hun plek bewerkt. Voor een lokale controle:
 
 ```sh
 node /pad/naar/marpos-studio/scripts/inspect-project.mjs /pad/naar/amstelgospelchoir /tmp/amstel-schema.json

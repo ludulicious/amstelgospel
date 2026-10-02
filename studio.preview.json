@@ -1,5 +1,6 @@
 {
   "content/home.yml": "/",
+  "content/home/concert.md": "/",
   "content/settings/site.yml": ["/", "/meezingen", "/boeken", "/steun-ons"],
   "content/events/avond-vol-herinneringen.md": "/agenda/avond-vol-herinneringen",
   "content/events/kerstconcerten-2026.md": "/agenda/kerstconcerten-2026",

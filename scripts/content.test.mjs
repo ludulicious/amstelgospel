@@ -7,6 +7,7 @@ const read = (file) =>
   readFileSync(new URL(`../${file}`, import.meta.url), 'utf8')
 const files = [
   'content/home.yml',
+  'content/home/concert.md',
   'content/settings/site.yml',
   ...['information', 'events', 'photos', 'videos', 'faq'].flatMap((dir) =>
     readdirSync(new URL(`../content/${dir}`, import.meta.url)).map(
@@ -21,7 +22,7 @@ const docs = files.map((file) => ({
 const routes = new Set([
   '/',
   ...docs
-    .filter((d) => d.file.endsWith('.md'))
+    .filter((d) => /^content\/(information|events)\//.test(d.file))
     .map(
       (d) =>
         `/${d.file.includes('/events/') ? 'agenda/' : ''}${d.file.split('/').pop().replace('.md', '')}`,

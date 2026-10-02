@@ -1,5 +1,5 @@
 <script setup lang="ts">
-definePageMeta({ key: (route) => route.path })
+definePageMeta({ key: (route) => route.path.replace(/\/+$/, '') || '/' })
 const route = useRoute()
 const contentPath = route.path.replace(/\/+$/, '') || '/'
 const { data: event } = await useAsyncData(`event-${contentPath}`, () =>
@@ -32,7 +32,10 @@ const dateLabel = computed(() =>
   <article v-if="event">
     <header class="inner-hero inner-hero-image event-hero page-pad">
       <div>
-        <NuxtLink to="/agenda" class="text-link back-link"
+        <NuxtLink
+          v-if="route.query.from !== 'home'"
+          to="/agenda"
+          class="text-link back-link"
           ><UIcon name="i-lucide-arrow-left" />Terug naar de agenda</NuxtLink
         >
         <p class="eyebrow">

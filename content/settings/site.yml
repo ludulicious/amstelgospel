@@ -5,10 +5,11 @@ phone: 06 30 93 60 61
 phoneLink: '+31630936061'
 contactName: Corine Dijst
 nav:
-  - { label: Het koor, to: /over-ons }
-  - { label: Agenda, to: /agenda }
-  - { label: Kijk & luister, to: /kijk-en-luister }
-  - { label: Meezingen, to: /meezingen }
+  - { label: Home, to: /, icon: i-lucide-house }
+  - { label: Het koor, to: /over-ons, icon: i-lucide-users }
+  - { label: Agenda, to: /agenda, icon: i-lucide-calendar-days }
+  - { label: Kijk & luister, to: /kijk-en-luister, icon: i-lucide-audio-lines }
+  - { label: Meezingen, to: /meezingen, icon: i-lucide-mic-vocal }
 socials:
   - { label: Instagram, to: 'https://instagram.com/amstelgospelchoir' }
   - { label: Facebook, to: 'https://www.facebook.com/amstelgospelchoir/' }

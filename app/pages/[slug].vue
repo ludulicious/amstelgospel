@@ -1,5 +1,5 @@
 <script setup lang="ts">
-definePageMeta({ key: (route) => route.path })
+definePageMeta({ key: (route) => route.path.replace(/\/+$/, '') || '/' })
 const route = useRoute()
 const contentPath = route.path.replace(/\/+$/, '') || '/'
 const { data: page } = await useAsyncData(`page-${contentPath}`, () =>

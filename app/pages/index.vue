@@ -16,7 +16,12 @@ onMounted(() => {
     { threshold: 0.12 },
   )
   homepage.value?.querySelectorAll('[data-reveal]').forEach((element) => {
-    revealObserver?.observe(element)
+    // SSR already displays these elements. Replaying an entrance on hydration
+    // would make visible content disappear and then fade back in.
+    const bounds = element.getBoundingClientRect()
+    if (bounds.top >= window.innerHeight || bounds.bottom <= 0) {
+      revealObserver?.observe(element)
+    }
   })
 })
 onBeforeUnmount(() => revealObserver?.disconnect())
@@ -24,12 +29,36 @@ onBeforeUnmount(() => revealObserver?.disconnect())
 const { data: home } = await useAsyncData('home', () =>
   queryCollection('home').first(),
 )
+const { data: concert } = await useAsyncData('home-concert', () =>
+  queryCollection('home_concert').first(),
+)
+const showConcert = computed(
+  () => home.value?.visibility.concert && !!concert.value,
+)
+const concertLink = computed(() => {
+  const to = concert.value?.link.to || '/agenda'
+  if (!to.startsWith('/agenda/')) return to
+  const hashIndex = to.indexOf('#')
+  const path = hashIndex === -1 ? to : to.slice(0, hashIndex)
+  const hash = hashIndex === -1 ? '' : to.slice(hashIndex)
+  return `${path}${path.includes('?') ? '&' : '?'}from=home${hash}`
+})
+const headingTag = (section: 'hero' | 'about' | 'agenda' | 'join') => {
+  const sections = ['concert', 'hero', 'about', 'agenda', 'join'] as const
+  const firstVisible = sections.find((key) =>
+    key === 'concert' ? showConcert.value : home.value?.visibility[key],
+  )
+  return firstVisible === section ? 'h1' : 'h2'
+}
 useSeoMeta({
-  title: () => home.value?.title,
-  description: () => home.value?.description,
-  ogTitle: () => home.value?.title,
-  ogDescription: () => home.value?.description,
-  ogImage: () => home.value?.concert.image.src,
+  title: () => (showConcert.value ? concert.value?.title : home.value?.title),
+  description: () =>
+    showConcert.value ? concert.value?.description : home.value?.description,
+  ogTitle: () => (showConcert.value ? concert.value?.title : home.value?.title),
+  ogDescription: () =>
+    showConcert.value ? concert.value?.description : home.value?.description,
+  ogImage: () =>
+    showConcert.value ? concert.value?.image.src : home.value?.hero.src,
   twitterCard: 'summary_large_image',
 })
 </script>
@@ -40,7 +69,7 @@ useSeoMeta({
     class="homepage"
     :class="{ 'motion-paused': motionPaused }"
   >
-    <section class="concert-feature page-pad">
+    <section v-if="showConcert && concert" class="concert-feature page-pad">
       <div class="concert-sparkles" aria-hidden="true">
         <span
           v-for="star in 32"
@@ -55,10 +84,10 @@ useSeoMeta({
         />
       </div>
       <div class="concert-copy" data-reveal>
-        <p class="eyebrow">{{ home.concert.eyebrow }}</p>
-        <h1 :aria-label="home.concert.title">
+        <p class="eyebrow">{{ concert.eyebrow }}</p>
+        <h1 :aria-label="concert.title">
           <span
-            v-for="(word, index) in home.concert.title.split(' ')"
+            v-for="(word, index) in concert.title.split(' ')"
             :key="index"
             class="entrance-word"
             aria-hidden="true"
@@ -66,22 +95,22 @@ useSeoMeta({
             >{{ word }}{{ ' ' }}</span
           >
         </h1>
-        <p>{{ home.concert.text }}</p>
-        <NuxtLink class="button button-gold" :to="home.concert.link.to"
-          >{{ home.concert.link.label }}<UIcon name="i-lucide-arrow-up-right"
+        <ContentRenderer :value="concert" class="concert-content" />
+        <NuxtLink class="button button-gold" :to="concertLink"
+          >{{ concert.link.label }}<UIcon name="i-lucide-arrow-up-right"
         /></NuxtLink>
       </div>
       <div class="concert-photo">
         <div class="concert-photo-viewport">
           <img
-            :src="home.concert.image.src"
-            :alt="home.concert.image.alt"
+            :src="concert.image.src"
+            :alt="concert.image.alt"
             width="800"
             height="534"
             fetchpriority="high"
           />
         </div>
-        <span class="concert-label">KERST MET AGC</span>
+        <span class="concert-label">{{ concert.imageLabel }}</span>
       </div>
       <button
         class="motion-toggle"
@@ -93,17 +122,17 @@ useSeoMeta({
         {{ motionPaused ? 'Animaties afspelen' : 'Animaties pauzeren' }}
       </button>
     </section>
-    <section class="home-hero page-pad">
+    <section v-if="home.visibility.hero" class="home-hero page-pad">
       <div class="hero-copy" data-reveal>
         <p class="eyebrow"><span class="live-dot" />{{ home.eyebrow }}</p>
-        <h2>
+        <component :is="headingTag('hero')">
           <span
             v-for="(line, i) in home.headline"
             :key="line"
             :class="{ 'hero-highlight': i === 2 }"
             >{{ line }}</span
           >
-        </h2>
+        </component>
         <p class="hero-intro">{{ home.intro }}</p>
         <div class="hero-actions">
           <NuxtLink class="button button-ink" :to="home.primary.to"
@@ -121,7 +150,8 @@ useSeoMeta({
             :alt="home.hero.alt"
             width="800"
             height="533"
-            loading="lazy"
+            :loading="showConcert ? 'lazy' : 'eager'"
+            :fetchpriority="showConcert ? 'auto' : 'high'"
           /><span class="photo-number" aria-hidden="true">AGC / LIVE</span>
         </div>
         <div class="hero-sticker" aria-hidden="true">
@@ -139,7 +169,11 @@ useSeoMeta({
         </p>
       </div>
     </section>
-    <div class="music-strip" aria-label="Ons geluid">
+    <div
+      v-if="home.visibility.strip"
+      class="music-strip"
+      aria-label="Ons geluid"
+    >
       <div class="music-track">
         <div
           v-for="copy in 2"
@@ -153,7 +187,7 @@ useSeoMeta({
         </div>
       </div>
     </div>
-    <section class="intro-section page-pad">
+    <section v-if="home.visibility.about" class="intro-section page-pad">
       <div class="intro-photo" data-reveal>
         <img
           :src="home.about.image.src"
@@ -165,26 +199,26 @@ useSeoMeta({
       </div>
       <div class="intro-copy" data-reveal>
         <p class="eyebrow">Meer dan een koor</p>
-        <h2>{{ home.about.title }}</h2>
+        <component :is="headingTag('about')">{{ home.about.title }}</component>
         <p>{{ home.about.text }}</p>
         <NuxtLink class="text-link" :to="home.about.link.to"
           >{{ home.about.link.label }}<UIcon name="i-lucide-arrow-up-right"
         /></NuxtLink>
       </div>
     </section>
-    <section class="agenda-section page-pad">
+    <section v-if="home.visibility.agenda" class="agenda-section page-pad">
       <div class="section-heading" data-reveal>
-        <h2>Tot vooraan.</h2>
+        <component :is="headingTag('agenda')">Tot vooraan.</component>
         <NuxtLink to="/agenda" class="text-link"
           >De hele agenda<UIcon name="i-lucide-arrow-right"
         /></NuxtLink>
       </div>
       <EventList :limit="3" />
     </section>
-    <section class="join-banner page-pad">
+    <section v-if="home.visibility.join" class="join-banner page-pad">
       <UIcon name="i-lucide-mic-vocal" class="join-mic" aria-hidden="true" />
       <div data-reveal>
-        <h2>{{ home.join.title }}</h2>
+        <component :is="headingTag('join')">{{ home.join.title }}</component>
         <p>{{ home.join.text }}</p>
         <NuxtLink :to="home.join.link.to" class="button button-ink"
           >{{ home.join.link.label }}<UIcon name="i-lucide-arrow-up-right"
@@ -192,5 +226,19 @@ useSeoMeta({
       </div>
       <span class="join-word" aria-hidden="true">SING<br />IT!</span>
     </section>
+    <div
+      v-if="!showConcert && Object.values(home.visibility).some(Boolean)"
+      class="page-pad"
+    >
+      <button
+        class="motion-toggle motion-toggle-inline"
+        type="button"
+        :aria-pressed="motionPaused"
+        @click="motionPaused = !motionPaused"
+      >
+        <span aria-hidden="true">{{ motionPaused ? '▶' : 'Ⅱ' }}</span>
+        {{ motionPaused ? 'Animaties afspelen' : 'Animaties pauzeren' }}
+      </button>
+    </div>
   </div>
 </template>

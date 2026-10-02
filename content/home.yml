@@ -1,5 +1,12 @@
-title: A Season of Kindness — Kerstconcerten 2026 · Amstel Gospel Choir
-description: Beleef A Season of Kindness, de kerstconcerten van Amstel Gospel Choir op 18 en 19 december 2026 in de Urbanuskerk in Amstelveen.
+title: Amstel Gospel Choir · Gospel, pop & soul uit Amstelveen
+description: Voel de muziek en deel de energie met Amstel Gospel Choir. Gospel, pop, soul en ballads uit Amstelveen.
+visibility:
+  concert: true
+  hero: true
+  strip: true
+  about: true
+  agenda: true
+  join: true
 eyebrow: Amstelveen • Gospel, pop & soul
 headline:
   - Voel de
@@ -29,16 +36,6 @@ about:
   link:
     label: Dit zijn wij
     to: /over-ons
-concert:
-  eyebrow: 18 & 19 december 2026 · Amstelveen
-  title: A Season of Kindness.
-  text: In december brengen we onze kerstconcerten naar de Urbanuskerk in Amstelveen. Warmte, samenzang en een flinke dosis gospel. Zet 18 en 19 december alvast in je agenda.
-  image:
-    src: /images/gallery-10.jpg
-    alt: Amstel Gospel Choir zingt tijdens een kerstconcert
-  link:
-    label: Alles over de concerten
-    to: /agenda/kerstconcerten-2026
 join:
   title: Jouw dinsdag kan wel wat gospel gebruiken.
   text: Samen zingen geeft energie. Kom luisteren, zing mee en ontdek of onze AGC-familie bij je past. Er is nu een wachtlijst, maar een repetitie bezoeken kan altijd.

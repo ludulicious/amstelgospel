@@ -248,15 +248,15 @@ p {
   background: var(--color-ink);
   border-radius: 100%;
 }
-.hero-copy h2 {
+.hero-copy :is(h1, h2) {
   font-size: clamp(80px, 10vw, 156px);
   margin: var(--space-6) 0 var(--space-8);
   letter-spacing: -0.035em;
 }
-.hero-copy h2 > span {
+.hero-copy :is(h1, h2) > span {
   display: block;
 }
-.hero-copy h2 .hero-highlight {
+.hero-copy :is(h1, h2) .hero-highlight {
   font-size: 0.37em;
   letter-spacing: -0.01em;
   background: var(--color-accent);
@@ -381,7 +381,7 @@ p {
   font-size: 13px;
   font-weight: 650;
 }
-.intro-copy h2 {
+.intro-copy :is(h1, h2) {
   margin: var(--space-4) 0 var(--space-6);
   max-width: 9ch;
 }
@@ -440,7 +440,7 @@ p {
   gap: var(--space-6);
   margin-bottom: var(--space-10);
 }
-.section-heading h2 {
+.section-heading :is(h1, h2) {
   margin: 0;
 }
 .section-heading > span {
@@ -496,7 +496,7 @@ p {
   padding-block: var(--space-20);
   align-items: start;
 }
-.join-banner h2 {
+.join-banner :is(h1, h2) {
   max-width: 15ch;
   margin: 0 0 var(--space-6);
 }
@@ -932,7 +932,7 @@ dd {
   .home-hero {
     gap: var(--space-8);
   }
-  .hero-copy h2 {
+  .hero-copy :is(h1, h2) {
     font-size: 112px;
   }
   .hero-photo {
@@ -981,7 +981,7 @@ dd {
     padding-bottom: var(--space-12);
     gap: var(--space-6);
   }
-  .hero-copy h2 {
+  .hero-copy :is(h1, h2) {
     font-size: clamp(68px, 12vw, 100px);
   }
   .hero-photo {
@@ -997,7 +997,7 @@ dd {
   .hero-sticker {
     top: 4px;
   }
-  .hero-copy h2 .hero-highlight {
+  .hero-copy :is(h1, h2) .hero-highlight {
     font-size: 0.36em;
   }
   .music-strip {
@@ -1057,7 +1057,7 @@ dd {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-10);
   }
-  .hero-copy h2 {
+  .hero-copy :is(h1, h2) {
     font-size: clamp(90px, 23vw, 132px);
     margin-top: var(--space-5);
     margin-bottom: var(--space-6);
@@ -1102,7 +1102,7 @@ dd {
   .intro-photo {
     margin-inline: var(--space-2);
   }
-  .intro-copy h2 {
+  .intro-copy :is(h1, h2) {
     max-width: 11ch;
     font-size: 56px;
   }
@@ -1148,7 +1148,7 @@ dd {
   .event-arrow {
     font-size: 24px;
   }
-  .join-banner h2 {
+  .join-banner :is(h1, h2) {
     font-size: 52px;
   }
   .site-footer {
@@ -1593,7 +1593,7 @@ dd {
   animation-duration: 1100ms;
 }
 .homepage.motion-paused .entrance-word,
-.homepage.motion-paused .hero-copy h2 > span {
+.homepage.motion-paused .hero-copy :is(h1, h2) > span {
   animation: none !important;
 }
 @keyframes gold-drift {
@@ -1706,6 +1706,37 @@ dd {
   }
 }
 
+#main {
+  display: grid;
+  isolation: isolate;
+}
+#main > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+  background: var(--color-paper);
+}
+.page-enter-active {
+  z-index: 1;
+  transition: opacity 240ms ease-in-out;
+}
+.page-leave-active {
+  pointer-events: none;
+}
+.page-enter-from {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
+  }
+  .page-enter-from,
+  .page-leave-to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Original choir artwork; crop its outer black padding without altering the asset. */
 .choir-mark-official {
   position: relative;
@@ -1732,4 +1763,34 @@ dd {
     width: 96px;
     height: 96px;
   }
+}
+
+/* Markdown copy inside the homepage concert promotion. */
+.concert-content {
+  max-width: 48ch;
+  margin-bottom: var(--space-6);
+}
+.concert-content p,
+.concert-content ul,
+.concert-content ol {
+  margin-block: 0 var(--space-4);
+}
+.concert-content > :last-child {
+  margin-bottom: 0;
+}
+.concert-content ul {
+  list-style: disc;
+  padding-left: var(--space-6);
+}
+.concert-content ol {
+  list-style: decimal;
+  padding-left: var(--space-6);
+}
+.concert-content a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.motion-toggle-inline {
+  position: static;
+  color: var(--color-ink);
 }

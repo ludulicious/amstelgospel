@@ -1,4 +1,5 @@
 import { readdirSync } from 'node:fs'
+import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 
 const contentRoot = fileURLToPath(new URL('./content/', import.meta.url))
@@ -20,6 +21,9 @@ export default defineNuxtConfig({
     clientBundle: {
       scan: true,
       icons: [
+        'lucide:house',
+        'lucide:users',
+        'lucide:calendar-days',
         'lucide:arrow-up-right',
         'lucide:arrow-right',
         'lucide:arrow-left',
@@ -35,9 +39,28 @@ export default defineNuxtConfig({
       ],
     },
   },
+  hooks: {
+    'vite:configResolved'(config) {
+      // MDC is nested under Nuxt Content in pnpm installations. Resolve its
+      // prebundled dependencies from MDC itself instead of the project root.
+      const include = config.optimizeDeps?.include
+      if (!include?.some((entry) => entry.startsWith('@nuxtjs/mdc > '))) return
+      const projectRequire = createRequire(import.meta.url)
+      const contentRequire = createRequire(
+        projectRequire.resolve('@nuxt/content'),
+      )
+      const mdcRequire = createRequire(contentRequire.resolve('@nuxtjs/mdc'))
+      config.optimizeDeps!.include = include.map((entry) =>
+        entry.startsWith('@nuxtjs/mdc > ')
+          ? mdcRequire.resolve(entry.slice('@nuxtjs/mdc > '.length))
+          : entry,
+      )
+    },
+  },
   devtools: { enabled: false },
   ui: { colorMode: false, fonts: false },
   app: {
+    pageTransition: { name: 'page', mode: 'default', duration: 240 },
     head: {
       htmlAttrs: { lang: 'nl' },
       link: [

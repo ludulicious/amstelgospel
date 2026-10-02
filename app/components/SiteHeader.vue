@@ -18,9 +18,9 @@ watch(
       ><ChoirMark
     /></NuxtLink>
     <nav class="desktop-nav" aria-label="Hoofdnavigatie">
-      <NuxtLink v-for="item in site?.nav" :key="item.to" :to="item.to">{{
-        item.label
-      }}</NuxtLink>
+      <NuxtLink v-for="item in site?.nav" :key="item.to" :to="item.to">
+        <UIcon :name="item.icon" aria-hidden="true" />{{ item.label }}
+      </NuxtLink>
     </nav>
     <NuxtLink to="/boeken" class="button button-ink header-book"
       >Boek het koor <UIcon name="i-lucide-arrow-up-right"
@@ -43,7 +43,7 @@ watch(
       @keydown.esc="open = false"
     >
       <NuxtLink v-for="item in site?.nav" :key="item.to" :to="item.to"
-        >{{ item.label }} <UIcon name="i-lucide-arrow-up-right"
+        >{{ item.label }} <UIcon :name="item.icon" aria-hidden="true"
       /></NuxtLink>
       <NuxtLink to="/boeken"
         >Boek het koor <UIcon name="i-lucide-arrow-up-right"
@@ -59,6 +59,15 @@ watch(
 /* Give the horizontal wordmark room without crowding the navigation. */
 .site-header {
   padding-block: var(--space-4);
+}
+.desktop-nav {
+  gap: var(--space-6);
+}
+.desktop-nav a {
+  gap: var(--space-2);
+}
+.desktop-nav a .iconify {
+  flex-shrink: 0;
 }
 .brand {
   display: block;
