@@ -2,12 +2,12 @@
 title: A Season of Kindness
 description: De kerstconcerten van Amstel Gospel Choir op 18 en 19 december 2026 in de Urbanuskerk in Amstelveen.
 schedule:
-  - date: '2026-12-18'
-    time: '20.00 uur'
-  - date: '2026-12-19'
-    time: '14.00 uur'
-  - date: '2026-12-19'
-    time: '20.00 uur'
+- date: 2026-12-18
+  time: 20.00 uur
+- date: 2026-12-19
+  time: 14.00 uur
+- date: 2026-12-19
+  time: 20.00 uur
 location: St. Urbanuskerk, Bovenkerk
 city: Amstelveen
 access: public
@@ -16,6 +16,8 @@ ticketUrl: https://shannonchapoy.portalnuxt.com/store/discover-yourself/book?loc
 image:
   src: /images/gallery-10.jpg
   alt: De feestelijke sfeer van een kerstconcert van Amstel Gospel Choir
+video:
+  src: https://www.youtube-nocookie.com/embed/8BetgX2Dhu8?rel=0
 ---
 
 ## A Season of Kindness.
