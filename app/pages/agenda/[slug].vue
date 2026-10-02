@@ -60,8 +60,17 @@ const schedule = computed(() => groupedEventSchedule(event.value?.schedule))
           >{{ copy.ticketLink }}<UIcon name="i-lucide-arrow-up-right"
         /></a>
       </div>
+      <iframe
+        v-if="event.video?.src && /^https:\/\/(www\.)?youtube(-nocookie)?\.com\/embed\//.test(event.video.src)"
+        :src="event.video.src"
+        :title="event.title"
+        class="event-video"
+        allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+      />
       <video
-        v-if="event.video?.src"
+        v-else-if="event.video?.src"
         :src="event.video.src"
         :aria-label="event.title"
         class="event-video"
