@@ -92,7 +92,7 @@ useSeoMeta({
             class="entrance-word"
             aria-hidden="true"
             :style="{ '--word-delay': `${index * 110}ms` }"
-            >{{ word }}{{ ' ' }}</span
+            >{{ word }}</span
           >
         </h1>
         <ContentRenderer :value="concert" class="concert-content" />

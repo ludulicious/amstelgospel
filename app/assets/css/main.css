@@ -1066,12 +1066,23 @@ dd {
   }
 }
 @media (max-width: 600px) {
+  h1 {
+    font-size: clamp(40px, 12vw, 60px);
+  }
+  h2 {
+    font-size: clamp(32px, 9vw, 44px);
+  }
+  .section-heading :is(h1, h2),
+  .practical-box h2,
+  .support-options h2 {
+    font-size: clamp(32px, 9vw, 44px);
+  }
   .home-hero {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-10);
   }
   .hero-copy :is(h1, h2) {
-    font-size: clamp(90px, 23vw, 132px);
+    font-size: clamp(56px, 17vw, 88px);
     margin-top: var(--space-5);
     margin-bottom: var(--space-6);
   }
@@ -1117,7 +1128,7 @@ dd {
   }
   .intro-copy :is(h1, h2) {
     max-width: 11ch;
-    font-size: 56px;
+    font-size: clamp(36px, 10vw, 48px);
   }
   .concert-feature {
     padding-block: var(--space-16) var(--space-20);
@@ -1162,7 +1173,7 @@ dd {
     font-size: 24px;
   }
   .join-banner :is(h1, h2) {
-    font-size: 52px;
+    font-size: clamp(36px, 10vw, 48px);
   }
   .site-footer {
     padding-top: var(--space-16);
@@ -1172,7 +1183,7 @@ dd {
     gap: var(--space-4);
   }
   .footer-top h2 {
-    font-size: 56px;
+    font-size: clamp(36px, 10vw, 48px);
   }
   .round-link {
     width: 52px;
@@ -1201,7 +1212,8 @@ dd {
     gap: var(--space-10);
   }
   .inner-hero h1 {
-    font-size: clamp(52px, 14vw, 76px);
+    font-size: clamp(40px, 12vw, 60px);
+    max-width: none;
   }
   .inner-description {
     font-size: 16px;
@@ -1213,7 +1225,7 @@ dd {
     font-size: 16px;
   }
   .prose-content h2 {
-    font-size: 36px;
+    font-size: clamp(30px, 8.5vw, 38px);
   }
   .practical-box {
     padding: var(--space-6);
@@ -1230,7 +1242,7 @@ dd {
     margin-inline: calc(var(--space-1) * -1);
   }
   .contact-form h2 {
-    font-size: 40px;
+    font-size: clamp(30px, 8.5vw, 38px);
   }
   .form-row {
     grid-template-columns: minmax(0, 1fr);
@@ -1306,6 +1318,9 @@ dd {
 }
 .homepage .concert-copy h1 {
   color: var(--color-gold-light);
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.18em;
 }
 .homepage .concert-copy .eyebrow {
   color: var(--color-accent);
@@ -1480,6 +1495,18 @@ dd {
   }
 }
 @media (max-width: 600px) {
+  .homepage .concert-copy h1 {
+    font-size: clamp(44px, 13vw, 64px);
+    max-width: none;
+    margin-block: var(--space-5) var(--space-6);
+  }
+  .homepage .concert-feature {
+    padding-top: var(--space-10);
+    gap: var(--space-8);
+  }
+  .homepage .concert-copy .button {
+    margin-top: var(--space-6);
+  }
   .homepage .concert-photo::before {
     width: 42px;
     height: 42px;
