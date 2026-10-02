@@ -6,11 +6,12 @@ const items = computed(() =>
   (menu.value?.items || []).filter((item) => item.visible !== false),
 )
 const mainItems = computed(() =>
-  items.value.filter((item) => item.placement === 'main'),
+  items.value.filter((item) => item.placements?.includes('desktop')),
 )
-const actionItems = computed(() =>
-  items.value.filter((item) => item.placement === 'action'),
+const mobileItems = computed(() =>
+  items.value.filter((item) => item.placements?.includes('mobile')),
 )
+const action = computed(() => menu.value?.action)
 const open = ref(false)
 const route = useRoute()
 watch(
@@ -29,17 +30,28 @@ watch(
       ><ChoirMark
     /></NuxtLink>
     <nav class="desktop-nav" aria-label="Hoofdnavigatie">
-      <NuxtLink v-for="item in mainItems" :key="item.to" :to="item.to">
+      <NuxtLink
+        v-for="item in mainItems"
+        :key="item.to"
+        :to="item.to"
+        :external="item.external"
+        :target="item.external ? '_blank' : undefined"
+        :rel="item.external ? 'noopener noreferrer' : undefined"
+      >
         <UIcon :name="item.icon" aria-hidden="true" />{{ item.label }}
       </NuxtLink>
     </nav>
     <NuxtLink
-      v-for="item in actionItems"
-      :key="item.to"
-      :to="item.to"
+      v-if="
+        action?.visible !== false && action?.placements?.includes('desktop')
+      "
+      :to="action.to"
+      :external="action.external"
+      :target="action.external ? '_blank' : undefined"
+      :rel="action.external ? 'noopener noreferrer' : undefined"
       class="button button-ink header-book"
     >
-      {{ item.label }} <UIcon :name="item.icon" aria-hidden="true" />
+      {{ action.label }} <UIcon :name="action.icon" aria-hidden="true" />
     </NuxtLink>
     <UButton
       class="menu-trigger"
@@ -58,9 +70,26 @@ watch(
       aria-label="Mobiele navigatie"
       @keydown.esc="open = false"
     >
-      <NuxtLink v-for="item in items" :key="item.to" :to="item.to"
+      <NuxtLink
+        v-for="item in mobileItems"
+        :key="item.to"
+        :to="item.to"
+        :external="item.external"
+        :target="item.external ? '_blank' : undefined"
+        :rel="item.external ? 'noopener noreferrer' : undefined"
         >{{ item.label }} <UIcon :name="item.icon" aria-hidden="true"
       /></NuxtLink>
+      <NuxtLink
+        v-if="
+          action?.visible !== false && action?.placements?.includes('mobile')
+        "
+        :to="action.to"
+        :external="action.external"
+        :target="action.external ? '_blank' : undefined"
+        :rel="action.external ? 'noopener noreferrer' : undefined"
+      >
+        {{ action.label }} <UIcon :name="action.icon" aria-hidden="true" />
+      </NuxtLink>
     </nav>
   </header>
 </template>

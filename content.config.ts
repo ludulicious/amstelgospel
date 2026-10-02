@@ -40,24 +40,21 @@ export default defineContentConfig({
       source: '1.home/2.menu.md',
       schema: z.object({
         title: z.string(),
+        action: link.extend({
+          icon: z.string().min(1),
+          visible: z.boolean().default(true),
+          placements: z
+            .array(z.enum(['desktop', 'mobile', 'footer']))
+            .default(['desktop', 'mobile']),
+          external: z.boolean().default(false),
+        }),
         items: z.array(
           link.extend({
             icon: z.string().min(1),
             visible: z.boolean().default(true),
-            placement: z.enum(['main', 'action', 'mobile']).default('main'),
-          }),
-        ),
-      }),
-    }),
-    footer_menu: defineCollection({
-      type: 'page',
-      source: '1.home/4.footer-menu.md',
-      schema: z.object({
-        title: z.string(),
-        items: z.array(
-          link.extend({
-            icon: z.string().optional(),
-            visible: z.boolean().default(true),
+            placements: z
+              .array(z.enum(['desktop', 'mobile', 'footer']))
+              .default(['desktop', 'mobile']),
             external: z.boolean().default(false),
           }),
         ),

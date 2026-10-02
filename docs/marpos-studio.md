@@ -9,13 +9,11 @@ Deze website is gemaakt voor **Marpos Studio**, de desktopeditor. Er is geen Nux
 3. Kies de hoofdmap van dit project als website. Laat Studio de afhankelijkheden installeren en de preview starten.
 4. Open een collectie, pas de inhoud aan en controleer de preview. Publiceer via de review- en publicatiestap van Marpos Studio. Een gekoppelde hosting-build moet na de GitHub-publicatie opnieuw `pnpm generate` uitvoeren.
 
-## Hoofdmenu
+## Menu
 
-Bewerk het hoofdmenu in **Menu** (`content/1.home/2.menu.md`). Elk item heeft een naam (`label`), bestemming (`to`), Lucide-icoon (`icon`) en een ja/nee-veld (`visible`). Zet `visible` op `false` om het item overal in het hoofdmenu te verbergen. De lijstvolgorde bepaalt de volgorde. `placement` bepaalt de plek: `main` voor gewone links, `action` voor de boekingsknop en `mobile` voor een link die alleen mobiel verschijnt. Het menu wordt op alle pagina's gebruikt.
+Bewerk alle desktop-, mobiele en footerlinks in **Menu** (`content/1.home/2.menu.md`). Elk item heeft een naam (`label`), bestemming (`to`), Lucide-icoon (`icon`), zichtbaarheid (`visible`) en meerdere `placements`: `desktop`, `mobile`, `footer`. Kies één of meer plekken. De lijstvolgorde bepaalt de volgorde per plek. `external: true` opent een link veilig in een nieuw tabblad.
 
-## Footermenu
-
-Bewerk **Footer Menu** (`content/1.home/4.footer-menu.md`) voor de links onderaan alle pagina's, inclusief socials. Pas naam, bestemming, optioneel Lucide-icoon, volgorde en `visible` aan. `external: true` opent de link veilig in een nieuw tabblad. Footertekst en contactgegevens blijven in **Site**.
+De actieknop heeft eigen velden onder `action`: label, bestemming, icoon, zichtbaarheid, placements en external. In de footer gebruikt de ronde actieknop hetzelfde label en icoon. Footertekst en contactgegevens blijven in **Site**.
 
 ## Wat staat waar?
 
@@ -70,7 +68,7 @@ Bestaande documenten hebben expliciete preview-adressen in `studio.preview.json`
 
 ## Gecontroleerd
 
-De projectinspectie van Marpos Studio herkent alle tien collecties zonder waarschuwingen. Pagina's, concerten, foto's, video's en vragen ondersteunen aanmaken; vaste bestanden worden op hun plek bewerkt. Voor een lokale controle:
+De projectinspectie van Marpos Studio herkent alle negen collecties zonder waarschuwingen. Pagina's, concerten, foto's, video's en vragen ondersteunen aanmaken; vaste bestanden worden op hun plek bewerkt. Voor een lokale controle:
 
 ```sh
 node /pad/naar/marpos-studio/scripts/inspect-project.mjs /pad/naar/amstelgospelchoir /tmp/amstel-schema.json

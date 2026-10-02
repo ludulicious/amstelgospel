@@ -1,11 +1,14 @@
 <script setup lang="ts">
 const { data: site } = await useChoir()
-const { data: menu } = await useAsyncData('footer-menu', () =>
-  queryCollection('footer_menu').first(),
+const { data: menu } = await useAsyncData('main-menu', () =>
+  queryCollection('menu').first(),
 )
 const items = computed(() =>
-  (menu.value?.items || []).filter((item) => item.visible !== false),
+  (menu.value?.items || []).filter(
+    (item) => item.visible !== false && item.placements?.includes('footer'),
+  ),
 )
+const action = computed(() => menu.value?.action)
 </script>
 <template>
   <footer v-if="site" class="site-footer">
@@ -15,10 +18,16 @@ const items = computed(() =>
         <h2>{{ site.footerTitle }}</h2>
       </div>
       <NuxtLink
+        v-if="
+          action?.visible !== false && action?.placements?.includes('footer')
+        "
         class="round-link"
-        to="/boeken"
-        aria-label="Neem contact op met het koor"
-        ><UIcon name="i-lucide-arrow-up-right"
+        :to="action.to"
+        :aria-label="action.label"
+        :external="action.external"
+        :target="action.external ? '_blank' : undefined"
+        :rel="action.external ? 'noopener noreferrer' : undefined"
+        ><UIcon :name="action.icon"
       /></NuxtLink>
     </div>
     <div class="footer-middle">

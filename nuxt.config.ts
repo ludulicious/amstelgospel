@@ -25,6 +25,7 @@ export default defineNuxtConfig({
         'lucide:instagram',
         'lucide:facebook',
         'lucide:circle-help',
+        'lucide:calendar-check',
         'lucide:house',
         'lucide:users',
         'lucide:calendar-days',
