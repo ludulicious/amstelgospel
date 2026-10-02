@@ -1,6 +1,6 @@
 {
   "content/1.home/home.yml": "/",
-  "content/2.information/home-concert.md": "/",
+  "content/2.information/1.home-concert.md": "/",
   "content/7.settings/site.yml": ["/", "/meezingen", "/boeken", "/steun-ons"],
   "content/3.events/avond-vol-herinneringen.md": "/agenda/avond-vol-herinneringen",
   "content/3.events/kerstconcerten-2026.md": "/agenda/kerstconcerten-2026",
@@ -53,12 +53,12 @@
   "content/6.faq/vraag-08.yml": ["/veelgestelde-vragen", "/boeken"],
   "content/6.faq/vraag-09.yml": ["/veelgestelde-vragen", "/boeken"],
   "content/6.faq/vraag-10.yml": ["/veelgestelde-vragen", "/boeken"],
-  "content/2.information/agenda.md": "/agenda",
-  "content/2.information/boeken.md": "/boeken",
-  "content/2.information/kijk-en-luister.md": "/kijk-en-luister",
-  "content/2.information/meezingen.md": "/meezingen",
-  "content/2.information/over-ons.md": "/over-ons",
-  "content/2.information/privacy.md": "/privacy",
-  "content/2.information/steun-ons.md": "/steun-ons",
-  "content/2.information/veelgestelde-vragen.md": "/veelgestelde-vragen"
+  "content/2.information/3.agenda.md": "/agenda",
+  "content/2.information/6.boeken.md": "/boeken",
+  "content/2.information/4.kijk-en-luister.md": "/kijk-en-luister",
+  "content/2.information/5.meezingen.md": "/meezingen",
+  "content/2.information/2.over-ons.md": "/over-ons",
+  "content/2.information/9.privacy.md": "/privacy",
+  "content/2.information/7.steun-ons.md": "/steun-ons",
+  "content/2.information/8.veelgestelde-vragen.md": "/veelgestelde-vragen"
 }

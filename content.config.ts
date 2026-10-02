@@ -37,7 +37,7 @@ export default defineContentConfig({
     }),
     home_concert: defineCollection({
       type: 'page',
-      source: '2.information/home-concert.md',
+      source: '2.information/1.home-concert.md',
       schema: z.object({
         title: z.string().min(1),
         description: z.string(),
@@ -51,7 +51,7 @@ export default defineContentConfig({
       type: 'page',
       source: {
         include: '2.information/*.md',
-        exclude: ['2.information/home-concert.md'],
+        exclude: ['2.information/1.home-concert.md'],
         prefix: '/',
       },
       schema: z.object({

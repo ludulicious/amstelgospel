@@ -25,11 +25,15 @@ const routes = new Set([
     .filter(
       (d) =>
         /^content\/\d+\.(information|events)\//.test(d.file) &&
-        !d.file.endsWith('/home-concert.md'),
+        !d.file.endsWith('/1.home-concert.md'),
     )
     .map(
       (d) =>
-        `/${d.file.includes('/3.events/') ? 'agenda/' : ''}${d.file.split('/').pop().replace('.md', '')}`,
+        `/${d.file.includes('/3.events/') ? 'agenda/' : ''}${d.file
+          .split('/')
+          .pop()
+          .replace(/^\d+\./, '')
+          .replace('.md', '')}`,
     ),
 ])
 const walk = (value, visit) => {

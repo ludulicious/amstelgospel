@@ -16,7 +16,7 @@ De contentmappen hebben een nummerprefix voor de volgorde: Home, Information, Ev
 | Sectie in Studio        | Bestand(en)                             | Wat je kunt aanpassen                                                                   |
 | ----------------------- | --------------------------------------- | --------------------------------------------------------------------------------------- |
 | Pages → Home            | `content/1.home/home.yml`               | Koppen, intro, foto's, knoppen, meezingblok en zichtbaarheid van alle homepageblokken   |
-| Pages → Home Concert    | `content/2.information/home-concert.md` | Concertpromotie in Markdown, titel, afbeelding, label en knop                           |
+| Pages → Home Concert    | `content/2.information/1.home-concert.md` | Concertpromotie in Markdown, titel, afbeelding, label en knop                           |
 | Pages → Settings → Site | `content/7.settings/site.yml`           | Navigatie, socials, contactgegevens, repetities, donaties en footer                     |
 | Information             | `content/2.information/*.md`            | Paginatitels, taglines, beschrijvingen, headerfoto, indeling en opgemaakte tekst        |
 | Events                  | `content/3.events/*.md`                 | Concerten, datums, tijden, locatie, kaartverkoop en omschrijving                        |
@@ -38,7 +38,7 @@ Een bestand `content/3.events/mijn-concert.md` krijgt de route `/agenda/mijn-con
 
 Open **Home** en gebruik de ja/nee-velden onder `visibility`: `concert` (concertpromotie), `hero` (introductie), `strip` (muziekstrook), `about` (over het koor), `agenda` en `join` (meezingen). Zet een veld op `false` om dat blok te verbergen; de inhoud blijft bewaard. Zet het op `true` om het weer te tonen.
 
-Bewerk de homepageconcertpromotie in **Home Concert** (`content/2.information/home-concert.md`). De tekst onder de frontmatter is Markdown en ondersteunt alinea's, nadruk, links en lijsten. Titel, omschrijving, datumregel (`eyebrow`), foto, fotolabel en knop staan in de velden erboven. Dit document heeft de homepage als preview en maakt geen losse publieke pagina.
+Bewerk de homepageconcertpromotie in **Home Concert** (`content/2.information/1.home-concert.md`). De tekst onder de frontmatter is Markdown en ondersteunt alinea's, nadruk, links en lijsten. Titel, omschrijving, datumregel (`eyebrow`), foto, fotolabel en knop staan in de velden erboven. Dit document heeft de homepage als preview en maakt geen losse publieke pagina.
 
 Zet na de concerten `visibility.concert` in **Home** op `false`. De introductie wordt dan de eerste sectie; de paginatitel, omschrijving en social-afbeelding gebruiken de algemene homepagegegevens. Je hoeft de concerttekst niet te verwijderen. Werk voor een volgend concert de Markdownpromotie en de bijbehorende agendapagina apart bij.
 
