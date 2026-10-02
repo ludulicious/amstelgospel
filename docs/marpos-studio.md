@@ -79,3 +79,7 @@ node /pad/naar/marpos-studio/scripts/inspect-project.mjs /pad/naar/amstelgospelc
 Een automatische inspectie bevestigt het contentcontract; de uiteindelijke GitHub-verbinding wordt in jouw Marpos Studio-account gemaakt.
 
 Gedeelde paginacopy (zijblokken, galerijen, agenda, formulieren en navigatielabels) staat in `content/7.settings/interface.md`. Laat placeholders zoals `{count}`, `{minimum}` en `{phone}` intact.
+
+## Steun ons bewerken
+
+Alle steunopties, teksten, rekeninggegevens en links staan in `content/2.information/7.steun-ons.md`. Bewerk de koppen, alinea's en Markdown-links rechtstreeks op deze pagina. `support-options` behoudt de kaartindeling; elk `support-option`-blok is één kaart. Pas `number` aan voor het kaartnummer. Je kunt kaarten toevoegen, verwijderen of verplaatsen. Hiervoor zijn geen wijzigingen in Interface teksten of Site settings nodig.

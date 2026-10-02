@@ -815,6 +815,10 @@ dd {
 .faq-section > .text-link {
   margin-top: var(--space-6);
 }
+.page-support .prose-content {
+  max-width: none;
+  width: 100%;
+}
 .support-options {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -843,7 +847,7 @@ dd {
   margin-bottom: var(--space-4);
 }
 .support-number {
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 700;
 }
 .iban {

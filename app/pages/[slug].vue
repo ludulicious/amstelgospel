@@ -129,58 +129,6 @@ useSeoMeta({
       <template v-if="page.layout === 'media'"
         ><VideoGallery /><MediaGallery
       /></template>
-      <template v-if="page.layout === 'support' && site"
-        ><div class="support-options">
-          <section>
-            <span class="support-number">{{ copy.donationNumber }}</span>
-            <h2>{{ copy.donationTitle }}</h2>
-            <p>
-              {{
-                formatCopy(copy.donationText, { minimum: site.support.minimum })
-              }}
-            </p>
-            <dl>
-              <dt>{{ copy.accountNumberLabel }}</dt>
-              <dd class="iban">{{ site.support.iban }}</dd>
-              <dt>{{ copy.accountNameLabel }}</dt>
-              <dd>{{ site.support.account }}</dd>
-            </dl>
-            <a
-              class="text-link"
-              :href="`mailto:${site.email}?subject=Donateur%20worden`"
-              >{{ copy.donationLink }}<UIcon name="i-lucide-arrow-up-right"
-            /></a>
-          </section>
-          <section>
-            <span class="support-number">{{ copy.shoppingNumber }}</span>
-            <h2>{{ copy.shoppingTitle }}</h2>
-            <p>{{ copy.shoppingText }}</p>
-            <a
-              :href="site.support.sponsorUrl"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-link"
-              >{{ copy.shoppingLink }}<UIcon name="i-lucide-arrow-up-right"
-            /></a>
-          </section>
-          <section>
-            <span class="support-number">{{ copy.lotteryNumber }}</span>
-            <h2>{{ copy.lotteryTitle }}</h2>
-            <p>
-              {{ copy.lotteryIntro }}
-              <strong>{{ site.support.clubCode }}</strong
-              >{{ copy.sentenceEnd }}
-            </p>
-            <p>
-              {{
-                formatCopy(copy.lotteryPhoneText, {
-                  phone: site.support.lotteryPhone,
-                })
-              }}
-            </p>
-          </section>
-        </div></template
-      >
       <ContactForm
         v-if="page.layout === 'join' || page.layout === 'booking'"
         :purpose="page.layout === 'join' ? 'join' : 'booking'"
