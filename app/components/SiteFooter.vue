@@ -1,5 +1,11 @@
 <script setup lang="ts">
 const { data: site } = await useChoir()
+const { data: menu } = await useAsyncData('footer-menu', () =>
+  queryCollection('footer_menu').first(),
+)
+const items = computed(() =>
+  (menu.value?.items || []).filter((item) => item.visible !== false),
+)
 </script>
 <template>
   <footer v-if="site" class="site-footer">
@@ -27,19 +33,28 @@ const { data: site } = await useChoir()
         ><ChoirMark surface="dark"
       /></NuxtLink>
       <nav aria-label="Footernavigatie">
-        <NuxtLink to="/steun-ons">Steun ons</NuxtLink
-        ><NuxtLink to="/veelgestelde-vragen">Veelgestelde vragen</NuxtLink
-        ><NuxtLink to="/privacy">Privacy</NuxtLink
-        ><a
-          v-for="social in site.socials"
-          :key="social.to"
-          :href="social.to"
-          target="_blank"
-          rel="noopener noreferrer"
-          >{{ social.label }} ↗</a
+        <NuxtLink
+          v-for="item in items"
+          :key="item.to"
+          :to="item.to"
+          :external="item.external"
+          :target="item.external ? '_blank' : undefined"
+          :rel="item.external ? 'noopener noreferrer' : undefined"
+          class="footer-menu-link"
         >
+          <UIcon v-if="item.icon" :name="item.icon" aria-hidden="true" />
+          {{ item.label }}
+        </NuxtLink>
       </nav>
       <span class="copyright">© {{ new Date().getFullYear() }} AGC</span>
     </div>
   </footer>
 </template>
+
+<style scoped>
+.footer-menu-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+</style>

@@ -8,6 +8,7 @@ const read = (file) =>
 const files = [
   'content/1.home/1.home.yml',
   'content/1.home/2.menu.md',
+  'content/1.home/4.footer-menu.md',
   'content/1.home/3.concert.md',
   'content/7.settings/site.yml',
   ...['2.information', '3.events', '4.photos', '5.videos', '6.faq'].flatMap(

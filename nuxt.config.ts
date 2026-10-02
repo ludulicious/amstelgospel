@@ -21,6 +21,10 @@ export default defineNuxtConfig({
     clientBundle: {
       scan: true,
       icons: [
+        'lucide:shield',
+        'lucide:instagram',
+        'lucide:facebook',
+        'lucide:circle-help',
         'lucide:house',
         'lucide:users',
         'lucide:calendar-days',

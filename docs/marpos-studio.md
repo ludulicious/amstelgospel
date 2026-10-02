@@ -13,6 +13,10 @@ Deze website is gemaakt voor **Marpos Studio**, de desktopeditor. Er is geen Nux
 
 Bewerk het hoofdmenu in **Menu** (`content/1.home/2.menu.md`). Elk item heeft een naam (`label`), bestemming (`to`), Lucide-icoon (`icon`) en een ja/nee-veld (`visible`). Zet `visible` op `false` om het item overal in het hoofdmenu te verbergen. De lijstvolgorde bepaalt de volgorde. `placement` bepaalt de plek: `main` voor gewone links, `action` voor de boekingsknop en `mobile` voor een link die alleen mobiel verschijnt. Het menu wordt op alle pagina's gebruikt.
 
+## Footermenu
+
+Bewerk **Footer Menu** (`content/1.home/4.footer-menu.md`) voor de links onderaan alle pagina's, inclusief socials. Pas naam, bestemming, optioneel Lucide-icoon, volgorde en `visible` aan. `external: true` opent de link veilig in een nieuw tabblad. Footertekst en contactgegevens blijven in **Site**.
+
 ## Wat staat waar?
 
 De contentmappen hebben een nummerprefix voor de volgorde: Home, Information, Events, Photos, Videos, Faq en Settings. Elke map heeft een `.navigation.yml` met een titel en Lucide-icoon, zoals in de portal-documentatie. Iconen voor de collectiemappen staan uitsluitend in deze navigatiebestanden. De nummers veranderen de publieke pagina-adressen niet.
@@ -66,7 +70,7 @@ Bestaande documenten hebben expliciete preview-adressen in `studio.preview.json`
 
 ## Gecontroleerd
 
-De projectinspectie van Marpos Studio herkent alle negen collecties zonder waarschuwingen. Pagina's, concerten, foto's, video's en vragen ondersteunen aanmaken; vaste bestanden worden op hun plek bewerkt. Voor een lokale controle:
+De projectinspectie van Marpos Studio herkent alle tien collecties zonder waarschuwingen. Pagina's, concerten, foto's, video's en vragen ondersteunen aanmaken; vaste bestanden worden op hun plek bewerkt. Voor een lokale controle:
 
 ```sh
 node /pad/naar/marpos-studio/scripts/inspect-project.mjs /pad/naar/amstelgospelchoir /tmp/amstel-schema.json

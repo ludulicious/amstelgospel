@@ -49,6 +49,20 @@ export default defineContentConfig({
         ),
       }),
     }),
+    footer_menu: defineCollection({
+      type: 'page',
+      source: '1.home/4.footer-menu.md',
+      schema: z.object({
+        title: z.string(),
+        items: z.array(
+          link.extend({
+            icon: z.string().optional(),
+            visible: z.boolean().default(true),
+            external: z.boolean().default(false),
+          }),
+        ),
+      }),
+    }),
     home_concert: defineCollection({
       type: 'page',
       source: '1.home/3.concert.md',
@@ -153,7 +167,6 @@ export default defineContentConfig({
         phone: z.string(),
         phoneLink: z.string(),
         contactName: z.string(),
-        socials: z.array(link),
         footerTitle: z.string(),
         footerText: z.string(),
         rehearsal: z.object({
