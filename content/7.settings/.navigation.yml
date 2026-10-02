@@ -1,4 +1,4 @@
 title: Settings
 icon: i-lucide-settings
 studio:
-  view: list
+  view: single
