@@ -26,6 +26,15 @@ pnpm generate
 
 Deploy `.output/public` to a static host. `pnpm build` also supports conventional Nuxt server hosting. No environment variables, remote fonts, content database service or authentication are required. All content pages and concerts are automatically included in prerendering, including archived concerts and newly added Markdown files.
 
+## Deploy with Docker
+
+```sh
+docker build -t amstel-gospel-choir .
+docker run -d --name amstel-gospel-choir --restart unless-stopped -p 3000:3000 amstel-gospel-choir
+```
+
+The image builds with Node.js 22 and the pinned pnpm version, then runs the Nuxt server as a non-root user on port 3000. Only the production output is copied into the runtime image. A health check requests the homepage every 30 seconds. Put your deployment's HTTPS reverse proxy in front of port 3000. Rebuild the image after content changes.
+
 ## Edit in Marpos Studio
 
 See [the editor guide](docs/marpos-studio.md). The project exposes nine non-overlapping local collections with explicit Zod schemas and media selectors. `studio.preview.json` maps each existing content document to its rendered route. Photos, videos and FAQ entries are individual documents that can be created and edited separately. There is deliberately no Nuxt Studio dependency: Marpos Studio is a separate desktop editor.
