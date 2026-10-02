@@ -6,13 +6,14 @@ import { parse } from 'yaml'
 const read = (file) =>
   readFileSync(new URL(`../${file}`, import.meta.url), 'utf8')
 const files = [
-  'content/home.yml',
-  'content/home/concert.md',
-  'content/settings/site.yml',
-  ...['information', 'events', 'photos', 'videos', 'faq'].flatMap((dir) =>
-    readdirSync(new URL(`../content/${dir}`, import.meta.url)).map(
-      (file) => `content/${dir}/${file}`,
-    ),
+  'content/1.home/home.yml',
+  'content/1.home/concert.md',
+  'content/7.settings/site.yml',
+  ...['2.information', '3.events', '4.photos', '5.videos', '6.faq'].flatMap(
+    (dir) =>
+      readdirSync(new URL(`../content/${dir}`, import.meta.url))
+        .filter((file) => !file.startsWith('.'))
+        .map((file) => `content/${dir}/${file}`),
   ),
 ]
 const docs = files.map((file) => ({
@@ -22,10 +23,10 @@ const docs = files.map((file) => ({
 const routes = new Set([
   '/',
   ...docs
-    .filter((d) => /^content\/(information|events)\//.test(d.file))
+    .filter((d) => /^content\/\d+\.(information|events)\//.test(d.file))
     .map(
       (d) =>
-        `/${d.file.includes('/events/') ? 'agenda/' : ''}${d.file.split('/').pop().replace('.md', '')}`,
+        `/${d.file.includes('/3.events/') ? 'agenda/' : ''}${d.file.split('/').pop().replace('.md', '')}`,
     ),
 ])
 const walk = (value, visit) => {
@@ -62,7 +63,7 @@ test('all editable documents have explicit Marpos preview mappings', () => {
 })
 test('concerts have ISO dates, chronological ranges and no ticket link for private events', () => {
   for (const { data: event } of docs.filter((d) =>
-    d.file.includes('/events/'),
+    d.file.includes('/3.events/'),
   )) {
     assert.match(event.date, /^\d{4}-\d{2}-\d{2}$/)
     if (event.endDate) assert.ok(event.endDate >= event.date)
@@ -71,18 +72,18 @@ test('concerts have ISO dates, chronological ranges and no ticket link for priva
 })
 test('all 30 source gallery photos and 8 source videos were migrated', () => {
   assert.equal(
-    docs.filter((d) => d.file.startsWith('content/photos/')).length,
+    docs.filter((d) => d.file.startsWith('content/4.photos/')).length,
     30,
   )
   assert.equal(
-    docs.filter((d) => d.file.startsWith('content/videos/')).length,
+    docs.filter((d) => d.file.startsWith('content/5.videos/')).length,
     8,
   )
 })
 
 test('photos and videos support free-form category lists', () => {
   for (const { file, data } of docs.filter((d) =>
-    /^content\/(photos|videos)\//.test(d.file),
+    /^content\/\d+\.(photos|videos)\//.test(d.file),
   )) {
     assert.ok(
       Array.isArray(data.categories),
@@ -96,7 +97,7 @@ test('photos and videos support free-form category lists', () => {
   }
 })
 test('FAQ migration keeps ten questions and four booking answers', () => {
-  const questions = docs.filter((d) => d.file.startsWith('content/faq/'))
+  const questions = docs.filter((d) => d.file.startsWith('content/6.faq/'))
   assert.equal(questions.length, 10)
   assert.equal(questions.filter((d) => d.data.showOnBooking).length, 4)
   for (const { data } of questions) {

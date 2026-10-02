@@ -46,4 +46,4 @@ Marpos Studio opens GitHub repositories. Put this standalone project in its own 
 
 [Source inventory](docs/sources.md) documents migrated facts and original URLs. [Image provenance](docs/media-sources.json) maps local assets to their source. Photography remains credited to its existing owners; no ownership or license is transferred by this project. Existing photo credits visible in source filenames are retained in the gallery.
 
-Rebuild after publishing content edits. Site navigation and footer links are editable in `content/settings/site.yml`; newly created pages can be added to navigation there.
+Rebuild after publishing content edits. Site navigation and footer links are editable in `content/7.settings/site.yml`; newly created pages can be added to navigation there.

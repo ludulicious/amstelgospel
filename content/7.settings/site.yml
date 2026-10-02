@@ -1,0 +1,33 @@
+icon: i-lucide-settings
+name: Amstel Gospel Choir
+tagline: Maakt van je evenement een belevenis.
+email: amstelgospelchoir@gmail.com
+phone: 06 30 93 60 61
+phoneLink: '+31630936061'
+contactName: Corine Dijst
+nav:
+  - { label: Home, to: /, icon: i-lucide-house }
+  - { label: Het koor, to: /over-ons, icon: i-lucide-users }
+  - { label: Agenda, to: /agenda, icon: i-lucide-calendar-days }
+  - { label: Kijk & luister, to: /kijk-en-luister, icon: i-lucide-audio-lines }
+  - { label: Meezingen, to: /meezingen, icon: i-lucide-mic-vocal }
+socials:
+  - { label: Instagram, to: 'https://instagram.com/amstelgospelchoir' }
+  - { label: Facebook, to: 'https://www.facebook.com/amstelgospelchoir/' }
+footerTitle: Samen klinkt het beter.
+footerText: Een vraag, een idee of zin om mee te zingen? We horen graag van je.
+rehearsal:
+  day: Elke dinsdag
+  time: 20.00 – 22.30 uur
+  venue: Wijkcentrum Westend
+  address: Westwijkplein 3, Amstelveen
+  cost: € 25 per maand
+  trial: De eerste 3 avonden zijn kosteloos.
+  waitingList: Het koor is momenteel vol. Je bent welkom bij een repetitie; daarna kun je je laten plaatsen op de wachtlijst.
+support:
+  iban: NL51 RABO 0302 7613 57
+  account: The Amstel Gospel Choir
+  minimum: € 25 per jaar
+  clubCode: '20933'
+  lotteryPhone: '088 020 1020'
+  sponsorUrl: 'https://www.sponsorkliks.com/products/shops.php?club=10097&so=ma'

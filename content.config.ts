@@ -11,8 +11,9 @@ export default defineContentConfig({
   collections: {
     home: defineCollection({
       type: 'data',
-      source: 'home.yml',
+      source: '1.home/home.yml',
       schema: z.object({
+        icon: z.string().default('i-lucide-house'),
         title: z.string(),
         description: z.string(),
         visibility: z.object({
@@ -37,8 +38,9 @@ export default defineContentConfig({
     }),
     home_concert: defineCollection({
       type: 'page',
-      source: 'home/concert.md',
+      source: '1.home/concert.md',
       schema: z.object({
+        icon: z.string().default('i-lucide-calendar-heart'),
         title: z.string().min(1),
         description: z.string(),
         eyebrow: z.string(),
@@ -49,8 +51,9 @@ export default defineContentConfig({
     }),
     information: defineCollection({
       type: 'page',
-      source: { include: 'information/*.md', prefix: '/' },
+      source: { include: '2.information/*.md', prefix: '/' },
       schema: z.object({
+        icon: z.string().default('i-lucide-book-open'),
         title: z.string(),
         description: z.string(),
         eyebrow: z.string(),
@@ -71,8 +74,9 @@ export default defineContentConfig({
     }),
     events: defineCollection({
       type: 'page',
-      source: { include: 'events/*.md', prefix: '/agenda' },
+      source: { include: '3.events/*.md', prefix: '/agenda' },
       schema: z.object({
+        icon: z.string().default('i-lucide-calendar-days'),
         title: z.string(),
         description: z.string(),
         date: z.string(),
@@ -88,8 +92,9 @@ export default defineContentConfig({
     }),
     photos: defineCollection({
       type: 'data',
-      source: 'photos/*.yml',
+      source: { include: '4.photos/*.yml', exclude: ['**/.navigation.yml'] },
       schema: z.object({
+        icon: z.string().default('i-lucide-images'),
         title: z.string().min(1),
         order: sortOrder,
         image,
@@ -99,8 +104,9 @@ export default defineContentConfig({
     }),
     videos: defineCollection({
       type: 'data',
-      source: 'videos/*.yml',
+      source: { include: '5.videos/*.yml', exclude: ['**/.navigation.yml'] },
       schema: z.object({
+        icon: z.string().default('i-lucide-video'),
         title: z.string().min(1),
         order: sortOrder,
         categories: z.array(z.string().trim().min(1)).default([]),
@@ -110,8 +116,9 @@ export default defineContentConfig({
     }),
     faq: defineCollection({
       type: 'data',
-      source: 'faq/*.yml',
+      source: { include: '6.faq/*.yml', exclude: ['**/.navigation.yml'] },
       schema: z.object({
+        icon: z.string().default('i-lucide-circle-help'),
         title: z.string().min(1),
         content: z.string().min(1),
         order: sortOrder,
@@ -120,8 +127,9 @@ export default defineContentConfig({
     }),
     site: defineCollection({
       type: 'data',
-      source: 'settings/site.yml',
+      source: '7.settings/site.yml',
       schema: z.object({
+        icon: z.string().default('i-lucide-settings'),
         name: z.string(),
         tagline: z.string(),
         email: z.string(),

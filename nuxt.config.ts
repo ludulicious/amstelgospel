@@ -3,12 +3,12 @@ import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 
 const contentRoot = fileURLToPath(new URL('./content/', import.meta.url))
-const contentRoutes = ['information', 'events'].flatMap((folder) =>
+const contentRoutes = ['2.information', '3.events'].flatMap((folder) =>
   readdirSync(`${contentRoot}${folder}`)
     .filter((file) => file.endsWith('.md'))
     .map(
       (file) =>
-        `${folder === 'events' ? '/agenda' : ''}/${file.replace(/\.md$/, '')}`,
+        `${folder === '3.events' ? '/agenda' : ''}/${file.replace(/\.md$/, '')}`,
     ),
 )
 
