@@ -6,3 +6,5 @@ studio:
     directory: images
     formats: [jpg, jpeg, png, webp, gif]
     maxBytes: 10485760
+    imageAspectRatio: "16:9"
+    thumbnailAspectRatio: "4:3"

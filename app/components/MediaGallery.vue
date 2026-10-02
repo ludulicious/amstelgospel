@@ -1,6 +1,10 @@
 <script setup lang="ts">
 const { data: data } = await useAsyncData('photos', () =>
-  queryCollection('photos').where('visible', '=', true).order('order', 'ASC').order('id', 'ASC').all(),
+  queryCollection('photos')
+    .where('visible', '=', true)
+    .order('order', 'ASC')
+    .order('id', 'ASC')
+    .all(),
 )
 const category = ref('')
 const categories = computed(() => [
@@ -70,7 +74,12 @@ watch(category, () => {
       v-model:open="isOpen"
       :title="selected?.title"
       :description="selected?.credit || 'Amstel Gospel Choir'"
-      :ui="{ content: 'max-w-5xl' }"
+      :ui="{
+        content: 'max-w-5xl h-[calc(100dvh-2rem)]',
+        header: 'shrink-0',
+        title: 'gallery-modal-title',
+        body: 'flex-1 min-h-0 overflow-hidden flex flex-col',
+      }"
       ><template #body
         ><div
           class="lightbox"

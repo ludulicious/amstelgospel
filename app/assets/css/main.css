@@ -890,13 +890,26 @@ dd {
   justify-content: space-between;
   gap: var(--space-3);
 }
+.gallery-modal-title {
+  font-size: clamp(22px, 3vw, 32px);
+  line-height: 1.15;
+}
+.lightbox {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
 .lightbox img {
   width: 100%;
-  max-height: 70vh;
+  height: 0;
+  flex: 1;
+  min-height: 0;
   object-fit: contain;
 }
 .lightbox-controls {
   display: flex;
+  flex-shrink: 0;
   justify-content: space-between;
   align-items: center;
   margin-top: var(--space-4);
