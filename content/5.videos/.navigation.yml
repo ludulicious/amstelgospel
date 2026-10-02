@@ -1,2 +1,7 @@
 title: Videos
 icon: i-lucide-video
+studio:
+  view: media
+  media:
+    kind: video
+    thumbnailAspectRatio: 16:9

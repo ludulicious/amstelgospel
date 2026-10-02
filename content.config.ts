@@ -140,6 +140,7 @@ export default defineContentConfig({
       schema: z.object({
         title: z.string().min(1),
         order: sortOrder,
+        visible: z.boolean().default(true),
         categories: z.array(z.string().trim().min(1)).default([]),
         youtubeId: z.string().regex(/^[A-Za-z0-9_-]{11}$/),
         image,

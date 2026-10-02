@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data: data } = await useAsyncData('videos', () =>
-  queryCollection('videos').order('order', 'ASC').order('id', 'ASC').all(),
+  queryCollection('videos').where('visible', '=', true).order('order', 'ASC').order('id', 'ASC').all(),
 )
 const category = ref('')
 const categories = computed(() => [
