@@ -1794,3 +1794,14 @@ dd {
   position: static;
   color: var(--color-ink);
 }
+
+.event-schedule {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+  padding: 0;
+  list-style: none;
+}
+.event-copy .event-schedule {
+  font-size: 14px;
+}

@@ -1,6 +1,7 @@
 ---
 icon: i-lucide-book-open
-title: Goed om te weten.
+title: Veelgestelde vragen
+tagline: Goed om te weten.
 description: Antwoorden op veelgestelde vragen over het boeken van Amstel Gospel Choir, ons repertoire, techniek en de mogelijkheden voor jouw evenement.
 eyebrow: Veelgestelde vragen
 layout: faq

@@ -55,6 +55,7 @@ export default defineContentConfig({
       schema: z.object({
         icon: z.string().default('i-lucide-book-open'),
         title: z.string(),
+        tagline: z.string().optional(),
         description: z.string(),
         eyebrow: z.string(),
         image,
@@ -78,10 +79,17 @@ export default defineContentConfig({
       schema: z.object({
         icon: z.string().default('i-lucide-calendar-days'),
         title: z.string(),
+        tagline: z.string().optional(),
         description: z.string(),
-        date: z.string(),
-        endDate: z.string().optional(),
-        time: z.string(),
+        schedule: z
+          .array(
+            z.object({
+              date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+              time: z.string().trim().min(1),
+            }),
+          )
+          .min(1)
+          .default([{ date: '', time: '' }]),
         location: z.string(),
         city: z.string(),
         access: z.enum(['public', 'private']),

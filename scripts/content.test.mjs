@@ -61,12 +61,15 @@ test('all editable documents have explicit Marpos preview mappings', () => {
       )
   }
 })
-test('concerts have ISO dates, chronological ranges and no ticket link for private events', () => {
+test('concerts have dated time slots and no ticket link for private events', () => {
   for (const { data: event } of docs.filter((d) =>
     d.file.includes('/3.events/'),
   )) {
-    assert.match(event.date, /^\d{4}-\d{2}-\d{2}$/)
-    if (event.endDate) assert.ok(event.endDate >= event.date)
+    assert.ok(event.schedule.length >= 1)
+    for (const slot of event.schedule) {
+      assert.match(slot.date, /^\d{4}-\d{2}-\d{2}$/)
+      assert.ok(slot.time.trim())
+    }
     if (event.access === 'private') assert.ok(!event.ticketUrl)
   }
 })

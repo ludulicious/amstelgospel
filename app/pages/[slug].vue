@@ -40,7 +40,7 @@ useSeoMeta({
     >
       <div>
         <p class="eyebrow">{{ page.eyebrow }}</p>
-        <h1>{{ page.title }}</h1>
+        <h1>{{ page.tagline || page.title }}</h1>
         <p class="inner-description">{{ page.description }}</p>
       </div>
       <img

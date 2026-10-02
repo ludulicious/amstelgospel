@@ -4,7 +4,7 @@ const props = withDefaults(
   { limit: 0, showPast: false },
 )
 const { data: events } = await useAsyncData('events', () =>
-  queryCollection('events').order('date', 'ASC').all(),
+  queryCollection('events').all(),
 )
 const today = useState('today', () =>
   new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Amsterdam' }).format(
@@ -17,11 +17,23 @@ onMounted(() => {
   }).format(new Date())
 })
 const visibleEvents = computed(() => {
-  const list = (events.value || []).filter((event) =>
-    props.showPast
-      ? (event.endDate || event.date) < today.value
-      : (event.endDate || event.date) >= today.value,
-  )
+  const list = (events.value || [])
+    .flatMap((event) =>
+      groupedEventSchedule(event.schedule).map((slot) => ({
+        ...event,
+        slot,
+      })),
+    )
+    .filter((event) =>
+      props.showPast
+        ? event.slot.date < today.value
+        : event.slot.date >= today.value,
+    )
+    .sort(
+      (a, b) =>
+        a.slot.date.localeCompare(b.slot.date) ||
+        a.slot.time.localeCompare(b.slot.time, 'nl', { numeric: true }),
+    )
   return props.limit ? list.slice(0, props.limit) : list
 })
 const month = (date: string) =>
@@ -36,13 +48,15 @@ const month = (date: string) =>
   <div class="event-list">
     <NuxtLink
       v-for="event in visibleEvents"
-      :key="event.id"
+      :key="`${event.id}-${event.slot.date}`"
       :to="event.path"
       class="event-row"
     >
-      <time :datetime="event.date" class="event-date"
-        ><strong>{{ event.date.slice(-2) }}</strong
-        ><span>{{ month(event.date) }} {{ event.date.slice(0, 4) }}</span></time
+      <time :datetime="event.slot.date" class="event-date"
+        ><strong>{{ event.slot.date.slice(-2) }}</strong
+        ><span
+          >{{ month(event.slot.date) }} {{ event.slot.date.slice(0, 4) }}</span
+        ></time
       >
       <div class="event-copy">
         <span class="eyebrow">{{
@@ -50,6 +64,7 @@ const month = (date: string) =>
         }}</span>
         <h3>{{ event.title }}</h3>
         <p>{{ event.location }} · {{ event.city }}</p>
+        <p class="event-time">{{ event.slot.time }}</p>
       </div>
       <UIcon name="i-lucide-arrow-up-right" class="event-arrow" />
     </NuxtLink>

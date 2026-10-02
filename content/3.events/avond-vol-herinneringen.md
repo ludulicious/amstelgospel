@@ -2,8 +2,9 @@
 icon: i-lucide-calendar-days
 title: Een avond vol herinneringen
 description: Een besloten optreden van Amstel Gospel Choir bij Inloophuis 't Anker in Mijdrecht.
-date: '2026-10-02'
-time: Avond
+schedule:
+  - date: '2026-10-02'
+    time: Avond
 location: Inloophuis 't Anker
 city: Mijdrecht
 access: private

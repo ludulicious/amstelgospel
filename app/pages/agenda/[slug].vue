@@ -17,16 +17,7 @@ useSeoMeta({
   ogTitle: () => event.value?.title,
   ogImage: () => event.value?.image.src,
 })
-const dateLabel = computed(() =>
-  event.value
-    ? new Intl.DateTimeFormat('nl-NL', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        timeZone: 'Europe/Amsterdam',
-      }).format(new Date(`${event.value.date}T12:00:00Z`))
-    : '',
-)
+const schedule = computed(() => groupedEventSchedule(event.value?.schedule))
 </script>
 <template>
   <article v-if="event">
@@ -45,8 +36,15 @@ const dateLabel = computed(() =>
               : 'Amstel Gospel Choir live'
           }}
         </p>
-        <h1>{{ event.title }}</h1>
-        <p>{{ dateLabel }} · {{ event.city }}</p>
+        <h1>{{ event.tagline || event.title }}</h1>
+        <p>{{ event.city }}</p>
+        <ul class="event-schedule">
+          <li v-for="(slot, index) in schedule" :key="index">
+            <time :datetime="slot.date"
+              >{{ eventDateLabel(slot.date) }} · {{ slot.time }}</time
+            >
+          </li>
+        </ul>
       </div>
       <img
         :src="event.image.src"
@@ -63,7 +61,15 @@ const dateLabel = computed(() =>
         <dl>
           <div>
             <dt>Wanneer</dt>
-            <dd>{{ event.time }}</dd>
+            <dd>
+              <ul class="event-schedule">
+                <li v-for="(slot, index) in schedule" :key="index">
+                  <time :datetime="slot.date"
+                    >{{ eventDateLabel(slot.date) }} · {{ slot.time }}</time
+                  >
+                </li>
+              </ul>
+            </dd>
           </div>
           <div>
             <dt>Waar</dt>

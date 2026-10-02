@@ -1,6 +1,7 @@
 ---
 icon: i-lucide-book-open
-title: Jouw gegevens, zorgvuldig gebruikt.
+title: Privacy
+tagline: Jouw gegevens, zorgvuldig gebruikt.
 description: Lees hoe contact via deze website werkt en waar je het privacybeleid van Amstel Gospel Choir kunt opvragen.
 eyebrow: Privacy & contact
 layout: story

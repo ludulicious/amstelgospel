@@ -1,6 +1,7 @@
 ---
 icon: i-lucide-book-open
-title: Jouw moment. Onze stemmen.
+title: Boek het koor
+tagline: Jouw moment. Onze stemmen.
 description: Boek Amstel Gospel Choir voor een bruiloft, feest, bedrijfsevenement, afscheid of workshop. Bespreek jouw wensen met ons.
 eyebrow: Geef je evenement een ziel
 layout: booking

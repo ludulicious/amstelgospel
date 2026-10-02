@@ -18,7 +18,7 @@ De contentmappen hebben een nummerprefix voor de volgorde: Home, Information, Ev
 | Pages → Home            | `content/1.home/home.yml`     | Koppen, intro, foto's, knoppen, meezingblok en zichtbaarheid van alle homepageblokken   |
 | Pages → Home Concert    | `content/1.home/concert.md`   | Concertpromotie in Markdown, titel, afbeelding, label en knop                           |
 | Pages → Settings → Site | `content/7.settings/site.yml` | Navigatie, socials, contactgegevens, repetities, donaties en footer                     |
-| Information             | `content/2.information/*.md`  | Paginatitels, beschrijvingen, headerfoto, indeling en opgemaakte tekst                  |
+| Information             | `content/2.information/*.md`  | Paginatitels, taglines, beschrijvingen, headerfoto, indeling en opgemaakte tekst        |
 | Events                  | `content/3.events/*.md`       | Concerten, datums, tijden, locatie, kaartverkoop en omschrijving                        |
 | Photos                  | `content/4.photos/*.yml`      | Eén foto per document: titel, afbeelding, alt-tekst, categorieën, credit en volgorde    |
 | Videos                  | `content/5.videos/*.yml`      | Eén video per document: titel, YouTube-ID, voorbeeldfoto, categorieën en volgorde       |
@@ -30,7 +30,7 @@ De pagina- en concertcollecties ondersteunen nieuwe documenten. De tekst van Mar
 
 ## Nieuw concert
 
-Maak een document in **Events**. Gebruik de datumvorm `2026-12-18` en vul bij meerdaagse concerten ook `endDate` in. Kies `public` voor publiek toegankelijke concerten of `private` voor besloten optredens. Vul een geldige volledige ticket-URL in zodra de verkoop beschikbaar is. De ticketknop verschijnt alleen bij een openbaar concert met een URL.
+Maak een document in **Events**. Vul `schedule` in met één of meer datum/tijd-items. Nieuwe documenten beginnen met één item. Gebruik de datumvorm `2026-12-18` en vul altijd een tijd in, bijvoorbeeld `20.00 uur`. Voeg voor meerdere optredens extra items toe, ook als ze op dezelfde dag zijn. Het kerstconcert heeft drie items: 18 december om 20.00 uur en 19 december om 14.00 en 20.00 uur. Een evenement blijft bij Binnenkort totdat de laatste datum voorbij is. Alle datums en tijden verschijnen in de agenda en op de detailpagina. Kies `public` voor publiek toegankelijke concerten of `private` voor besloten optredens. Vul een geldige volledige ticket-URL in zodra de verkoop beschikbaar is. De ticketknop verschijnt alleen bij een openbaar concert met een URL.
 
 Een bestand `content/3.events/mijn-concert.md` krijgt de route `/agenda/mijn-concert`. De build neemt alle concertbestanden mee, ook concerten uit het verleden.
 
@@ -44,7 +44,7 @@ Zet na de concerten `visibility.concert` in **Home** op `false`. De introductie 
 
 ## Nieuwe pagina
 
-Maak een document in **Information**. De standaardindeling `story` toont een kop, foto en opgemaakte tekst. Andere indelingen zijn voor de agenda, boekingen, meezingen, media, steun en FAQ. Geef een nieuwe pagina een link in de site-navigatie als bezoekers haar daar moeten vinden.
+Maak een document in **Information**. `title` is de paginanaam (bijvoorbeeld Agenda) en wordt gebruikt in het browsertabblad. `tagline` is de grote zichtbare hoofdkop op de pagina (bijvoorbeeld Daar wil je bij zijn.). Zonder tagline gebruikt de hoofdkop de titel. Ook concertdetails ondersteunen een optionele `tagline`. De standaardindeling `story` toont een kop, foto en opgemaakte tekst. Andere indelingen zijn voor de agenda, boekingen, meezingen, media, steun en FAQ. Geef een nieuwe pagina een link in de site-navigatie als bezoekers haar daar moeten vinden.
 
 `studio.preview.json` legt voor de bestaande bestanden vast welke pagina Studio moet tonen. Voeg daar bij een afwijkende of gedeelde preview een route aan toe. Gewone nieuwe Markdown-pagina's gebruiken de prefix van hun collectie.
 
