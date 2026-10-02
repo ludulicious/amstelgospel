@@ -11,7 +11,7 @@ Deze website is gemaakt voor **Marpos Studio**, de desktopeditor. Er is geen Nux
 
 ## Wat staat waar?
 
-De contentmappen hebben een nummerprefix voor de volgorde: Home, Information, Events, Photos, Videos, Faq en Settings. Elke map heeft een `.navigation.yml` met een titel en Lucide-icoon, zoals in de portal-documentatie. Elke collectie heeft ook een `icon`-veld met een passende standaardwaarde; bestaande documenten zijn ingevuld. De nummers veranderen de publieke pagina-adressen niet.
+De contentmappen hebben een nummerprefix voor de volgorde: Home, Information, Events, Photos, Videos, Faq en Settings. Elke map heeft een `.navigation.yml` met een titel en Lucide-icoon, zoals in de portal-documentatie. Iconen voor de collectiemappen staan uitsluitend in deze navigatiebestanden. De nummers veranderen de publieke pagina-adressen niet.
 
 | Sectie in Studio        | Bestand(en)                   | Wat je kunt aanpassen                                                                   |
 | ----------------------- | ----------------------------- | --------------------------------------------------------------------------------------- |

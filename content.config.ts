@@ -13,7 +13,6 @@ export default defineContentConfig({
       type: 'data',
       source: '1.home/home.yml',
       schema: z.object({
-        icon: z.string().default('i-lucide-house'),
         title: z.string(),
         description: z.string(),
         visibility: z.object({
@@ -40,7 +39,6 @@ export default defineContentConfig({
       type: 'page',
       source: '1.home/concert.md',
       schema: z.object({
-        icon: z.string().default('i-lucide-calendar-heart'),
         title: z.string().min(1),
         description: z.string(),
         eyebrow: z.string(),
@@ -53,7 +51,6 @@ export default defineContentConfig({
       type: 'page',
       source: { include: '2.information/*.md', prefix: '/' },
       schema: z.object({
-        icon: z.string().default('i-lucide-book-open'),
         title: z.string(),
         tagline: z.string().optional(),
         description: z.string(),
@@ -77,7 +74,6 @@ export default defineContentConfig({
       type: 'page',
       source: { include: '3.events/*.md', prefix: '/agenda' },
       schema: z.object({
-        icon: z.string().default('i-lucide-calendar-days'),
         title: z.string(),
         tagline: z.string().optional(),
         description: z.string(),
@@ -102,7 +98,6 @@ export default defineContentConfig({
       type: 'data',
       source: { include: '4.photos/*.yml', exclude: ['**/.navigation.yml'] },
       schema: z.object({
-        icon: z.string().default('i-lucide-images'),
         title: z.string().min(1),
         order: sortOrder,
         image,
@@ -114,7 +109,6 @@ export default defineContentConfig({
       type: 'data',
       source: { include: '5.videos/*.yml', exclude: ['**/.navigation.yml'] },
       schema: z.object({
-        icon: z.string().default('i-lucide-video'),
         title: z.string().min(1),
         order: sortOrder,
         categories: z.array(z.string().trim().min(1)).default([]),
@@ -126,7 +120,6 @@ export default defineContentConfig({
       type: 'data',
       source: { include: '6.faq/*.yml', exclude: ['**/.navigation.yml'] },
       schema: z.object({
-        icon: z.string().default('i-lucide-circle-help'),
         title: z.string().min(1),
         content: z.string().min(1),
         order: sortOrder,
@@ -137,7 +130,6 @@ export default defineContentConfig({
       type: 'data',
       source: '7.settings/site.yml',
       schema: z.object({
-        icon: z.string().default('i-lucide-settings'),
         name: z.string(),
         tagline: z.string(),
         email: z.string(),

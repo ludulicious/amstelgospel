@@ -1,5 +1,4 @@
 ---
-icon: i-lucide-book-open
 title: Veelgestelde vragen
 tagline: Goed om te weten.
 description: Antwoorden op veelgestelde vragen over het boeken van Amstel Gospel Choir, ons repertoire, techniek en de mogelijkheden voor jouw evenement.

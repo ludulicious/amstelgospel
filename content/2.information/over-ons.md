@@ -1,5 +1,4 @@
 ---
-icon: i-lucide-book-open
 title: Het koor
 tagline: Veel stemmen. Eén groot hart.
 description: Ontmoet Amstel Gospel Choir uit Amstelveen. Gospel, pop, soul en ballads onder leiding van Vladimir Pairel.

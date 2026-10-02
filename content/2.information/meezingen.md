@@ -1,5 +1,4 @@
 ---
-icon: i-lucide-book-open
 title: Meezingen
 tagline: Laat je dinsdag zingen.
 description: Kom een repetitie bijwonen bij Amstel Gospel Choir in Amstelveen. Lees over de wachtlijst, repetities en contributie.

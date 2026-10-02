@@ -1,5 +1,4 @@
 ---
-icon: i-lucide-book-open
 title: Steun ons
 tagline: Geef onze muziek een zetje.
 description: Steun Amstel Gospel Choir als donateur, via SponsorKliks of door je bestaande VriendenLoterij-lot aan ons te koppelen.

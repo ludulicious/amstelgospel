@@ -1,5 +1,4 @@
 ---
-icon: i-lucide-book-open
 title: Kijk & luister
 tagline: Dit is hoe plezier klinkt.
 description: Bekijk foto's en video's van Amstel Gospel Choir. Van swingende concerten tot bijzondere momenten samen.

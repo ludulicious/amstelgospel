@@ -1,5 +1,4 @@
 ---
-icon: i-lucide-calendar-days
 title: Ride for the Roses
 description: Amstel Gospel Choir bij Ride for the Roses in Aalsmeer op 27 september 2026.
 schedule:
