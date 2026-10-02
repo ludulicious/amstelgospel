@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 const contentRoot = fileURLToPath(new URL('./content/', import.meta.url))
 const contentRoutes = ['2.information', '3.events'].flatMap((folder) =>
   readdirSync(`${contentRoot}${folder}`)
-    .filter((file) => file.endsWith('.md'))
+    .filter((file) => file.endsWith('.md') && file !== 'home-concert.md')
     .map(
       (file) =>
         `${folder === '3.events' ? '/agenda' : ''}/${file.replace(/\.md$/, '')}`,
