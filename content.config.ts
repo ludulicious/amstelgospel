@@ -180,7 +180,7 @@ export default defineContentConfig({
         showOnBooking: z.boolean().default(false),
       }),
     }),
-    interface: defineCollection({
+    interfaceCopy: defineCollection({
       type: 'page',
       source: '7.settings/interface.md',
       schema: z.object({

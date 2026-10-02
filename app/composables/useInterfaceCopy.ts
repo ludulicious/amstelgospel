@@ -1,6 +1,6 @@
 export async function useInterfaceCopy() {
   const { data } = await useAsyncData('interface-copy', () =>
-    queryCollection('interface').first(),
+    queryCollection('interfaceCopy').first(),
   )
   if (!data.value)
     throw createError({
