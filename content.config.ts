@@ -11,7 +11,7 @@ export default defineContentConfig({
   collections: {
     home: defineCollection({
       type: 'data',
-      source: '1.home/home.yml',
+      source: '1.home/1.home.yml',
       schema: z.object({
         title: z.string(),
         description: z.string(),
@@ -35,9 +35,23 @@ export default defineContentConfig({
         join: z.object({ title: z.string(), text: z.string(), link }),
       }),
     }),
+    menu: defineCollection({
+      type: 'page',
+      source: '1.home/2.menu.md',
+      schema: z.object({
+        title: z.string(),
+        items: z.array(
+          link.extend({
+            icon: z.string().min(1),
+            visible: z.boolean().default(true),
+            placement: z.enum(['main', 'action', 'mobile']).default('main'),
+          }),
+        ),
+      }),
+    }),
     home_concert: defineCollection({
       type: 'page',
-      source: '2.information/1.home-concert.md',
+      source: '1.home/3.concert.md',
       schema: z.object({
         title: z.string().min(1),
         description: z.string(),
@@ -51,7 +65,6 @@ export default defineContentConfig({
       type: 'page',
       source: {
         include: '2.information/*.md',
-        exclude: ['2.information/1.home-concert.md'],
         prefix: '/',
       },
       schema: z.object({
@@ -140,7 +153,6 @@ export default defineContentConfig({
         phone: z.string(),
         phoneLink: z.string(),
         contactName: z.string(),
-        nav: z.array(link.extend({ icon: z.string().min(1) })),
         socials: z.array(link),
         footerTitle: z.string(),
         footerText: z.string(),

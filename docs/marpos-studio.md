@@ -9,20 +9,24 @@ Deze website is gemaakt voor **Marpos Studio**, de desktopeditor. Er is geen Nux
 3. Kies de hoofdmap van dit project als website. Laat Studio de afhankelijkheden installeren en de preview starten.
 4. Open een collectie, pas de inhoud aan en controleer de preview. Publiceer via de review- en publicatiestap van Marpos Studio. Een gekoppelde hosting-build moet na de GitHub-publicatie opnieuw `pnpm generate` uitvoeren.
 
+## Hoofdmenu
+
+Bewerk het hoofdmenu in **Menu** (`content/1.home/2.menu.md`). Elk item heeft een naam (`label`), bestemming (`to`), Lucide-icoon (`icon`) en een ja/nee-veld (`visible`). Zet `visible` op `false` om het item overal in het hoofdmenu te verbergen. De lijstvolgorde bepaalt de volgorde. `placement` bepaalt de plek: `main` voor gewone links, `action` voor de boekingsknop en `mobile` voor een link die alleen mobiel verschijnt. Het menu wordt op alle pagina's gebruikt.
+
 ## Wat staat waar?
 
 De contentmappen hebben een nummerprefix voor de volgorde: Home, Information, Events, Photos, Videos, Faq en Settings. Elke map heeft een `.navigation.yml` met een titel en Lucide-icoon, zoals in de portal-documentatie. Iconen voor de collectiemappen staan uitsluitend in deze navigatiebestanden. De nummers veranderen de publieke pagina-adressen niet.
 
-| Sectie in Studio        | Bestand(en)                             | Wat je kunt aanpassen                                                                   |
-| ----------------------- | --------------------------------------- | --------------------------------------------------------------------------------------- |
-| Pages → Home            | `content/1.home/home.yml`               | Koppen, intro, foto's, knoppen, meezingblok en zichtbaarheid van alle homepageblokken   |
-| Pages → Home Concert    | `content/2.information/1.home-concert.md` | Concertpromotie in Markdown, titel, afbeelding, label en knop                           |
-| Pages → Settings → Site | `content/7.settings/site.yml`           | Navigatie, socials, contactgegevens, repetities, donaties en footer                     |
-| Information             | `content/2.information/*.md`            | Paginatitels, taglines, beschrijvingen, headerfoto, indeling en opgemaakte tekst        |
-| Events                  | `content/3.events/*.md`                 | Concerten, datums, tijden, locatie, kaartverkoop en omschrijving                        |
-| Photos                  | `content/4.photos/*.yml`                | Eén foto per document: titel, afbeelding, alt-tekst, categorieën, credit en volgorde    |
-| Videos                  | `content/5.videos/*.yml`                | Eén video per document: titel, YouTube-ID, voorbeeldfoto, categorieën en volgorde       |
-| Faq                     | `content/6.faq/*.yml`                   | Eén vraag per document: vraag, antwoord, volgorde en zichtbaarheid op de boekingspagina |
+| Sectie in Studio        | Bestand(en)                   | Wat je kunt aanpassen                                                                   |
+| ----------------------- | ----------------------------- | --------------------------------------------------------------------------------------- |
+| Pages → Home            | `content/1.home/1.home.yml`   | Koppen, intro, foto's, knoppen, meezingblok en zichtbaarheid van alle homepageblokken   |
+| Pages → Home Concert    | `content/1.home/3.concert.md` | Concertpromotie in Markdown, titel, afbeelding, label en knop                           |
+| Pages → Settings → Site | `content/7.settings/site.yml` | Socials, contactgegevens, repetities, donaties en footer                                |
+| Information             | `content/2.information/*.md`  | Paginatitels, taglines, beschrijvingen, headerfoto, indeling en opgemaakte tekst        |
+| Events                  | `content/3.events/*.md`       | Concerten, datums, tijden, locatie, kaartverkoop en omschrijving                        |
+| Photos                  | `content/4.photos/*.yml`      | Eén foto per document: titel, afbeelding, alt-tekst, categorieën, credit en volgorde    |
+| Videos                  | `content/5.videos/*.yml`      | Eén video per document: titel, YouTube-ID, voorbeeldfoto, categorieën en volgorde       |
+| Faq                     | `content/6.faq/*.yml`         | Eén vraag per document: vraag, antwoord, volgorde en zichtbaarheid op de boekingspagina |
 
 Studio groepeert collecties met één vast bestand automatisch onder **Pages**. De vorige Markdown-collectie heette óók Pages en stond in de map `content/pages/`; daardoor verschenen twee gelijknamige secties. De Markdown-collectie en map heten nu **Information**. Dit verandert de publieke pagina-adressen niet. Home en Site blijven vaste bestanden; alle herhaalbare inhoud heeft een eigen collectie.
 
@@ -38,7 +42,7 @@ Een bestand `content/3.events/mijn-concert.md` krijgt de route `/agenda/mijn-con
 
 Open **Home** en gebruik de ja/nee-velden onder `visibility`: `concert` (concertpromotie), `hero` (introductie), `strip` (muziekstrook), `about` (over het koor), `agenda` en `join` (meezingen). Zet een veld op `false` om dat blok te verbergen; de inhoud blijft bewaard. Zet het op `true` om het weer te tonen.
 
-Bewerk de homepageconcertpromotie in **Home Concert** (`content/2.information/1.home-concert.md`). De tekst onder de frontmatter is Markdown en ondersteunt alinea's, nadruk, links en lijsten. Titel, omschrijving, datumregel (`eyebrow`), foto, fotolabel en knop staan in de velden erboven. Dit document heeft de homepage als preview en maakt geen losse publieke pagina.
+Bewerk de homepageconcertpromotie in **Home Concert** (`content/1.home/3.concert.md`). De tekst onder de frontmatter is Markdown en ondersteunt alinea's, nadruk, links en lijsten. Titel, omschrijving, datumregel (`eyebrow`), foto, fotolabel en knop staan in de velden erboven. Dit document heeft de homepage als preview en maakt geen losse publieke pagina.
 
 Zet na de concerten `visibility.concert` in **Home** op `false`. De introductie wordt dan de eerste sectie; de paginatitel, omschrijving en social-afbeelding gebruiken de algemene homepagegegevens. Je hoeft de concerttekst niet te verwijderen. Werk voor een volgend concert de Markdownpromotie en de bijbehorende agendapagina apart bij.
 
@@ -62,7 +66,7 @@ Bestaande documenten hebben expliciete preview-adressen in `studio.preview.json`
 
 ## Gecontroleerd
 
-De projectinspectie van Marpos Studio herkent alle acht collecties zonder waarschuwingen. Pagina's, concerten, foto's, video's en vragen ondersteunen aanmaken; vaste bestanden worden op hun plek bewerkt. Voor een lokale controle:
+De projectinspectie van Marpos Studio herkent alle negen collecties zonder waarschuwingen. Pagina's, concerten, foto's, video's en vragen ondersteunen aanmaken; vaste bestanden worden op hun plek bewerkt. Voor een lokale controle:
 
 ```sh
 node /pad/naar/marpos-studio/scripts/inspect-project.mjs /pad/naar/amstelgospelchoir /tmp/amstel-schema.json

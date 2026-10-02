@@ -28,7 +28,7 @@ Deploy `.output/public` to a static host. `pnpm build` also supports conventiona
 
 ## Edit in Marpos Studio
 
-See [the editor guide](docs/marpos-studio.md). The project exposes eight non-overlapping local collections with explicit Zod schemas and media selectors. `studio.preview.json` maps each existing content document to its rendered route. Photos, videos and FAQ entries are individual documents that can be created and edited separately. There is deliberately no Nuxt Studio dependency: Marpos Studio is a separate desktop editor.
+See [the editor guide](docs/marpos-studio.md). The project exposes nine non-overlapping local collections with explicit Zod schemas and media selectors. `studio.preview.json` maps each existing content document to its rendered route. Photos, videos and FAQ entries are individual documents that can be created and edited separately. There is deliberately no Nuxt Studio dependency: Marpos Studio is a separate desktop editor.
 
 Marpos Studio opens GitHub repositories. Put this standalone project in its own GitHub repository, then connect that repository in Marpos Studio. A preview hosted elsewhere does not automatically create that GitHub connection.
 

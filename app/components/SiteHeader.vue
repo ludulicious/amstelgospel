@@ -1,5 +1,16 @@
 <script setup lang="ts">
-const { data: site } = await useChoir()
+const { data: menu } = await useAsyncData('main-menu', () =>
+  queryCollection('menu').first(),
+)
+const items = computed(() =>
+  (menu.value?.items || []).filter((item) => item.visible !== false),
+)
+const mainItems = computed(() =>
+  items.value.filter((item) => item.placement === 'main'),
+)
+const actionItems = computed(() =>
+  items.value.filter((item) => item.placement === 'action'),
+)
 const open = ref(false)
 const route = useRoute()
 watch(
@@ -18,13 +29,18 @@ watch(
       ><ChoirMark
     /></NuxtLink>
     <nav class="desktop-nav" aria-label="Hoofdnavigatie">
-      <NuxtLink v-for="item in site?.nav" :key="item.to" :to="item.to">
+      <NuxtLink v-for="item in mainItems" :key="item.to" :to="item.to">
         <UIcon :name="item.icon" aria-hidden="true" />{{ item.label }}
       </NuxtLink>
     </nav>
-    <NuxtLink to="/boeken" class="button button-ink header-book"
-      >Boek het koor <UIcon name="i-lucide-arrow-up-right"
-    /></NuxtLink>
+    <NuxtLink
+      v-for="item in actionItems"
+      :key="item.to"
+      :to="item.to"
+      class="button button-ink header-book"
+    >
+      {{ item.label }} <UIcon :name="item.icon" aria-hidden="true" />
+    </NuxtLink>
     <UButton
       class="menu-trigger"
       color="neutral"
@@ -42,14 +58,8 @@ watch(
       aria-label="Mobiele navigatie"
       @keydown.esc="open = false"
     >
-      <NuxtLink v-for="item in site?.nav" :key="item.to" :to="item.to"
+      <NuxtLink v-for="item in items" :key="item.to" :to="item.to"
         >{{ item.label }} <UIcon :name="item.icon" aria-hidden="true"
-      /></NuxtLink>
-      <NuxtLink to="/boeken"
-        >Boek het koor <UIcon name="i-lucide-arrow-up-right"
-      /></NuxtLink>
-      <NuxtLink to="/steun-ons"
-        >Steun ons <UIcon name="i-lucide-heart"
       /></NuxtLink>
     </nav>
   </header>

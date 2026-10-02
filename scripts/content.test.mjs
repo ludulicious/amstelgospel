@@ -6,7 +6,9 @@ import { parse } from 'yaml'
 const read = (file) =>
   readFileSync(new URL(`../${file}`, import.meta.url), 'utf8')
 const files = [
-  'content/1.home/home.yml',
+  'content/1.home/1.home.yml',
+  'content/1.home/2.menu.md',
+  'content/1.home/3.concert.md',
   'content/7.settings/site.yml',
   ...['2.information', '3.events', '4.photos', '5.videos', '6.faq'].flatMap(
     (dir) =>
@@ -22,11 +24,7 @@ const docs = files.map((file) => ({
 const routes = new Set([
   '/',
   ...docs
-    .filter(
-      (d) =>
-        /^content\/\d+\.(information|events)\//.test(d.file) &&
-        !d.file.endsWith('/1.home-concert.md'),
-    )
+    .filter((d) => /^content\/\d+\.(information|events)\//.test(d.file))
     .map(
       (d) =>
         `/${d.file.includes('/3.events/') ? 'agenda/' : ''}${d.file
