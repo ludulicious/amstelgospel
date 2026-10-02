@@ -26,7 +26,7 @@ COPY --from=builder --chown=node:node /app/.output ./.output
 USER node
 
 EXPOSE 3000
-HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
   CMD wget --quiet --tries=1 --spider http://127.0.0.1:${PORT}/ || exit 1
 
 CMD ["node", ".output/server/index.mjs"]
