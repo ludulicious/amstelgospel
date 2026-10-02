@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { copy } = await useInterfaceCopy()
 const { data: menu } = await useAsyncData('main-menu', () =>
   queryCollection('menu').first(),
 )
@@ -23,13 +24,10 @@ watch(
 </script>
 <template>
   <header class="site-header">
-    <NuxtLink
-      to="/"
-      aria-label="Amstel Gospel Choir, naar de homepage"
-      class="brand"
+    <NuxtLink to="/" :aria-label="copy.homeLinkLabel" class="brand"
       ><ChoirMark
     /></NuxtLink>
-    <nav class="desktop-nav" aria-label="Hoofdnavigatie">
+    <nav class="desktop-nav" :aria-label="copy.desktopNavLabel">
       <NuxtLink
         v-for="item in mainItems"
         :key="item.to"
@@ -60,14 +58,14 @@ watch(
       :icon="open ? 'i-lucide-x' : 'i-lucide-menu'"
       :aria-expanded="open"
       aria-controls="mobile-menu"
-      :aria-label="open ? 'Sluit menu' : 'Open menu'"
+      :aria-label="open ? copy.closeMenuLabel : copy.openMenuLabel"
       @click="open = !open"
     />
     <nav
       v-if="open"
       id="mobile-menu"
       class="mobile-menu"
-      aria-label="Mobiele navigatie"
+      :aria-label="copy.mobileNavLabel"
       @keydown.esc="open = false"
     >
       <NuxtLink

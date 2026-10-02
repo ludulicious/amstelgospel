@@ -21,7 +21,7 @@ De contentmappen hebben een nummerprefix voor de volgorde: Home, Information, Ev
 
 | Sectie in Studio        | Bestand(en)                   | Wat je kunt aanpassen                                                                   |
 | ----------------------- | ----------------------------- | --------------------------------------------------------------------------------------- |
-| Pages → Home            | `content/1.home/1.home.yml`   | Koppen, intro, foto's, knoppen, meezingblok en zichtbaarheid van alle homepageblokken   |
+| Pages → Home            | `content/1.home/1.home.md`    | Koppen, intro, foto's, knoppen, meezingblok en zichtbaarheid van alle homepageblokken   |
 | Pages → Home Concert    | `content/1.home/3.concert.md` | Concertpromotie in Markdown, titel, afbeelding, label en knop                           |
 | Pages → Settings → Site | `content/7.settings/site.yml` | Socials, contactgegevens, repetities, donaties en footer                                |
 | Information             | `content/2.information/*.md`  | Paginatitels, taglines, beschrijvingen, headerfoto, indeling en opgemaakte tekst        |
@@ -75,3 +75,5 @@ node /pad/naar/marpos-studio/scripts/inspect-project.mjs /pad/naar/amstelgospelc
 ```
 
 Een automatische inspectie bevestigt het contentcontract; de uiteindelijke GitHub-verbinding wordt in jouw Marpos Studio-account gemaakt.
+
+Gedeelde paginacopy (zijblokken, galerijen, agenda, formulieren en navigatielabels) staat in `content/7.settings/interface.md`. Laat placeholders zoals `{count}`, `{minimum}` en `{phone}` intact.

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { copy } = await useInterfaceCopy()
 const { data: data } = await useAsyncData('photos', () =>
   queryCollection('photos')
     .where('visible', '=', true)
@@ -8,7 +9,7 @@ const { data: data } = await useAsyncData('photos', () =>
 )
 const category = ref('')
 const categories = computed(() => [
-  { key: '', title: 'Alles' },
+  { key: '', title: copy.photosAllLabel },
   ...Array.from(
     new Set((data.value || []).flatMap((photo) => photo.categories || [])),
   ).map((title) => ({ key: title, title })),
@@ -37,10 +38,10 @@ watch(category, () => {
 <template>
   <section class="gallery-section">
     <div class="section-heading">
-      <h2>In beeld.</h2>
-      <span>{{ photos.length }} foto's</span>
+      <h2>{{ copy.photosTitle }}</h2>
+      <span>{{ formatCopy(copy.photoCount, { count: photos.length }) }}</span>
     </div>
-    <div class="filter-buttons" aria-label="Filter foto's">
+    <div class="filter-buttons" :aria-label="copy.photosFilterLabel">
       <UButton
         v-for="item in categories"
         :key="item.key"
@@ -57,7 +58,9 @@ watch(category, () => {
         :key="photo.image.src"
         type="button"
         class="gallery-photo"
-        :aria-label="`Vergroot foto: ${photo.image.alt}`"
+        :aria-label="
+          formatCopy(copy.enlargePhotoLabel, { alt: photo.image.alt })
+        "
         @click="show(index)"
       >
         <img
@@ -73,7 +76,7 @@ watch(category, () => {
       v-if="isOpen"
       v-model:open="isOpen"
       :title="selected?.title"
-      :description="selected?.credit || 'Amstel Gospel Choir'"
+      :description="selected?.credit || copy.footerEyebrow"
       :ui="{
         content: 'max-w-5xl h-[calc(100dvh-2rem)]',
         header: 'shrink-0',
@@ -96,14 +99,14 @@ watch(category, () => {
               icon="i-lucide-arrow-left"
               color="neutral"
               variant="outline"
-              aria-label="Vorige foto"
+              :aria-label="copy.previousPhotoLabel"
               @click="step(-1)"
             /><span>{{ selectedIndex + 1 }} / {{ photos.length }}</span
             ><UButton
               icon="i-lucide-arrow-right"
               color="neutral"
               variant="outline"
-              aria-label="Volgende foto"
+              :aria-label="copy.nextPhotoLabel"
               @click="step(1)"
             />
           </div></div></template

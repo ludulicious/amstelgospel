@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { copy } = await useInterfaceCopy()
 definePageMeta({ key: (route) => route.path.replace(/\/+$/, '') || '/' })
 const route = useRoute()
 const contentPath = route.path.replace(/\/+$/, '') || '/'
@@ -66,21 +67,21 @@ useSeoMeta({
       >
         <ContentRenderer :value="page" class="prose-content" />
         <aside v-if="page.layout === 'join' && site" class="practical-box">
-          <p class="eyebrow">Een plek voor je stem</p>
-          <h2>Kom erbij.</h2>
+          <p class="eyebrow">{{ copy.joinEyebrow }}</p>
+          <h2>{{ copy.joinTitle }}</h2>
           <dl>
             <div>
-              <dt>Wanneer</dt>
+              <dt>{{ copy.whenLabel }}</dt>
               <dd>{{ site.rehearsal.day }}<br />{{ site.rehearsal.time }}</dd>
             </div>
             <div>
-              <dt>Waar</dt>
+              <dt>{{ copy.whereLabel }}</dt>
               <dd>
                 {{ site.rehearsal.venue }}<br />{{ site.rehearsal.address }}
               </dd>
             </div>
             <div>
-              <dt>Contributie</dt>
+              <dt>{{ copy.membershipLabel }}</dt>
               <dd>{{ site.rehearsal.cost }}<br />{{ site.rehearsal.trial }}</dd>
             </div>
           </dl>
@@ -89,15 +90,15 @@ useSeoMeta({
           </p>
         </aside>
         <aside v-if="page.layout === 'booking' && site" class="practical-box">
-          <p class="eyebrow">Even overleggen?</p>
-          <h2>We horen je graag.</h2>
+          <p class="eyebrow">{{ copy.bookingEyebrow }}</p>
+          <h2>{{ copy.bookingTitle }}</h2>
           <p>{{ site.contactName }}</p>
           <a :href="`tel:${site.phoneLink}`" class="contact-phone">{{
             site.phone
           }}</a
           ><a :href="`mailto:${site.email}`">{{ site.email }}</a
           ><NuxtLink to="/veelgestelde-vragen" class="text-link"
-            >Veelgestelde vragen <UIcon name="i-lucide-arrow-right"
+            >{{ copy.faqLink }}<UIcon name="i-lucide-arrow-right"
           /></NuxtLink>
         </aside>
       </div>
@@ -114,13 +115,13 @@ useSeoMeta({
             :variant="!showPast ? 'solid' : 'outline'"
             :aria-pressed="!showPast"
             @click="showPast = false"
-            >Binnenkort</UButton
+            >{{ copy.upcomingFilter }}</UButton
           ><UButton
             color="neutral"
             :variant="showPast ? 'solid' : 'outline'"
             :aria-pressed="showPast"
             @click="showPast = true"
-            >Terugblik</UButton
+            >{{ copy.pastFilter }}</UButton
           >
         </div>
         <EventList :show-past="showPast"
@@ -131,51 +132,51 @@ useSeoMeta({
       <template v-if="page.layout === 'support' && site"
         ><div class="support-options">
           <section>
-            <span class="support-number">01</span>
-            <h2>Word donateur.</h2>
+            <span class="support-number">{{ copy.donationNumber }}</span>
+            <h2>{{ copy.donationTitle }}</h2>
             <p>
-              Vanaf {{ site.support.minimum }} help je ons met nieuwe muziek en
-              kledingaccessoires.
+              {{
+                formatCopy(copy.donationText, { minimum: site.support.minimum })
+              }}
             </p>
             <dl>
-              <dt>Rekeningnummer</dt>
+              <dt>{{ copy.accountNumberLabel }}</dt>
               <dd class="iban">{{ site.support.iban }}</dd>
-              <dt>Ten name van</dt>
+              <dt>{{ copy.accountNameLabel }}</dt>
               <dd>{{ site.support.account }}</dd>
             </dl>
             <a
               class="text-link"
               :href="`mailto:${site.email}?subject=Donateur%20worden`"
-              >Meld je aan als donateur<UIcon name="i-lucide-arrow-up-right"
+              >{{ copy.donationLink }}<UIcon name="i-lucide-arrow-up-right"
             /></a>
           </section>
           <section>
-            <span class="support-number">02</span>
-            <h2>Shop & steun.</h2>
-            <p>
-              Ga via SponsorKliks naar je favoriete webwinkel. Jij betaalt
-              dezelfde prijs, wij ontvangen een commissie.
-            </p>
+            <span class="support-number">{{ copy.shoppingNumber }}</span>
+            <h2>{{ copy.shoppingTitle }}</h2>
+            <p>{{ copy.shoppingText }}</p>
             <a
               :href="site.support.sponsorUrl"
               target="_blank"
               rel="noopener noreferrer"
               class="text-link"
-              >Naar SponsorKliks<UIcon name="i-lucide-arrow-up-right"
+              >{{ copy.shoppingLink }}<UIcon name="i-lucide-arrow-up-right"
             /></a>
           </section>
           <section>
-            <span class="support-number">03</span>
-            <h2>Koppel je lot.</h2>
+            <span class="support-number">{{ copy.lotteryNumber }}</span>
+            <h2>{{ copy.lotteryTitle }}</h2>
             <p>
-              Speel je al mee met de VriendenLoterij? Laat jouw bestaande lot
-              aan Amstel Gospel Choir koppelen. Onze clubcode is
+              {{ copy.lotteryIntro }}
               <strong>{{ site.support.clubCode }}</strong
-              >.
+              >{{ copy.sentenceEnd }}
             </p>
             <p>
-              Bel de VriendenLoterij via {{ site.support.lotteryPhone }} en houd
-              onze clubcode bij de hand.
+              {{
+                formatCopy(copy.lotteryPhoneText, {
+                  phone: site.support.lotteryPhone,
+                })
+              }}
             </p>
           </section>
         </div></template
@@ -188,7 +189,7 @@ useSeoMeta({
         v-if="page.layout === 'faq' || page.layout === 'booking'"
         class="faq-section"
       >
-        <h2 v-if="page.layout === 'booking'">Alvast een antwoord.</h2>
+        <h2 v-if="page.layout === 'booking'">{{ copy.bookingFaqTitle }}</h2>
         <UAccordion
           :items="faqItems"
           :ui="{
@@ -199,7 +200,7 @@ useSeoMeta({
           v-if="page.layout === 'booking'"
           class="text-link"
           to="/veelgestelde-vragen"
-          >Alle vragen & antwoorden<UIcon name="i-lucide-arrow-right"
+          >{{ copy.allFaqLink }}<UIcon name="i-lucide-arrow-right"
         /></NuxtLink>
       </section>
     </div>

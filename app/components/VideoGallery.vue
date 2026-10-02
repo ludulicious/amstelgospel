@@ -1,10 +1,15 @@
 <script setup lang="ts">
+const { copy } = await useInterfaceCopy()
 const { data: data } = await useAsyncData('videos', () =>
-  queryCollection('videos').where('visible', '=', true).order('order', 'ASC').order('id', 'ASC').all(),
+  queryCollection('videos')
+    .where('visible', '=', true)
+    .order('order', 'ASC')
+    .order('id', 'ASC')
+    .all(),
 )
 const category = ref('')
 const categories = computed(() => [
-  { key: '', title: 'Alles' },
+  { key: '', title: copy.videosAllLabel },
   ...Array.from(
     new Set((data.value || []).flatMap((video) => video.categories || [])),
   ).map((title) => ({ key: title, title })),
@@ -22,14 +27,11 @@ watch(category, () => {
 <template>
   <section class="video-section">
     <div class="section-heading">
-      <h2>Hoor ons gaan.</h2>
-      <span>Gospel, pop & soul</span>
+      <h2>{{ copy.videosTitle }}</h2>
+      <span>{{ copy.videosSubtitle }}</span>
     </div>
-    <p class="media-notice">
-      Speel een video af om YouTube te laden. Je maakt dan verbinding met
-      YouTube.
-    </p>
-    <div class="filter-buttons" aria-label="Filter video's">
+    <p class="media-notice">{{ copy.youtubeNotice }}</p>
+    <div class="filter-buttons" :aria-label="copy.videosFilterLabel">
       <UButton
         v-for="item in categories"
         :key="item.key"
@@ -51,7 +53,7 @@ watch(category, () => {
         /><button
           v-else
           type="button"
-          :aria-label="`Speel ${video.title}`"
+          :aria-label="formatCopy(copy.playVideoLabel, { title: video.title })"
           @click="active = video.youtubeId"
         >
           <img

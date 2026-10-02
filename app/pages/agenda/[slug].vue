@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { copy } = await useInterfaceCopy()
 definePageMeta({ key: (route) => route.path.replace(/\/+$/, '') || '/' })
 const route = useRoute()
 const contentPath = route.path.replace(/\/+$/, '') || '/'
@@ -27,13 +28,15 @@ const schedule = computed(() => groupedEventSchedule(event.value?.schedule))
           v-if="route.query.from !== 'home'"
           to="/agenda"
           class="text-link back-link"
-          ><UIcon name="i-lucide-arrow-left" />Terug naar de agenda</NuxtLink
+          ><UIcon name="i-lucide-arrow-left" />{{
+            copy.eventBackLink
+          }}</NuxtLink
         >
         <p class="eyebrow">
           {{
             event.access === 'private'
-              ? 'Besloten optreden'
-              : 'Amstel Gospel Choir live'
+              ? copy.eventPrivateLabel
+              : copy.eventPublicLabel
           }}
         </p>
         <h1>{{ event.tagline || event.title }}</h1>
@@ -57,10 +60,10 @@ const schedule = computed(() => groupedEventSchedule(event.value?.schedule))
     <div class="page-content page-pad content-columns">
       <ContentRenderer :value="event" class="prose-content" />
       <aside class="practical-box">
-        <h2>Goed om te weten.</h2>
+        <h2>{{ copy.eventPracticalTitle }}</h2>
         <dl>
           <div>
-            <dt>Wanneer</dt>
+            <dt>{{ copy.eventWhenLabel }}</dt>
             <dd>
               <ul class="event-schedule">
                 <li v-for="(slot, index) in schedule" :key="index">
@@ -72,7 +75,7 @@ const schedule = computed(() => groupedEventSchedule(event.value?.schedule))
             </dd>
           </div>
           <div>
-            <dt>Waar</dt>
+            <dt>{{ copy.eventWhereLabel }}</dt>
             <dd>{{ event.location }}<br />{{ event.city }}</dd>
           </div>
         </dl>
@@ -83,12 +86,12 @@ const schedule = computed(() => groupedEventSchedule(event.value?.schedule))
           target="_blank"
           rel="noopener noreferrer"
           class="button button-ink"
-          >Koop je tickets<UIcon name="i-lucide-arrow-up-right" /></a
+          >{{ copy.ticketLink }}<UIcon name="i-lucide-arrow-up-right" /></a
         ><a
           v-else-if="event.access === 'public'"
-          :href="`mailto:${site?.email}?subject=${encodeURIComponent('Vraag over ' + event.title)}`"
+          :href="`mailto:${site?.email}?subject=${encodeURIComponent(formatCopy(copy.questionSubject, { title: event.title }))}`"
           class="text-link"
-          >Stel een vraag<UIcon name="i-lucide-mail"
+          >{{ copy.questionLink }}<UIcon name="i-lucide-mail"
         /></a>
       </aside>
     </div>

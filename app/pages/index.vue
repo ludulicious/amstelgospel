@@ -119,7 +119,7 @@ useSeoMeta({
         @click="motionPaused = !motionPaused"
       >
         <span aria-hidden="true">{{ motionPaused ? '▶' : 'Ⅱ' }}</span>
-        {{ motionPaused ? 'Animaties afspelen' : 'Animaties pauzeren' }}
+        {{ motionPaused ? home.motion.play : home.motion.pause }}
       </button>
     </section>
     <section v-if="home.visibility.hero" class="home-hero page-pad">
@@ -152,7 +152,9 @@ useSeoMeta({
             height="533"
             :loading="showConcert ? 'lazy' : 'eager'"
             :fetchpriority="showConcert ? 'auto' : 'high'"
-          /><span class="photo-number" aria-hidden="true">AGC / LIVE</span>
+          /><span class="photo-number" aria-hidden="true">{{
+            home.photoStamp
+          }}</span>
         </div>
         <div class="hero-sticker" aria-hidden="true">
           <div class="sound-bars">
@@ -162,7 +164,11 @@ useSeoMeta({
               :style="{ '--bar-delay': `${bar * -0.18}s` }"
             />
           </div>
-          <span>VOLUIT.<br />SAMEN.</span>
+          <span
+            ><template v-for="(line, index) in home.stickerLines" :key="index"
+              ><br v-if="index" />{{ line }}</template
+            ></span
+          >
         </div>
         <p class="photo-caption">
           {{ home.imageLabel }} <UIcon name="i-lucide-heart" />
@@ -172,7 +178,7 @@ useSeoMeta({
     <div
       v-if="home.visibility.strip"
       class="music-strip"
-      aria-label="Ons geluid"
+      :aria-label="home.stripLabel"
     >
       <div class="music-track">
         <div
@@ -195,10 +201,10 @@ useSeoMeta({
           width="800"
           height="533"
           loading="lazy"
-        /><span class="photo-note">Aangenaam, de AGC-familie.</span>
+        /><span class="photo-note">{{ home.about.imageLabel }}</span>
       </div>
       <div class="intro-copy" data-reveal>
-        <p class="eyebrow">Meer dan een koor</p>
+        <p class="eyebrow">{{ home.about.eyebrow }}</p>
         <component :is="headingTag('about')">{{ home.about.title }}</component>
         <p>{{ home.about.text }}</p>
         <NuxtLink class="text-link" :to="home.about.link.to"
@@ -208,12 +214,19 @@ useSeoMeta({
     </section>
     <section v-if="home.visibility.agenda" class="agenda-section page-pad">
       <div class="section-heading" data-reveal>
-        <component :is="headingTag('agenda')">Tot vooraan.</component>
-        <NuxtLink to="/agenda" class="text-link"
-          >De hele agenda<UIcon name="i-lucide-arrow-right"
+        <component :is="headingTag('agenda')">{{
+          home.agenda.title
+        }}</component>
+        <NuxtLink :to="home.agenda.link.to" class="text-link"
+          >{{ home.agenda.link.label }}<UIcon name="i-lucide-arrow-right"
         /></NuxtLink>
       </div>
-      <EventList :limit="3" />
+      <EventList
+        :limit="3"
+        :public-label="home.agenda.publicLabel"
+        :private-label="home.agenda.privateLabel"
+        :empty-text="home.agenda.emptyText"
+      />
     </section>
     <section v-if="home.visibility.join" class="join-banner page-pad">
       <UIcon name="i-lucide-mic-vocal" class="join-mic" aria-hidden="true" />
@@ -224,7 +237,11 @@ useSeoMeta({
           >{{ home.join.link.label }}<UIcon name="i-lucide-arrow-up-right"
         /></NuxtLink>
       </div>
-      <span class="join-word" aria-hidden="true">SING<br />IT!</span>
+      <span class="join-word" aria-hidden="true"
+        ><template v-for="(word, index) in home.joinWords" :key="index"
+          ><br v-if="index" />{{ word }}</template
+        ></span
+      >
     </section>
     <div
       v-if="!showConcert && Object.values(home.visibility).some(Boolean)"
@@ -237,7 +254,7 @@ useSeoMeta({
         @click="motionPaused = !motionPaused"
       >
         <span aria-hidden="true">{{ motionPaused ? '▶' : 'Ⅱ' }}</span>
-        {{ motionPaused ? 'Animaties afspelen' : 'Animaties pauzeren' }}
+        {{ motionPaused ? home.motion.play : home.motion.pause }}
       </button>
     </div>
   </div>

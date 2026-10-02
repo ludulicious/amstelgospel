@@ -1,5 +1,5 @@
 {
-  "content/1.home/1.home.yml": "/",
+  "content/1.home/1.home.md": "/",
   "content/1.home/2.menu.md": "/",
   "content/1.home/3.concert.md": "/",
   "content/7.settings/site.yml": ["/", "/meezingen", "/boeken", "/steun-ons"],
@@ -61,5 +61,12 @@
   "content/2.information/2.over-ons.md": "/over-ons",
   "content/2.information/9.privacy.md": "/privacy",
   "content/2.information/7.steun-ons.md": "/steun-ons",
-  "content/2.information/8.veelgestelde-vragen.md": "/veelgestelde-vragen"
+  "content/2.information/8.veelgestelde-vragen.md": "/veelgestelde-vragen",
+  "content/7.settings/interface.md": [
+    "/agenda",
+    "/boeken",
+    "/meezingen",
+    "/kijk-en-luister",
+    "/steun-ons"
+  ]
 }

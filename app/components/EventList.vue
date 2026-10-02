@@ -1,7 +1,20 @@
 <script setup lang="ts">
+const { copy } = await useInterfaceCopy()
 const props = withDefaults(
-  defineProps<{ limit?: number; showPast?: boolean }>(),
-  { limit: 0, showPast: false },
+  defineProps<{
+    limit?: number
+    showPast?: boolean
+    publicLabel?: string
+    privateLabel?: string
+    emptyText?: string
+  }>(),
+  {
+    limit: 0,
+    showPast: false,
+    publicLabel: undefined,
+    privateLabel: undefined,
+    emptyText: '',
+  },
 )
 const { data: events } = await useAsyncData('events', () =>
   queryCollection('events').all(),
@@ -60,7 +73,9 @@ const month = (date: string) =>
       >
       <div class="event-copy">
         <span class="eyebrow">{{
-          event.access === 'private' ? 'Besloten optreden' : 'Live concert'
+          event.access === 'private'
+            ? privateLabel || copy.privateEventLabel
+            : publicLabel || copy.publicEventLabel
         }}</span>
         <h3>{{ event.title }}</h3>
         <p>{{ event.location }} · {{ event.city }}</p>
@@ -70,9 +85,7 @@ const month = (date: string) =>
     </NuxtLink>
     <p v-if="!visibleEvents.length" class="empty-state">
       {{
-        showPast
-          ? 'Hier verschijnen onze eerdere optredens.'
-          : 'Nieuwe concerten volgen. Houd onze socials in de gaten!'
+        emptyText || (showPast ? copy.pastEmptyText : copy.upcomingEmptyText)
       }}
     </p>
   </div>

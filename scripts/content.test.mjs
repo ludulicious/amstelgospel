@@ -6,10 +6,11 @@ import { parse } from 'yaml'
 const read = (file) =>
   readFileSync(new URL(`../${file}`, import.meta.url), 'utf8')
 const files = [
-  'content/1.home/1.home.yml',
+  'content/1.home/1.home.md',
   'content/1.home/2.menu.md',
   'content/1.home/3.concert.md',
   'content/7.settings/site.yml',
+  'content/7.settings/interface.md',
   ...['2.information', '3.events', '4.photos', '5.videos', '6.faq'].flatMap(
     (dir) =>
       readdirSync(new URL(`../content/${dir}`, import.meta.url))

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { copy } = await useInterfaceCopy()
 const { data: site } = await useChoir()
 const { data: menu } = await useAsyncData('main-menu', () =>
   queryCollection('menu').first(),
@@ -14,7 +15,7 @@ const action = computed(() => menu.value?.action)
   <footer v-if="site" class="site-footer">
     <div class="footer-top">
       <div>
-        <p class="eyebrow">Amstel Gospel Choir</p>
+        <p class="eyebrow">{{ copy.footerEyebrow }}</p>
         <h2>{{ site.footerTitle }}</h2>
       </div>
       <NuxtLink
@@ -38,10 +39,10 @@ const action = computed(() => menu.value?.action)
       </div>
     </div>
     <div class="footer-bottom">
-      <NuxtLink to="/" aria-label="Amstel Gospel Choir homepage"
+      <NuxtLink to="/" :aria-label="copy.footerHomeLabel"
         ><ChoirMark surface="dark"
       /></NuxtLink>
-      <nav aria-label="Footernavigatie">
+      <nav :aria-label="copy.footerNavLabel">
         <NuxtLink
           v-for="item in items"
           :key="item.to"
@@ -55,7 +56,9 @@ const action = computed(() => menu.value?.action)
           {{ item.label }}
         </NuxtLink>
       </nav>
-      <span class="copyright">© {{ new Date().getFullYear() }} AGC</span>
+      <span class="copyright">{{
+        formatCopy(copy.copyrightText, { year: new Date().getFullYear() })
+      }}</span>
     </div>
   </footer>
 </template>

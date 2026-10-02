@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { copy } = await useInterfaceCopy()
 import { z } from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 const props = withDefaults(
@@ -7,24 +8,19 @@ const props = withDefaults(
 )
 const { data: site } = await useChoir()
 const schema = z.object({
-  name: z.string().trim().min(2, 'Vul je naam in.'),
-  email: z.email('Vul een geldig e-mailadres in.'),
+  name: z.string().trim().min(2, copy.nameError),
+  email: z.email(copy.emailError),
   phone: z.string(),
-  subject: z.string().min(1, 'Kies een onderwerp.'),
-  message: z
-    .string()
-    .trim()
-    .min(10, 'Vertel ons iets meer (minimaal 10 tekens).'),
-  consent: z
-    .boolean()
-    .refine(Boolean, 'Ga akkoord voordat je je e-mail opstelt.'),
+  subject: z.string().min(1, copy.subjectError),
+  message: z.string().trim().min(10, copy.messageError),
+  consent: z.boolean().refine(Boolean, copy.consentError),
 })
 type FormData = z.output<typeof schema>
 const subjects = [
-  'Een optreden boeken',
-  'Een repetitie bezoeken',
-  'Donateur worden',
-  'Een andere vraag',
+  copy.bookingSubject,
+  copy.joinSubject,
+  copy.donationSubject,
+  copy.otherSubject,
 ]
 const state = reactive({
   name: '',
@@ -47,10 +43,16 @@ const copied = ref(false)
 const copyError = ref(false)
 function submit(event: FormSubmitEvent<FormData>) {
   const v = event.data
-  draft.value = `Beste Amstel Gospel Choir,\n\n${v.message}\n\nNaam: ${v.name}\nE-mail: ${v.email}\nTelefoon: ${v.phone || 'Niet opgegeven'}\nOnderwerp: ${v.subject}\n\nIk ga akkoord met het gebruik van deze gegevens om mijn vraag te beantwoorden.`
+  draft.value = formatCopy(copy.emailTemplate, {
+    name: v.name,
+    email: v.email,
+    message: v.message,
+    subject: v.subject,
+    phone: v.phone || copy.phoneNotProvided,
+  })
   mailto.value = `mailto:${site.value?.email}?subject=${encodeURIComponent(v.subject)}&body=${encodeURIComponent(draft.value)}`
 }
-async function copy() {
+async function copyDraft() {
   try {
     await navigator.clipboard.writeText(draft.value)
     copied.value = true
@@ -62,11 +64,8 @@ async function copy() {
 </script>
 <template>
   <section class="contact-form" aria-labelledby="contact-title">
-    <h2 id="contact-title">Vertel het ons.</h2>
-    <p>
-      Vul je bericht in en open het daarna in je eigen e-mailprogramma. Je
-      verstuurt de e-mail zelf.
-    </p>
+    <h2 id="contact-title">{{ copy.formTitle }}</h2>
+    <p>{{ copy.formIntro }}</p>
     <UForm
       :schema="schema"
       :state="state"
@@ -75,12 +74,12 @@ async function copy() {
       @submit="submit"
     >
       <div class="form-row">
-        <UFormField name="name" label="Je naam" required
+        <UFormField name="name" :label="copy.nameLabel" required
           ><UInput
             v-model="state.name"
             autocomplete="name"
             size="xl" /></UFormField
-        ><UFormField name="email" label="E-mailadres" required
+        ><UFormField name="email" :label="copy.emailLabel" required
           ><UInput
             v-model="state.email"
             type="email"
@@ -89,23 +88,21 @@ async function copy() {
         /></UFormField>
       </div>
       <div class="form-row">
-        <UFormField name="phone" label="Telefoon (optioneel)"
+        <UFormField name="phone" :label="copy.phoneLabel"
           ><UInput
             v-model="state.phone"
             type="tel"
             autocomplete="tel"
             size="xl" /></UFormField
-        ><UFormField name="subject" label="Waar gaat het over?"
+        ><UFormField name="subject" :label="copy.subjectLabel"
           ><USelect v-model="state.subject" :items="subjects" size="xl"
         /></UFormField>
       </div>
       <UFormField
         name="message"
-        label="Je bericht"
+        :label="copy.messageLabel"
         :description="
-          purpose === 'booking'
-            ? 'Denk aan datum, locatie, soort evenement en de sfeer die je zoekt.'
-            : 'Vertel bijvoorbeeld wanneer je wilt komen en of je al zangervaring hebt.'
+          purpose === 'booking' ? copy.bookingMessageHint : copy.joinMessageHint
         "
         required
         ><UTextarea v-model="state.message" :rows="5" autoresize size="xl"
@@ -113,37 +110,35 @@ async function copy() {
       <UFormField name="consent"
         ><UCheckbox
           v-model="state.consent"
-          label="Het koor mag mijn gegevens gebruiken om mijn vraag te beantwoorden."
-        /><NuxtLink to="/privacy" class="privacy-link"
-          >Lees over je privacy</NuxtLink
-        ></UFormField
+          :label="copy.consentLabel"
+        /><NuxtLink to="/privacy" class="privacy-link">{{
+          copy.privacyLink
+        }}</NuxtLink></UFormField
       >
       <UButton
         type="submit"
         class="button button-ink"
         trailing-icon="i-lucide-arrow-right"
-        >Maak mijn e-mail</UButton
+        >{{ copy.formSubmit }}</UButton
       >
     </UForm>
     <div v-if="draft" class="email-draft" role="status">
-      <h3>Je bericht staat klaar.</h3>
+      <h3>{{ copy.draftTitle }}</h3>
       <p>
-        Klik om je e-mailprogramma te openen. Werkt dat niet? Kopieer je bericht
-        en mail het naar <a :href="`mailto:${site?.email}`">{{ site?.email }}</a
-        >.
+        {{ copy.draftIntro }}
+        <a :href="`mailto:${site?.email}`">{{ site?.email }}</a
+        >{{ copy.draftSentenceEnd }}
       </p>
       <div class="draft-actions">
         <a :href="mailto" class="button button-ink"
-          >Open je e-mail<UIcon name="i-lucide-mail" /></a
-        ><UButton color="neutral" variant="outline" @click="copy">{{
-          copied ? 'Bericht gekopieerd' : 'Kopieer bericht'
+          >{{ copy.draftOpenLink }}<UIcon name="i-lucide-mail" /></a
+        ><UButton color="neutral" variant="outline" @click="copyDraft">{{
+          copied ? copy.copiedLabel : copy.copyLabel
         }}</UButton>
       </div>
-      <p v-if="copyError">
-        Kopiëren is niet beschikbaar. Selecteer de tekst hieronder.
-      </p>
+      <p v-if="copyError">{{ copy.clipboardError }}</p>
       <details>
-        <summary>Bekijk je bericht</summary>
+        <summary>{{ copy.draftPreview }}</summary>
         <pre>{{ draft }}</pre>
       </details>
     </div>
