@@ -3,5 +3,6 @@ order: 7
 image:
   src: /images/gallery-07.jpg
   alt: Amstel Gospel Choir live — Amstel Gospel Choir
-category: concerten
+categories:
+  - Concerten
 credit: HJ Kaaks Photography

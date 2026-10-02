@@ -2,20 +2,16 @@
 const { data: data } = await useAsyncData('photos', () =>
   queryCollection('photos').order('order', 'ASC').order('id', 'ASC').all(),
 )
-const { data: photoCategories } = await useAsyncData('photo-categories', () =>
-  queryCollection('photo_categories')
-    .order('order', 'ASC')
-    .order('id', 'ASC')
-    .all(),
-)
 const category = ref('')
 const categories = computed(() => [
   { key: '', title: 'Alles' },
-  ...(photoCategories.value || []),
+  ...Array.from(
+    new Set((data.value || []).flatMap((photo) => photo.categories || [])),
+  ).map((title) => ({ key: title, title })),
 ])
 const photos = computed(() =>
   (data.value || []).filter(
-    (p) => !category.value || p.category === category.value,
+    (p) => !category.value || p.categories?.includes(category.value),
   ),
 )
 const isOpen = ref(false)

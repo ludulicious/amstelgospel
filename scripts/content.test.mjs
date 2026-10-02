@@ -8,14 +8,7 @@ const read = (file) =>
 const files = [
   'content/home.yml',
   'content/settings/site.yml',
-  ...[
-    'information',
-    'events',
-    'photos',
-    'videos',
-    'faq',
-    'photo-categories',
-  ].flatMap((dir) =>
+  ...['information', 'events', 'photos', 'videos', 'faq'].flatMap((dir) =>
     readdirSync(new URL(`../content/${dir}`, import.meta.url)).map(
       (file) => `content/${dir}/${file}`,
     ),
@@ -86,21 +79,20 @@ test('all 30 source gallery photos and 8 source videos were migrated', () => {
   )
 })
 
-test('photo categories have unique keys and every photo uses a defined category', () => {
-  const categories = docs.filter((d) =>
-    d.file.startsWith('content/photo-categories/'),
-  )
-  const keys = new Set(categories.map((d) => d.data.key))
-  assert.equal(keys.size, categories.length)
-  for (const { file, data } of categories)
-    assert.match(data.key, /^[a-z0-9]+(?:-[a-z0-9]+)*$/, file)
+test('photos and videos support free-form category lists', () => {
   for (const { file, data } of docs.filter((d) =>
-    d.file.startsWith('content/photos/'),
-  ))
+    /^content\/(photos|videos)\//.test(d.file),
+  )) {
     assert.ok(
-      keys.has(data.category),
-      `${file}: unknown category ${data.category}`,
+      Array.isArray(data.categories),
+      `${file}: categories must be a list`,
     )
+    assert.ok(!('category' in data), `${file}: legacy category field`)
+    for (const category of data.categories) {
+      assert.equal(typeof category, 'string', file)
+      assert.ok(category.trim().length > 0, `${file}: empty category`)
+    }
+  }
 })
 test('FAQ migration keeps ten questions and four booking answers', () => {
   const questions = docs.filter((d) => d.file.startsWith('content/faq/'))

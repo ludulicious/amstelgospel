@@ -80,20 +80,8 @@ export default defineContentConfig({
         title: z.string().min(1),
         order: sortOrder,
         image,
-        category: z
-          .string()
-          .min(1)
-          .describe('Key from Photo Categories, e.g. concerten'),
+        categories: z.array(z.string().trim().min(1)).default([]),
         credit: z.string().optional(),
-      }),
-    }),
-    photo_categories: defineCollection({
-      type: 'data',
-      source: 'photo-categories/*.yml',
-      schema: z.object({
-        title: z.string().min(1),
-        key: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
-        order: sortOrder,
       }),
     }),
     videos: defineCollection({
@@ -102,6 +90,7 @@ export default defineContentConfig({
       schema: z.object({
         title: z.string().min(1),
         order: sortOrder,
+        categories: z.array(z.string().trim().min(1)).default([]),
         youtubeId: z.string().regex(/^[A-Za-z0-9_-]{11}$/),
         image,
       }),

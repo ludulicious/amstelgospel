@@ -3,5 +3,6 @@ order: 22
 image:
   src: /images/gallery-22.jpeg
   alt: Nemo Amsterdam — Amstel Gospel Choir
-category: samen
+categories:
+  - Samen
 credit: ''
