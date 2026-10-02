@@ -11,7 +11,8 @@ schedule:
 location: St. Urbanuskerk, Bovenkerk
 city: Amstelveen
 access: public
-ticketStatus: Kaartverkoop start begin oktober.
+ticketStatus: De kaartverkoop is gestart.
+ticketUrl: https://shannonchapoy.portalnuxt.com/store/discover-yourself/book?locale=en&currency=EUR&returnUrl=https://shannonchapoy.com/specials/discover-yourself
 image:
   src: /images/gallery-10.jpg
   alt: De feestelijke sfeer van een kerstconcert van Amstel Gospel Choir
@@ -24,4 +25,4 @@ De kerstconcerten van Amstel Gospel Choir komen terug naar de Urbanuskerk in Ams
 - **Vrijdag 18 december:** avondconcert om 20.00 uur.
 - **Zaterdag 19 december:** matinee om 14.00 uur en avondconcert om 20.00 uur.
 
-De kaartverkoop gaat volgens onze aankondiging begin oktober van start. Zodra de ticketlink beschikbaar is, vind je die op deze pagina. Volg ons ook op [Instagram](https://instagram.com/amstelgospelchoir) en [Facebook](https://www.facebook.com/amstelgospelchoir/) voor nieuws over de concerten.
+De kaartverkoop is gestart. Bestel nu je tickets via de knop op deze pagina. Volg ons ook op [Instagram](https://instagram.com/amstelgospelchoir) en [Facebook](https://www.facebook.com/amstelgospelchoir/) voor nieuws over de concerten.

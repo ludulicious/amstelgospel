@@ -30,7 +30,7 @@ copy:
   eventPracticalTitle: 'Goed om te weten.'
   eventWhenLabel: 'Wanneer'
   eventWhereLabel: 'Waar'
-  ticketLink: 'Koop je tickets'
+  ticketLink: 'Bestel nu'
   questionLink: 'Stel een vraag'
   eventPrivateLabel: 'Besloten optreden'
   eventPublicLabel: 'Amstel Gospel Choir live'

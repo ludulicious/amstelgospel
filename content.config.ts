@@ -138,7 +138,12 @@ export default defineContentConfig({
         access: z.enum(['public', 'private']),
         ticketStatus: z.string(),
         ticketUrl: z.string().optional(),
-        image,
+        image: image.optional(),
+        video: z
+          .object({
+            src: z.string().editor({ input: 'media' }),
+          })
+          .optional(),
       }),
     }),
     photos: defineCollection({

@@ -40,6 +40,8 @@ Maak een document in **Events**. Vul `schedule` in met één of meer datum/tijd-
 
 Een bestand `content/3.events/mijn-concert.md` krijgt de route `/agenda/mijn-concert`. De build neemt alle concertbestanden mee, ook concerten uit het verleden.
 
+Concerten kunnen een afbeelding (`image.src` en `image.alt`) of een videobestand (`video.src`) krijgen via de media-selector. Beide velden zijn optioneel. Als beide zijn ingevuld, toont de concertpagina de video met afspeelbediening in de header. Gebruik bijvoorbeeld een MP4-bestand; de video speelt niet automatisch af. Zonder video wordt de afbeelding getoond.
+
 ## Homepageblokken tonen of verbergen
 
 Open **Home** en gebruik de ja/nee-velden onder `visibility`: `concert` (concertpromotie), `hero` (introductie), `strip` (muziekstrook), `about` (over het koor), `agenda` en `join` (meezingen). Zet een veld op `false` om dat blok te verbergen; de inhoud blijft bewaard. Zet het op `true` om het weer te tonen.

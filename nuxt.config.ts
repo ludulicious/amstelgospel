@@ -103,5 +103,5 @@ export default defineNuxtConfig({
       failOnError: true,
     },
   },
-  experimental: { payloadExtraction: true },
+  experimental: { payloadExtraction: process.env.NODE_ENV !== 'development' },
 })

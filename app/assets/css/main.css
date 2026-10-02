@@ -408,8 +408,24 @@ p {
 .concert-copy > p:not(.eyebrow) {
   max-width: 48ch;
 }
+.concert-actions {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--space-6);
+  align-items: center;
+}
 .concert-copy .button {
   margin-top: var(--space-8);
+}
+.button-concert-secondary {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-color: color-mix(in srgb, var(--color-paper) 40%, transparent);
+}
+.button-concert-secondary:hover,
+.button-concert-secondary:focus-visible {
+  background: color-mix(in srgb, var(--color-paper) 8%, var(--color-ink));
+  border-color: var(--color-paper);
 }
 .concert-photo {
   position: relative;
@@ -715,6 +731,15 @@ dd {
 }
 .back-link {
   margin-bottom: var(--space-10);
+}
+.event-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--color-ink);
+}
+.event-ticket-button {
+  margin-top: var(--space-6);
 }
 .event-hero {
   background: var(--color-ink);

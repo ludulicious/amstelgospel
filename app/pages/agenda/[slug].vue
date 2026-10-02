@@ -16,13 +16,16 @@ useSeoMeta({
   title: () => event.value?.title,
   description: () => event.value?.description,
   ogTitle: () => event.value?.title,
-  ogImage: () => event.value?.image.src,
+  ogImage: () => event.value?.image?.src,
 })
 const schedule = computed(() => groupedEventSchedule(event.value?.schedule))
 </script>
 <template>
   <article v-if="event">
-    <header class="inner-hero inner-hero-image event-hero page-pad">
+    <header
+      class="inner-hero event-hero page-pad"
+      :class="{ 'inner-hero-image': event.video?.src || event.image?.src }"
+    >
       <div>
         <NuxtLink
           v-if="route.query.from !== 'home'"
@@ -48,8 +51,26 @@ const schedule = computed(() => groupedEventSchedule(event.value?.schedule))
             >
           </li>
         </ul>
+        <a
+          v-if="event.ticketUrl && event.access === 'public'"
+          :href="event.ticketUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="button button-gold event-ticket-button"
+          >{{ copy.ticketLink }}<UIcon name="i-lucide-arrow-up-right"
+        /></a>
       </div>
+      <video
+        v-if="event.video?.src"
+        :src="event.video.src"
+        :aria-label="event.title"
+        class="event-video"
+        controls
+        playsinline
+        preload="metadata"
+      />
       <img
+        v-else-if="event.image?.src"
         :src="event.image.src"
         :alt="event.image.alt"
         width="800"

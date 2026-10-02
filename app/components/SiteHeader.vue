@@ -1,8 +1,6 @@
 <script setup lang="ts">
 const { copy } = await useInterfaceCopy()
-const { data: menu } = await useAsyncData('main-menu', () =>
-  queryCollection('menu').first(),
-)
+const { data: menu } = await useMainMenu()
 const items = computed(() =>
   (menu.value?.items || []).filter((item) => item.visible !== false),
 )

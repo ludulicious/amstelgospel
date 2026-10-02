@@ -32,6 +32,17 @@ const { data: home } = await useAsyncData('home', () =>
 const { data: concert } = await useAsyncData('home-concert', () =>
   queryCollection('home_concert').first(),
 )
+const { copy } = await useInterfaceCopy()
+const { data: concertEvent } = await useAsyncData('home-concert-event', () => {
+  const path = concert.value?.link.to.split(/[?#]/)[0]
+  return path?.startsWith('/agenda/')
+    ? queryCollection('events').path(path).first()
+    : Promise.resolve(null)
+})
+const hasConcertTickets = computed(
+  () =>
+    !!concertEvent.value?.ticketUrl && concertEvent.value.access === 'public',
+)
 const showConcert = computed(
   () => home.value?.visibility.concert && !!concert.value,
 )
@@ -96,9 +107,24 @@ useSeoMeta({
           >
         </h1>
         <ContentRenderer :value="concert" class="concert-content" />
-        <NuxtLink class="button button-gold" :to="concertLink"
-          >{{ concert.link.label }}<UIcon name="i-lucide-arrow-up-right"
-        /></NuxtLink>
+        <div class="concert-actions">
+          <a
+            v-if="hasConcertTickets"
+            :href="concertEvent?.ticketUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button button-gold"
+            >{{ copy.ticketLink }}<UIcon name="i-lucide-arrow-up-right"
+          /></a>
+          <NuxtLink
+            class="button"
+            :class="
+              hasConcertTickets ? 'button-concert-secondary' : 'button-gold'
+            "
+            :to="concertLink"
+            >{{ concert.link.label }}<UIcon name="i-lucide-arrow-right"
+          /></NuxtLink>
+        </div>
       </div>
       <div class="concert-photo">
         <div class="concert-photo-viewport">
