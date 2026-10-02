@@ -42,3 +42,5 @@ join:
   link:
     label: Kom een keer meezingen
     to: /meezingen
+studio:
+  view: single
