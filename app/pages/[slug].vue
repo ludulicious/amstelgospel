@@ -70,27 +70,40 @@ useSeoMeta({
         }"
       >
         <ContentRenderer :value="page" class="prose-content" />
-        <aside v-if="page.layout === 'join' && site" class="practical-box">
-          <p class="eyebrow">{{ copy.joinEyebrow }}</p>
-          <h2>{{ copy.joinTitle }}</h2>
+        <aside
+          v-if="page.layout === 'join' && page.information"
+          class="practical-box"
+        >
+          <p class="eyebrow">{{ page.information.eyebrow }}</p>
+          <h2>{{ page.information.title }}</h2>
           <dl>
             <div>
-              <dt>{{ copy.whenLabel }}</dt>
-              <dd>{{ site.rehearsal.day }}<br />{{ site.rehearsal.time }}</dd>
-            </div>
-            <div>
-              <dt>{{ copy.whereLabel }}</dt>
+              <dt>{{ page.information.when.label }}</dt>
               <dd>
-                {{ site.rehearsal.venue }}<br />{{ site.rehearsal.address }}
+                {{ page.information.when.day }}<br />{{
+                  page.information.when.time
+                }}
               </dd>
             </div>
             <div>
-              <dt>{{ copy.membershipLabel }}</dt>
-              <dd>{{ site.rehearsal.cost }}<br />{{ site.rehearsal.trial }}</dd>
+              <dt>{{ page.information.where.label }}</dt>
+              <dd>
+                {{ page.information.where.venue }}<br />{{
+                  page.information.where.address
+                }}
+              </dd>
+            </div>
+            <div>
+              <dt>{{ page.information.membership.label }}</dt>
+              <dd>
+                {{ page.information.membership.cost }}<br />{{
+                  page.information.membership.trial
+                }}
+              </dd>
             </div>
           </dl>
           <p class="notice">
-            <UIcon name="i-lucide-info" />{{ site.rehearsal.waitingList }}
+            <UIcon name="i-lucide-info" />{{ page.information.notice }}
           </p>
         </aside>
         <aside v-if="page.layout === 'booking' && site" class="practical-box">

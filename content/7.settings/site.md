@@ -1,11 +1,14 @@
 ---
-title: Interface teksten
+title: Site instellingen
+name: Amstel Gospel Choir
+tagline: Maakt van je evenement een belevenis.
+email: amstelgospelchoir@gmail.com
+phone: 06 30 93 60 61
+phoneLink: '+31630936061'
+contactName: Corine Dijst
+footerTitle: Samen klinkt het beter.
+footerText: Een vraag, een idee of zin om mee te zingen? We horen graag van je.
 copy:
-  joinEyebrow: 'Een plek voor je stem'
-  joinTitle: 'Kom erbij.'
-  whenLabel: 'Wanneer'
-  whereLabel: 'Waar'
-  membershipLabel: 'Contributie'
   bookingEyebrow: 'Even overleggen?'
   bookingTitle: 'We horen je graag.'
   faqLink: 'Veelgestelde vragen'
@@ -80,5 +83,3 @@ copy:
   phoneNotProvided: Niet opgegeven
   questionSubject: 'Vraag over {title}'
 ---
-
-Gedeelde teksten voor pagina’s, formulieren, galerijen en navigatie. Laat placeholders zoals `{count}` intact.

@@ -9,8 +9,7 @@ const files = [
   'content/1.home/1.home.md',
   'content/1.home/2.menu.md',
   'content/1.home/3.concert.md',
-  'content/7.settings/site.yml',
-  'content/7.settings/interface.md',
+  'content/7.settings/site.md',
   ...['2.information', '3.events', '4.photos', '5.videos', '6.faq'].flatMap(
     (dir) =>
       readdirSync(new URL(`../content/${dir}`, import.meta.url))
@@ -113,4 +112,42 @@ test('FAQ migration keeps ten questions and four booking answers', () => {
     assert.ok(data.title && data.content)
     assert.equal(typeof data.showOnBooking, 'boolean')
   }
+})
+
+test('page block definitions reference the actual structured fields and Markdown slots', () => {
+  const pages = docs.filter(({ data }) => data.studio?.blocks)
+  assert.equal(pages.length, 2)
+  for (const { file, data } of pages) {
+    const ids = new Set()
+    for (const block of data.studio.blocks) {
+      assert.ok(!ids.has(block.id), `${file}: duplicate tab`)
+      ids.add(block.id)
+      if (block.type === 'fields') {
+        assert.ok(data[block.field], `${file}: missing ${block.field}`)
+      } else {
+        assert.ok(read(file).includes(`::${block.component}\n`))
+        assert.ok(read(file).includes(`\n#${block.slot}\n`))
+        assert.ok(
+          existsSync(
+            new URL(
+              `../app/components/content/${block.component
+                .split('-')
+                .map((part) => part[0].toUpperCase() + part.slice(1))
+                .join('')}.vue`,
+              import.meta.url,
+            ),
+          ),
+        )
+      }
+    }
+  }
+  const join = pages.find(({ data }) => data.layout === 'join').data
+  assert.ok(join.information.when.time)
+  assert.ok(join.information.where.address)
+  assert.ok(join.information.membership.cost)
+  const support = pages.find(({ data }) => data.layout === 'support').data
+  assert.deepEqual(
+    support.studio.blocks.map(({ slot }) => slot),
+    ['default', 'donateur', 'sponsorkliks', 'vriendenloterij'],
+  )
 })

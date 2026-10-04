@@ -104,6 +104,43 @@ export default defineContentConfig({
         eyebrow: z.string(),
         image,
         action: link.optional(),
+        studio: z
+          .object({
+            blocks: z.array(
+              z.object({
+                id: z.string(),
+                label: z.string(),
+                type: z.enum(['markdown', 'fields']),
+                component: z.string().optional(),
+                slot: z.string().optional(),
+                field: z.string().optional(),
+              }),
+            ),
+          })
+          .optional()
+          .editor({ hidden: true }),
+        information: z
+          .object({
+            eyebrow: z.string(),
+            title: z.string(),
+            when: z.object({
+              label: z.string(),
+              day: z.string(),
+              time: z.string(),
+            }),
+            where: z.object({
+              label: z.string(),
+              venue: z.string(),
+              address: z.string(),
+            }),
+            membership: z.object({
+              label: z.string(),
+              cost: z.string(),
+              trial: z.string(),
+            }),
+            notice: z.string(),
+          })
+          .optional(),
         layout: z
           .enum([
             'story',
@@ -181,16 +218,19 @@ export default defineContentConfig({
         showOnBooking: z.boolean().default(false),
       }),
     }),
-    interfaceCopy: defineCollection({
+    site: defineCollection({
       type: 'page',
-      source: '7.settings/interface.md',
+      source: '7.settings/site.md',
       schema: z.object({
+        name: z.string(),
+        tagline: z.string(),
+        email: z.string(),
+        phone: z.string(),
+        phoneLink: z.string(),
+        contactName: z.string(),
+        footerTitle: z.string(),
+        footerText: z.string(),
         copy: z.object({
-          joinEyebrow: z.string(),
-          joinTitle: z.string(),
-          whenLabel: z.string(),
-          whereLabel: z.string(),
-          membershipLabel: z.string(),
           bookingEyebrow: z.string(),
           bookingTitle: z.string(),
           faqLink: z.string(),
@@ -264,29 +304,6 @@ export default defineContentConfig({
           emailTemplate: z.string(),
           phoneNotProvided: z.string(),
           questionSubject: z.string(),
-        }),
-      }),
-    }),
-    site: defineCollection({
-      type: 'data',
-      source: '7.settings/site.yml',
-      schema: z.object({
-        name: z.string(),
-        tagline: z.string(),
-        email: z.string(),
-        phone: z.string(),
-        phoneLink: z.string(),
-        contactName: z.string(),
-        footerTitle: z.string(),
-        footerText: z.string(),
-        rehearsal: z.object({
-          day: z.string(),
-          time: z.string(),
-          venue: z.string(),
-          address: z.string(),
-          cost: z.string(),
-          trial: z.string(),
-          waitingList: z.string(),
         }),
       }),
     }),

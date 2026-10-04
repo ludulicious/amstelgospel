@@ -23,7 +23,7 @@ De contentmappen hebben een nummerprefix voor de volgorde: Home, Information, Ev
 | ----------------------- | ----------------------------- | --------------------------------------------------------------------------------------- |
 | Pages → Home            | `content/1.home/1.home.md`    | Koppen, intro, foto's, knoppen, meezingblok en zichtbaarheid van alle homepageblokken   |
 | Pages → Home Concert    | `content/1.home/3.concert.md` | Concertpromotie in Markdown, titel, afbeelding, label en knop                           |
-| Pages → Settings → Site | `content/7.settings/site.yml` | Socials, contactgegevens, repetities, donaties en footer                                |
+| Pages → Settings → Site | `content/7.settings/site.md`  | Contactgegevens, footer en gedeelde interfaceteksten                                    |
 | Information             | `content/2.information/*.md`  | Paginatitels, taglines, beschrijvingen, headerfoto, indeling en opgemaakte tekst        |
 | Events                  | `content/3.events/*.md`       | Concerten, datums, tijden, locatie, kaartverkoop en omschrijving                        |
 | Photos                  | `content/4.photos/*.yml`      | Eén foto per document: titel, afbeelding, alt-tekst, categorieën, credit en volgorde    |
@@ -78,8 +78,20 @@ node /pad/naar/marpos-studio/scripts/inspect-project.mjs /pad/naar/amstelgospelc
 
 Een automatische inspectie bevestigt het contentcontract; de uiteindelijke GitHub-verbinding wordt in jouw Marpos Studio-account gemaakt.
 
-Gedeelde paginacopy (zijblokken, galerijen, agenda, formulieren en navigatielabels) staat in `content/7.settings/interface.md`. Laat placeholders zoals `{count}`, `{minimum}` en `{phone}` intact.
+Gedeelde paginacopy (boekingszijblok, galerijen, agenda, formulieren en navigatielabels) staat in `content/7.settings/site.md`. Laat placeholders zoals `{count}`, `{minimum}` en `{phone}` intact.
 
 ## Steun ons bewerken
 
-Alle steunopties, teksten, rekeninggegevens en links staan in `content/2.information/7.steun-ons.md`. Bewerk de koppen, alinea's en Markdown-links rechtstreeks op deze pagina. `support-options` behoudt de kaartindeling; elk `support-option`-blok is één kaart. Pas `number` aan voor het kaartnummer. Je kunt kaarten toevoegen, verwijderen of verplaatsen. Hiervoor zijn geen wijzigingen in Interface teksten of Site settings nodig.
+Alle steunopties, teksten, rekeninggegevens en links staan in `content/2.information/7.steun-ons.md`. Bewerk elke steunmethode via haar eigen tab. `support-sections` behoudt de kaartindeling en rendert de drie benoemde slots. Voor extra steunmethoden voeg je een slot, een tabdefinitie en een kaart in de component toe.
+
+## Meerdere contentblokken en tabs
+
+**Meezingen** heeft naast Story en Details een tab **Praktische informatie**. Alle koppen, repetitiegegevens, contributie en wachtlijsttekst van het zijblok staan nu in `information` op de pagina zelf. Ze staan niet meer in gedeelde Site-instellingen.
+
+**Steun ons** heeft de tabs **Introductie**, **Donateur**, **SponsorKliks**, **VriendenLoterij**, **Details** en **Full document**. Elke teksttab heeft een eigen visuele editor en Markdownmodus. De drie steunmethoden blijven als kaarten op de website verschijnen.
+
+De frontmatter `studio.blocks` bepaalt welke tabs Studio toont. Een Markdownblok verwijst naar een component en een benoemd MDC-slot (`component` en `slot`). Een gestructureerd blok verwijst met `field` naar een frontmatterveld en gebruikt de velden uit `content.config.ts`. Het speciale ID `story` vervangt de standaard Story-tab door bijvoorbeeld Introductie. Andere blokken voegen tabs toe.
+
+**Full document** blijft beschikbaar voor de volledige Markdownbron, inclusief componenten en slotmarkeringen. Gebruik die tab om de structuur aan te passen of een ontbrekend slot te herstellen. De gewone bloktabs bewerken alleen hun eigen inhoud. Tabwisselingen slaan niets op; Save changes bewaart de hele pagina. Preview en publiceren werken zoals bij andere pagina's.
+
+Voor een volgende pagina: voeg de gewenste `studio.blocks` toe, declareer eventuele gestructureerde velden in de collectie en maak een Vue-contentcomponent die de benoemde slots in de gewenste indeling toont. Studio voegt de tabs automatisch toe. De tabnamen staan los van de koppen in de tekst.

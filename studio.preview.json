@@ -2,7 +2,6 @@
   "content/1.home/1.home.md": "/",
   "content/1.home/2.menu.md": "/",
   "content/1.home/3.concert.md": "/",
-  "content/7.settings/site.yml": ["/", "/meezingen", "/boeken", "/steun-ons"],
   "content/3.events/avond-vol-herinneringen.md": "/agenda/avond-vol-herinneringen",
   "content/3.events/kerstconcerten-2026.md": "/agenda/kerstconcerten-2026",
   "content/3.events/ride-for-the-roses.md": "/agenda/ride-for-the-roses",
@@ -62,11 +61,12 @@
   "content/2.information/9.privacy.md": "/privacy",
   "content/2.information/7.steun-ons.md": "/steun-ons",
   "content/2.information/8.veelgestelde-vragen.md": "/veelgestelde-vragen",
-  "content/7.settings/interface.md": [
-    "/agenda",
-    "/boeken",
+  "content/7.settings/site.md": [
+    "/",
     "/meezingen",
-    "/kijk-en-luister",
-    "/steun-ons"
+    "/boeken",
+    "/steun-ons",
+    "/agenda",
+    "/kijk-en-luister"
   ]
 }
