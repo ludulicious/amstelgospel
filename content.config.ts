@@ -167,7 +167,7 @@ export default defineContentConfig({
         schedule: z
           .array(
             z.object({
-              date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+              date: z.string().date().describe('Event date in YYYY-MM-DD format'),
               time: z.string().trim().min(1),
             }),
           )
