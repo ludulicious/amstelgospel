@@ -61,7 +61,12 @@ const schedule = computed(() => groupedEventSchedule(event.value?.schedule))
         /></a>
       </div>
       <iframe
-        v-if="event.video?.src && /^https:\/\/(www\.)?youtube(-nocookie)?\.com\/embed\//.test(event.video.src)"
+        v-if="
+          event.video?.src &&
+          /^https:\/\/(www\.)?youtube(-nocookie)?\.com\/embed\//.test(
+            event.video.src,
+          )
+        "
         :src="event.video.src"
         :title="event.title"
         class="event-video"
@@ -78,7 +83,11 @@ const schedule = computed(() => groupedEventSchedule(event.value?.schedule))
         playsinline
         preload="metadata"
       />
-      <img
+      <NuxtImg
+        format="webp"
+        fit="inside"
+        sizes="xs:100vw sm:50vw md:50vw lg:50vw xl:50vw"
+        densities="1x 2x"
         v-else-if="event.image?.src"
         :src="event.image.src"
         :alt="event.image.alt"

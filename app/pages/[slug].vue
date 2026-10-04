@@ -44,7 +44,11 @@ useSeoMeta({
         <h1>{{ page.tagline || page.title }}</h1>
         <p class="inner-description">{{ page.description }}</p>
       </div>
-      <img
+      <NuxtImg
+        format="webp"
+        fit="inside"
+        sizes="xs:100vw sm:50vw md:50vw lg:50vw xl:50vw"
+        densities="1x 2x"
         v-if="
           ['story', 'join', 'booking', 'support'].includes(
             page.layout || 'story',

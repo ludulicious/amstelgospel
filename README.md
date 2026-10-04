@@ -26,6 +26,18 @@ pnpm generate
 
 Deploy `.output/public` to a static host. `pnpm build` also supports conventional Nuxt server hosting. No environment variables, remote fonts, content database service or authentication are required. All content pages and concerts are automatically included in prerendering, including archived concerts and newly added Markdown files.
 
+## Image delivery
+
+Photos use Nuxt Image with WebP output at quality 80 and responsive `srcset`
+variants for standard and high-density displays. Sizes follow the page and gallery
+breakpoints. Original uploads remain in `public/images` for editing and social
+previews; displayed photos are resized by IPX. SVG logos remain vector images.
+
+`pnpm generate` includes optimized image files in the static export. The gallery
+also registers enlarged image variants during server rendering, so opening its
+initially closed modal works without an image server. `pnpm build` supports IPX
+image processing on the Nuxt server. Rebuild after adding or changing uploads.
+
 ## Deploy with Docker
 
 ```sh

@@ -14,7 +14,11 @@ const contentRoutes = ['2.information', '3.events'].flatMap((folder) =>
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-01',
-  modules: ['@nuxt/ui', '@nuxt/content'],
+  modules: ['@nuxt/ui', '@nuxt/content', '@nuxt/image'],
+  image: {
+    quality: 80,
+    screens: { xs: 320, sm: 601, md: 851, lg: 1200, xl: 1680 },
+  },
   css: ['~/assets/css/main.css'],
   icon: {
     provider: 'none',

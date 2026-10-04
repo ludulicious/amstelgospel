@@ -56,7 +56,11 @@ watch(category, () => {
           :aria-label="formatCopy(copy.playVideoLabel, { title: video.title })"
           @click="active = video.youtubeId"
         >
-          <img
+          <NuxtImg
+            format="webp"
+            fit="inside"
+            sizes="xs:100vw sm:50vw md:50vw lg:50vw xl:50vw"
+            densities="1x 2x"
             :src="video.image.src"
             :alt="video.image.alt"
             loading="lazy"

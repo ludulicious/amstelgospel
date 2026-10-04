@@ -7,6 +7,22 @@ const { data: data } = await useAsyncData('photos', () =>
     .order('id', 'ASC')
     .all(),
 )
+// Register modal-only variants while rendering the gallery so static exports
+// contain them even though the modal is initially closed.
+const image = useImage()
+if (import.meta.server) {
+  for (const photo of data.value || []) {
+    image.getSizes(photo.image.src, {
+      sizes: galleryLightboxImage.sizes,
+      densities: galleryLightboxImage.densities,
+      modifiers: {
+        format: galleryLightboxImage.format,
+        quality: 80,
+        fit: galleryLightboxImage.fit,
+      },
+    })
+  }
+}
 const category = ref('')
 const categories = computed(() => [
   { key: '', title: copy.photosAllLabel },
@@ -63,12 +79,15 @@ watch(category, () => {
         "
         @click="show(index)"
       >
-        <img
+        <NuxtImg
+          format="webp"
+          fit="inside"
+          sizes="xs:100vw sm:50vw md:33vw lg:33vw xl:33vw"
+          densities="1x 2x"
           :src="photo.image.src"
           :alt="photo.image.alt"
           loading="lazy"
           width="800"
-          height="533"
         /><span>{{ photo.title }} <UIcon name="i-lucide-expand" /></span>
       </button>
     </div>
@@ -89,8 +108,9 @@ watch(category, () => {
           @keydown.left.prevent="step(-1)"
           @keydown.right.prevent="step(1)"
         >
-          <img
+          <NuxtImg
             v-if="selected"
+            v-bind="galleryLightboxImage"
             :src="selected.image.src"
             :alt="selected.image.alt"
           />

@@ -128,7 +128,11 @@ useSeoMeta({
       </div>
       <div class="concert-photo">
         <div class="concert-photo-viewport">
-          <img
+          <NuxtImg
+            format="webp"
+            fit="inside"
+            sizes="xs:100vw sm:50vw md:50vw lg:50vw xl:50vw"
+            densities="1x 2x"
             :src="concert.image.src"
             :alt="concert.image.alt"
             width="800"
@@ -171,7 +175,11 @@ useSeoMeta({
       </div>
       <div class="hero-photo-wrap" data-reveal>
         <div class="hero-photo">
-          <img
+          <NuxtImg
+            format="webp"
+            fit="inside"
+            sizes="xs:100vw sm:50vw md:50vw lg:50vw xl:50vw"
+            densities="1x 2x"
             :src="home.hero.src"
             :alt="home.hero.alt"
             width="800"
@@ -221,7 +229,11 @@ useSeoMeta({
     </div>
     <section v-if="home.visibility.about" class="intro-section page-pad">
       <div class="intro-photo" data-reveal>
-        <img
+        <NuxtImg
+          format="webp"
+          fit="inside"
+          sizes="xs:100vw sm:50vw md:50vw lg:50vw xl:50vw"
+          densities="1x 2x"
           :src="home.about.image.src"
           :alt="home.about.image.alt"
           width="800"
