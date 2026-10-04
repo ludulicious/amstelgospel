@@ -154,6 +154,7 @@ export default defineContentConfig({
         visible: z.boolean().default(true),
         order: sortOrder,
         image,
+        thumbnail: image.optional(),
         categories: z.array(z.string().trim().min(1)).default([]),
         credit: z.string().optional(),
       }),
