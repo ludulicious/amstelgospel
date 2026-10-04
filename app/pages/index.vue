@@ -154,22 +154,22 @@ useSeoMeta({
     </section>
     <section v-if="home.visibility.hero" class="home-hero page-pad">
       <div class="hero-copy" data-reveal>
-        <p class="eyebrow"><span class="live-dot" />{{ home.eyebrow }}</p>
+        <p class="eyebrow"><span class="live-dot" />{{ home.hero.eyebrow }}</p>
         <component :is="headingTag('hero')">
           <span
-            v-for="(line, i) in home.headline"
+            v-for="(line, i) in home.hero.headline"
             :key="line"
             :class="{ 'hero-highlight': i === 2 }"
             >{{ line }}</span
           >
         </component>
-        <p class="hero-intro">{{ home.intro }}</p>
+        <p class="hero-intro">{{ home.hero.intro }}</p>
         <div class="hero-actions">
-          <NuxtLink class="button button-ink" :to="home.primary.to"
-            >{{ home.primary.label
+          <NuxtLink class="button button-ink" :to="home.hero.primary.to"
+            >{{ home.hero.primary.label
             }}<UIcon name="i-lucide-arrow-up-right" /></NuxtLink
-          ><NuxtLink class="text-link" :to="home.secondary.to"
-            >{{ home.secondary.label }}<UIcon name="i-lucide-arrow-right"
+          ><NuxtLink class="text-link" :to="home.hero.secondary.to"
+            >{{ home.hero.secondary.label }}<UIcon name="i-lucide-arrow-right"
           /></NuxtLink>
         </div>
       </div>
@@ -187,7 +187,7 @@ useSeoMeta({
             :loading="showConcert ? 'lazy' : 'eager'"
             :fetchpriority="showConcert ? 'auto' : 'high'"
           /><span class="photo-number" aria-hidden="true">{{
-            home.photoStamp
+            home.hero.photoStamp
           }}</span>
         </div>
         <div class="hero-sticker" aria-hidden="true">
@@ -199,20 +199,22 @@ useSeoMeta({
             />
           </div>
           <span
-            ><template v-for="(line, index) in home.stickerLines" :key="index"
+            ><template
+              v-for="(line, index) in home.hero.stickerLines"
+              :key="index"
               ><br v-if="index" />{{ line }}</template
             ></span
           >
         </div>
         <p class="photo-caption">
-          {{ home.imageLabel }} <UIcon name="i-lucide-heart" />
+          {{ home.hero.imageLabel }} <UIcon name="i-lucide-heart" />
         </p>
       </div>
     </section>
     <div
       v-if="home.visibility.strip"
       class="music-strip"
-      :aria-label="home.stripLabel"
+      :aria-label="home.strip.label"
     >
       <div class="music-track">
         <div
@@ -221,7 +223,7 @@ useSeoMeta({
           class="music-track-group"
           :aria-hidden="copy === 2 ? true : undefined"
         >
-          <span v-for="item in home.strip" :key="item"
+          <span v-for="item in home.strip.items" :key="item"
             ><span aria-hidden="true">✳</span>{{ item }}</span
           >
         </div>
@@ -276,7 +278,7 @@ useSeoMeta({
         /></NuxtLink>
       </div>
       <span class="join-word" aria-hidden="true"
-        ><template v-for="(word, index) in home.joinWords" :key="index"
+        ><template v-for="(word, index) in home.join.words" :key="index"
           ><br v-if="index" />{{ word }}</template
         ></span
       >

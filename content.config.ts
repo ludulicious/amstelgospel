@@ -5,6 +5,22 @@ const image = z.object({
   alt: z.string(),
 })
 const link = z.object({ label: z.string(), to: z.string() })
+const studioBlocks = z
+  .object({
+    blocks: z.array(
+      z.object({
+        id: z.string(),
+        label: z.string(),
+        type: z.enum(['markdown', 'fields']),
+        component: z.string().optional(),
+        slot: z.string().optional(),
+        field: z.string().optional(),
+      }),
+    ),
+  })
+  .optional()
+  .editor({ hidden: true })
+
 // Nuxt Content maps integer schemas to TEXT; use number for numeric SQL sorting.
 const sortOrder = z.number().nonnegative().default(0)
 export default defineContentConfig({
@@ -23,15 +39,17 @@ export default defineContentConfig({
           agenda: z.boolean().default(true),
           join: z.boolean().default(true),
         }),
-        eyebrow: z.string(),
-        headline: z.array(z.string()),
-        intro: z.string(),
-        hero: image,
-        imageLabel: z.string(),
-        photoStamp: z.string(),
-        stickerLines: z.array(z.string()),
-        stripLabel: z.string(),
-        joinWords: z.array(z.string()),
+        studio: studioBlocks,
+        hero: image.extend({
+          eyebrow: z.string(),
+          headline: z.array(z.string()),
+          intro: z.string(),
+          imageLabel: z.string(),
+          photoStamp: z.string(),
+          stickerLines: z.array(z.string()),
+          primary: link,
+          secondary: link,
+        }),
         motion: z.object({ play: z.string(), pause: z.string() }),
         agenda: z.object({
           title: z.string(),
@@ -40,9 +58,7 @@ export default defineContentConfig({
           privateLabel: z.string(),
           emptyText: z.string(),
         }),
-        primary: link,
-        secondary: link,
-        strip: z.array(z.string()),
+        strip: z.object({ label: z.string(), items: z.array(z.string()) }),
         about: z.object({
           eyebrow: z.string(),
           imageLabel: z.string(),
@@ -51,7 +67,12 @@ export default defineContentConfig({
           image,
           link,
         }),
-        join: z.object({ title: z.string(), text: z.string(), link }),
+        join: z.object({
+          title: z.string(),
+          text: z.string(),
+          link,
+          words: z.array(z.string()),
+        }),
       }),
     }),
     menu: defineCollection({
@@ -104,21 +125,7 @@ export default defineContentConfig({
         eyebrow: z.string(),
         image,
         action: link.optional(),
-        studio: z
-          .object({
-            blocks: z.array(
-              z.object({
-                id: z.string(),
-                label: z.string(),
-                type: z.enum(['markdown', 'fields']),
-                component: z.string().optional(),
-                slot: z.string().optional(),
-                field: z.string().optional(),
-              }),
-            ),
-          })
-          .optional()
-          .editor({ hidden: true }),
+        studio: studioBlocks,
         information: z
           .object({
             eyebrow: z.string(),

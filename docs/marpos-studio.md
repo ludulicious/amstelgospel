@@ -95,3 +95,9 @@ De frontmatter `studio.blocks` bepaalt welke tabs Studio toont. Een Markdownblok
 **Full document** blijft beschikbaar voor de volledige Markdownbron, inclusief componenten en slotmarkeringen. Gebruik die tab om de structuur aan te passen of een ontbrekend slot te herstellen. De gewone bloktabs bewerken alleen hun eigen inhoud. Tabwisselingen slaan niets op; Save changes bewaart de hele pagina. Preview en publiceren werken zoals bij andere pagina's.
 
 Voor een volgende pagina: voeg de gewenste `studio.blocks` toe, declareer eventuele gestructureerde velden in de collectie en maak een Vue-contentcomponent die de benoemde slots in de gewenste indeling toont. Studio voegt de tabs automatisch toe. De tabnamen staan los van de koppen in de tekst.
+
+## Homepage bewerken via tabs
+
+**Home** heeft tabs voor **Introductie**, **Muziekstrook**, **Over het koor**, **Agenda**, **Meezingen**, **Zichtbaarheid** en **Animaties**. De bijbehorende velden staan per sectie bij elkaar. Introductie bevat ook de foto, knoppen, fotolabels en stickertekst. Meezingen bevat de decoratieve woorden. Details bevat de paginatitel en omschrijving voor zoekmachines.
+
+De concertpromotie blijft het afzonderlijke document **Home Concert**, met zijn eigen Markdowneditor en homepagepreview. Via **Home → Zichtbaarheid → concert** toon of verberg je deze sectie.

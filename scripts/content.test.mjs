@@ -116,7 +116,7 @@ test('FAQ migration keeps ten questions and four booking answers', () => {
 
 test('page block definitions reference the actual structured fields and Markdown slots', () => {
   const pages = docs.filter(({ data }) => data.studio?.blocks)
-  assert.equal(pages.length, 2)
+  assert.equal(pages.length, 3)
   for (const { file, data } of pages) {
     const ids = new Set()
     for (const block of data.studio.blocks) {
