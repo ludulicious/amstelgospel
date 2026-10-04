@@ -6,5 +6,5 @@ studio:
     directory: images
     formats: [jpg, jpeg, png, webp, gif]
     maxBytes: 10485760
-    imageAspectRatio: "16:9"
-    thumbnailAspectRatio: "4:3"
+    imageAspectRatio: null # default is null, which allows portrait or landscape crops.
+    thumbnailAspectRatio: '4:3'
