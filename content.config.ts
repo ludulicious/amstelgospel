@@ -39,6 +39,14 @@ export default defineContentConfig({
           agenda: z.boolean().default(true),
           join: z.boolean().default(true),
         }),
+        concert: z.object({
+          title: z.string().min(1),
+          description: z.string(),
+          eyebrow: z.string(),
+          image,
+          imageLabel: z.string(),
+          link,
+        }),
         studio: studioBlocks,
         hero: image.extend({
           eyebrow: z.string(),
@@ -98,18 +106,6 @@ export default defineContentConfig({
             external: z.boolean().default(false),
           }),
         ),
-      }),
-    }),
-    home_concert: defineCollection({
-      type: 'page',
-      source: '1.home/3.concert.md',
-      schema: z.object({
-        title: z.string().min(1),
-        description: z.string(),
-        eyebrow: z.string(),
-        image,
-        imageLabel: z.string(),
-        link,
       }),
     }),
     information: defineCollection({

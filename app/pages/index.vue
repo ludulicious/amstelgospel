@@ -29,9 +29,7 @@ onBeforeUnmount(() => revealObserver?.disconnect())
 const { data: home } = await useAsyncData('home', () =>
   queryCollection('home').first(),
 )
-const { data: concert } = await useAsyncData('home-concert', () =>
-  queryCollection('home_concert').first(),
-)
+const concert = computed(() => home.value?.concert)
 const { copy } = await useInterfaceCopy()
 const { data: concertEvent } = await useAsyncData('home-concert-event', () => {
   const path = concert.value?.link.to.split(/[?#]/)[0]
@@ -106,7 +104,7 @@ useSeoMeta({
             >{{ word }}</span
           >
         </h1>
-        <ContentRenderer :value="concert" class="concert-content" />
+        <ContentRenderer :value="home" class="concert-content" />
         <div class="concert-actions">
           <a
             v-if="hasConcertTickets"
