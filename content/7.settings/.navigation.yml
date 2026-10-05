@@ -2,4 +2,5 @@ title: Settings
 icon: i-lucide-settings
 studio:
   view: single
+  story: false
   previewUrl: /
