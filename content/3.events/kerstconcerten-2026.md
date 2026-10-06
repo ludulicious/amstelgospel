@@ -12,7 +12,7 @@ location: St. Urbanuskerk, Bovenkerk
 city: Amstelveen
 access: public
 ticketStatus: De kaartverkoop is gestart.
-ticketUrl: https://shannonchapoy.portalnuxt.com/store/discover-yourself/book?locale=en&currency=EUR&returnUrl=https://shannonchapoy.com/specials/discover-yourself
+ticketUrl: https://www.ticketkantoor.nl/shop/amstelgospel
 image:
   src: /images/gallery-10.jpg
   alt: De feestelijke sfeer van een kerstconcert van Amstel Gospel Choir
