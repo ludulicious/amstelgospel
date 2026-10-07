@@ -34,9 +34,14 @@ useSeoMeta({
     <header
       class="inner-hero page-pad"
       :class="{
-        'inner-hero-image': ['story', 'join', 'booking', 'support'].includes(
-          page.layout || 'story',
-        ),
+        'inner-hero-image': [
+          'story',
+          'join',
+          'booking',
+          'support',
+          'agenda',
+          'media',
+        ].includes(page.layout || 'story'),
       }"
     >
       <div>
@@ -50,7 +55,7 @@ useSeoMeta({
         sizes="xs:100vw sm:50vw md:50vw lg:50vw xl:50vw"
         densities="1x 2x"
         v-if="
-          ['story', 'join', 'booking', 'support'].includes(
+          ['story', 'join', 'booking', 'support', 'agenda', 'media'].includes(
             page.layout || 'story',
           )
         "
