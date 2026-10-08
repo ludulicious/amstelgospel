@@ -1,6 +1,11 @@
 title: Photos
 icon: i-lucide-images
 studio:
+  filters:
+    - field: categories
+      label: Category
+    - field: visible
+      label: Visibility
   view: media
   media:
     directory: images

@@ -1,2 +1,8 @@
 title: Faq
 icon: i-lucide-circle-help
+studio:
+  filters:
+    - field: category
+      label: Category
+    - field: visible
+      label: Visibility
