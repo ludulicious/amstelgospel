@@ -13,11 +13,28 @@ if (!page.value)
   })
 const { data: site } = await useChoir()
 const { data: faq } = await useAsyncData('faq', () =>
-  queryCollection('faq').order('order', 'ASC').order('id', 'ASC').all(),
+  queryCollection('faq')
+    .where('visible', '=', true)
+    .order('order', 'ASC')
+    .order('id', 'ASC')
+    .all(),
 )
+const faqCategory = ref('')
+const faqCategories = computed(() => [
+  { key: '', title: copy.faqAllLabel },
+  ...['Inhuren', 'Meezingen', 'Optredens', 'Algemeen']
+    .filter((category) =>
+      (faq.value || []).some((item) => item.category === category),
+    )
+    .map((title) => ({ key: title, title })),
+])
 const faqItems = computed(() =>
   (faq.value || [])
-    .filter((item) => page.value?.layout !== 'booking' || item.showOnBooking)
+    .filter((item) => {
+      if (page.value?.layout === 'booking') return item.category === 'Inhuren'
+      if (page.value?.layout === 'join') return item.category === 'Meezingen'
+      return !faqCategory.value || item.category === faqCategory.value
+    })
     .map((item) => ({ label: item.title, content: item.content })),
 )
 const showPast = ref(false)
@@ -156,18 +173,41 @@ useSeoMeta({
         :purpose="page.layout === 'join' ? 'join' : 'booking'"
       />
       <section
-        v-if="page.layout === 'faq' || page.layout === 'booking'"
+        v-if="
+          page.layout === 'faq' ||
+          (['booking', 'join'].includes(page.layout || '') &&
+            faqItems.length > 0)
+        "
         class="faq-section"
       >
         <h2 v-if="page.layout === 'booking'">{{ copy.bookingFaqTitle }}</h2>
+        <h2 v-else-if="page.layout === 'join'">{{ copy.joinFaqTitle }}</h2>
+        <div
+          v-if="page.layout === 'faq'"
+          class="filter-buttons"
+          :aria-label="copy.faqFilterLabel"
+        >
+          <UButton
+            v-for="item in faqCategories"
+            :key="item.key"
+            :variant="faqCategory === item.key ? 'solid' : 'outline'"
+            color="neutral"
+            :aria-pressed="faqCategory === item.key"
+            @click="faqCategory = item.key"
+            >{{ item.title }}</UButton
+          >
+        </div>
+        <p v-if="!faqItems.length">{{ copy.faqEmptyText }}</p>
         <UAccordion
+          v-else
+          :key="faqCategory"
           :items="faqItems"
           :ui="{
             trigger: 'text-lg py-5 cursor-pointer font-bold',
             body: 'text-base pb-5 leading-relaxed',
           }"
         /><NuxtLink
-          v-if="page.layout === 'booking'"
+          v-if="page.layout === 'booking' || page.layout === 'join'"
           class="text-link"
           to="/veelgestelde-vragen"
           >{{ copy.allFaqLink }}<UIcon name="i-lucide-arrow-right"

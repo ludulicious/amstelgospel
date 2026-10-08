@@ -19,15 +19,15 @@ De actieknop heeft eigen velden onder `action`: label, bestemming, icoon, zichtb
 
 De contentmappen hebben een nummerprefix voor de volgorde: Home, Information, Events, Photos, Videos, Faq en Settings. Elke map heeft een `.navigation.yml` met een titel en Lucide-icoon, zoals in de portal-documentatie. Iconen voor de collectiemappen staan uitsluitend in deze navigatiebestanden. De nummers veranderen de publieke pagina-adressen niet.
 
-| Sectie in Studio        | Bestand(en)                  | Wat je kunt aanpassen                                                                   |
-| ----------------------- | ---------------------------- | --------------------------------------------------------------------------------------- |
-| Pages → Home            | `content/1.home/1.home.md`   | Koppen, intro, foto's, knoppen, meezingblok en zichtbaarheid van alle homepageblokken   |
-| Pages → Settings → Site | `content/7.settings/site.md` | Contactgegevens, footer en gedeelde interfaceteksten                                    |
-| Information             | `content/2.information/*.md` | Paginatitels, taglines, beschrijvingen, headerfoto, indeling en opgemaakte tekst        |
-| Events                  | `content/3.events/*.md`      | Concerten, datums, tijden, locatie, kaartverkoop en omschrijving                        |
-| Photos                  | `content/4.photos/*.yml`     | Eén foto per document: titel, afbeelding, alt-tekst, categorieën, credit en volgorde    |
-| Videos                  | `content/5.videos/*.yml`     | Eén video per document: titel, YouTube-ID, voorbeeldfoto, categorieën en volgorde       |
-| Faq                     | `content/6.faq/*.yml`        | Eén vraag per document: vraag, antwoord, volgorde en zichtbaarheid op de boekingspagina |
+| Sectie in Studio        | Bestand(en)                  | Wat je kunt aanpassen                                                                 |
+| ----------------------- | ---------------------------- | ------------------------------------------------------------------------------------- |
+| Pages → Home            | `content/1.home/1.home.md`   | Koppen, intro, foto's, knoppen, meezingblok en zichtbaarheid van alle homepageblokken |
+| Pages → Settings → Site | `content/7.settings/site.md` | Contactgegevens, footer en gedeelde interfaceteksten                                  |
+| Information             | `content/2.information/*.md` | Paginatitels, taglines, beschrijvingen, headerfoto, indeling en opgemaakte tekst      |
+| Events                  | `content/3.events/*.md`      | Concerten, datums, tijden, locatie, kaartverkoop en omschrijving                      |
+| Photos                  | `content/4.photos/*.yml`     | Eén foto per document: titel, afbeelding, alt-tekst, categorieën, credit en volgorde  |
+| Videos                  | `content/5.videos/*.yml`     | Eén video per document: titel, YouTube-ID, voorbeeldfoto, categorieën en volgorde     |
+| Faq                     | `content/6.faq/*.yml`        | Eén vraag per document: vraag, antwoord, categorie, volgorde en zichtbaarheid         |
 
 Studio groepeert collecties met één vast bestand automatisch onder **Pages**. De vorige Markdown-collectie heette óók Pages en stond in de map `content/pages/`; daardoor verschenen twee gelijknamige secties. De Markdown-collectie en map heten nu **Information**. Dit verandert de publieke pagina-adressen niet. Home en Site blijven vaste bestanden; alle herhaalbare inhoud heeft een eigen collectie.
 
@@ -63,9 +63,9 @@ Voeg categorieën rechtstreeks toe aan het veld `categories` in **Photos** of **
 
 Een video gebruikt het elf tekens lange YouTube-ID, niet de complete URL. Afbeeldingen en alt-teksten blijven via de media-velden aanpasbaar.
 
-Bij een FAQ-document is `title` de vraag en `content` het antwoord. Alle vragen verschijnen op de FAQ-pagina. Zet `showOnBooking` aan voor vragen die ook op de boekingspagina moeten staan.
+Bij een FAQ-document is `title` de vraag en `content` het antwoord. Kies bij `category` uit **Inhuren**, **Meezingen**, **Optredens** en **Algemeen**. Met `visible` bepaal je of een vraag op de website verschijnt. De algemene FAQ-pagina toont alle zichtbare vragen met categorieknoppen. De boekingspagina toont alleen **Inhuren**; de meezingenpagina alleen **Meezingen**.
 
-Bestaande documenten hebben expliciete preview-adressen in `studio.preview.json`. Studio kan voor nieuwe gedeelde documenten de gebruikende pagina afleiden; kies zo nodig **Set preview page** of voeg een expliciete mapping toe. Foto's en video's gebruiken `/kijk-en-luister`; vragen gebruiken `/veelgestelde-vragen` en `/boeken`.
+Bestaande documenten hebben expliciete preview-adressen in `studio.preview.json`. Studio kan voor nieuwe gedeelde documenten de gebruikende pagina afleiden; kies zo nodig **Set preview page** of voeg een expliciete mapping toe. Foto's en video's gebruiken `/kijk-en-luister`; vragen gebruiken `/veelgestelde-vragen`, `/boeken` en `/meezingen`.
 
 ## Gecontroleerd
 

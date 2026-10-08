@@ -167,7 +167,10 @@ export default defineContentConfig({
         schedule: z
           .array(
             z.object({
-              date: z.string().date().describe('Event date in YYYY-MM-DD format'),
+              date: z
+                .string()
+                .date()
+                .describe('Event date in YYYY-MM-DD format'),
               time: z.string().trim().min(1),
             }),
           )
@@ -218,7 +221,10 @@ export default defineContentConfig({
         title: z.string().min(1),
         content: z.string().min(1),
         order: sortOrder,
-        showOnBooking: z.boolean().default(false),
+        category: z
+          .enum(['Inhuren', 'Meezingen', 'Optredens', 'Algemeen'])
+          .default('Algemeen'),
+        visible: z.boolean().default(true),
       }),
     }),
     site: defineCollection({
@@ -241,6 +247,10 @@ export default defineContentConfig({
           pastFilter: z.string(),
           bookingFaqTitle: z.string(),
           allFaqLink: z.string(),
+          joinFaqTitle: z.string(),
+          faqAllLabel: z.string(),
+          faqFilterLabel: z.string(),
+          faqEmptyText: z.string(),
           eventBackLink: z.string(),
           eventPracticalTitle: z.string(),
           eventWhenLabel: z.string(),

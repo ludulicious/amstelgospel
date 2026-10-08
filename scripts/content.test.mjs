@@ -103,13 +103,16 @@ test('photos and videos support free-form category lists', () => {
     }
   }
 })
-test('FAQ migration keeps ten questions and four booking answers', () => {
+test('FAQ entries have a supported category and explicit visibility', () => {
   const questions = docs.filter((d) => d.file.startsWith('content/6.faq/'))
   assert.equal(questions.length, 10)
-  assert.equal(questions.filter((d) => d.data.showOnBooking).length, 4)
   for (const { data } of questions) {
     assert.ok(data.title && data.content)
-    assert.equal(typeof data.showOnBooking, 'boolean')
+    assert.ok(
+      ['Inhuren', 'Meezingen', 'Optredens', 'Algemeen'].includes(data.category),
+    )
+    assert.equal(typeof data.visible, 'boolean')
+    assert.ok(!('showOnBooking' in data))
   }
 })
 

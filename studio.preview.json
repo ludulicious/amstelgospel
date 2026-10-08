@@ -42,16 +42,56 @@
   "content/5.videos/live-06.yml": "/kijk-en-luister",
   "content/5.videos/live-07.yml": "/kijk-en-luister",
   "content/5.videos/live-08.yml": "/kijk-en-luister",
-  "content/6.faq/vraag-01.yml": ["/veelgestelde-vragen", "/boeken"],
-  "content/6.faq/vraag-02.yml": ["/veelgestelde-vragen", "/boeken"],
-  "content/6.faq/vraag-03.yml": ["/veelgestelde-vragen", "/boeken"],
-  "content/6.faq/vraag-04.yml": ["/veelgestelde-vragen", "/boeken"],
-  "content/6.faq/vraag-05.yml": ["/veelgestelde-vragen", "/boeken"],
-  "content/6.faq/vraag-06.yml": ["/veelgestelde-vragen", "/boeken"],
-  "content/6.faq/vraag-07.yml": ["/veelgestelde-vragen", "/boeken"],
-  "content/6.faq/vraag-08.yml": ["/veelgestelde-vragen", "/boeken"],
-  "content/6.faq/vraag-09.yml": ["/veelgestelde-vragen", "/boeken"],
-  "content/6.faq/vraag-10.yml": ["/veelgestelde-vragen", "/boeken"],
+  "content/6.faq/vraag-01.yml": [
+    "/veelgestelde-vragen",
+    "/boeken",
+    "/meezingen"
+  ],
+  "content/6.faq/vraag-02.yml": [
+    "/veelgestelde-vragen",
+    "/boeken",
+    "/meezingen"
+  ],
+  "content/6.faq/vraag-03.yml": [
+    "/veelgestelde-vragen",
+    "/boeken",
+    "/meezingen"
+  ],
+  "content/6.faq/vraag-04.yml": [
+    "/veelgestelde-vragen",
+    "/boeken",
+    "/meezingen"
+  ],
+  "content/6.faq/vraag-05.yml": [
+    "/veelgestelde-vragen",
+    "/boeken",
+    "/meezingen"
+  ],
+  "content/6.faq/vraag-06.yml": [
+    "/veelgestelde-vragen",
+    "/boeken",
+    "/meezingen"
+  ],
+  "content/6.faq/vraag-07.yml": [
+    "/veelgestelde-vragen",
+    "/boeken",
+    "/meezingen"
+  ],
+  "content/6.faq/vraag-08.yml": [
+    "/veelgestelde-vragen",
+    "/boeken",
+    "/meezingen"
+  ],
+  "content/6.faq/vraag-09.yml": [
+    "/veelgestelde-vragen",
+    "/boeken",
+    "/meezingen"
+  ],
+  "content/6.faq/vraag-10.yml": [
+    "/veelgestelde-vragen",
+    "/boeken",
+    "/meezingen"
+  ],
   "content/2.information/3.agenda.md": "/agenda",
   "content/2.information/6.boeken.md": "/boeken",
   "content/2.information/4.kijk-en-luister.md": "/kijk-en-luister",
