@@ -495,7 +495,7 @@ p {
   display: grid;
   grid-template-columns: 80px minmax(0, 1fr) 220px;
   gap: var(--space-8);
-  background: var(--color-accent);
+  background: var(--color-lavender);
   padding-block: var(--space-20);
   align-items: start;
 }
@@ -613,7 +613,7 @@ p {
 }
 .page-agenda .inner-hero,
 .page-support .inner-hero {
-  background: var(--color-accent);
+  background: var(--color-lavender);
 }
 .page-media .inner-hero {
   background: var(--color-ink);
@@ -818,7 +818,7 @@ dd {
 }
 .support-options section:first-child {
   grid-row: span 2;
-  background: var(--color-accent);
+  background: var(--color-lavender);
 }
 .support-options h2 {
   font-size: 48px;
