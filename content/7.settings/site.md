@@ -6,8 +6,8 @@ email: amstelgospelchoir@gmail.com
 phone: 06 30 93 60 61
 phoneLink: '+31630936061'
 contactName: Corine Dijst
-footerTitle: Maakt van je evenement een belevenis
-footerText: Wil je ons boeken, heb je een vraag, een idee of zin om mee te zingen? We horen graag van je.
+footerTitle: Samen klinkt het beter.
+footerText: Een vraag, een idee of zin om mee te zingen? We horen graag van je.
 copy:
   bookingEyebrow: 'Even overleggen?'
   bookingTitle: 'We horen je graag.'

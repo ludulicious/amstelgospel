@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const route = useRoute()
 const { copy } = await useInterfaceCopy()
 const { data: site } = await useChoir()
 const { data: menu } = await useMainMenu()
@@ -58,10 +59,39 @@ const action = computed(() => menu.value?.action)
         formatCopy(copy.copyrightText, { year: new Date().getFullYear() })
       }}</span>
     </div>
+    <div v-if="route.path === '/'" class="footer-partners">
+      <a
+        href="https://www.e-boekhouden.nl/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="/images/website-identity/e-boekhouden.png"
+          alt="Wij werken met e-Boekhouden.nl"
+          width="180"
+          height="90"
+          loading="lazy"
+        />
+      </a>
+    </div>
   </footer>
 </template>
 
 <style scoped>
+.footer-partners {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-8);
+}
+.footer-partners img {
+  width: 180px;
+  height: auto;
+}
+@media (max-width: 640px) {
+  .footer-partners {
+    justify-content: flex-start;
+  }
+}
 .footer-menu-link {
   display: inline-flex;
   align-items: center;
