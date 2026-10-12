@@ -138,7 +138,6 @@ useSeoMeta({
             fetchpriority="high"
           />
         </div>
-        <span class="concert-label">{{ concert.imageLabel }}</span>
       </div>
       <button
         class="motion-toggle"
@@ -184,29 +183,8 @@ useSeoMeta({
             height="533"
             :loading="showConcert ? 'lazy' : 'eager'"
             :fetchpriority="showConcert ? 'auto' : 'high'"
-          /><span class="photo-number" aria-hidden="true">{{
-            home.hero.photoStamp
-          }}</span>
+          />
         </div>
-        <div class="hero-sticker" aria-hidden="true">
-          <div class="sound-bars">
-            <i
-              v-for="bar in 5"
-              :key="bar"
-              :style="{ '--bar-delay': `${bar * -0.18}s` }"
-            />
-          </div>
-          <span
-            ><template
-              v-for="(line, index) in home.hero.stickerLines"
-              :key="index"
-              ><br v-if="index" />{{ line }}</template
-            ></span
-          >
-        </div>
-        <p class="photo-caption">
-          {{ home.hero.imageLabel }} <UIcon name="i-lucide-heart" />
-        </p>
       </div>
     </section>
     <div
@@ -239,7 +217,7 @@ useSeoMeta({
           width="800"
           height="533"
           loading="lazy"
-        /><span class="photo-note">{{ home.about.imageLabel }}</span>
+        />
       </div>
       <div class="intro-copy" data-reveal>
         <p class="eyebrow">{{ home.about.eyebrow }}</p>
