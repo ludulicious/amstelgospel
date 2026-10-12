@@ -8,7 +8,7 @@
   --font-sans: var(--font-body);
 }
 :root {
-  --ui-bg: var(--color-paper);
+  --ui-bg: var(--color-background);
   --ui-text: var(--color-ink);
   --ui-text-highlighted: var(--color-ink);
   --ui-text-muted: var(--color-muted);
@@ -28,11 +28,15 @@ html {
 }
 body {
   margin: 0;
-  background: var(--color-paper);
+  background: var(--color-background);
   color: var(--color-ink);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.65;
+}
+body:has(.event-hero) {
+  --color-background: var(--color-paper);
+  --color-surface: var(--color-pink);
 }
 img {
   max-width: 100%;
@@ -165,7 +169,7 @@ p {
   gap: var(--space-10);
   border-bottom: 1px solid var(--color-rule);
   z-index: 20;
-  background: var(--color-paper);
+  background: var(--color-background);
 }
 .choir-mark {
   display: flex;
@@ -228,6 +232,8 @@ p {
   font-weight: 700;
 }
 .home-hero {
+  background: var(--color-background);
+  color: var(--color-ink);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-12);
@@ -236,6 +242,16 @@ p {
   max-width: 1680px;
   margin: auto;
   align-items: center;
+}
+.home-hero-solo {
+  --color-focus: var(--color-gold-light);
+  background: var(--color-ink);
+  color: var(--color-hero-text);
+  box-shadow: 0 0 0 100vmax var(--color-ink);
+  clip-path: inset(0 -100vmax);
+}
+.home-hero-solo .live-dot {
+  background: var(--color-hero-text);
 }
 .hero-copy .eyebrow {
   display: flex;
@@ -364,11 +380,17 @@ p {
   column-gap: var(--space-6);
   align-items: center;
 }
+.aftermovie-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
 .concert-copy .button {
   margin-top: var(--space-8);
 }
 .button-concert-secondary {
-  background: var(--color-ink);
+  background: transparent;
   color: var(--color-paper);
   border-color: color-mix(in srgb, var(--color-paper) 40%, transparent);
 }
@@ -379,6 +401,33 @@ p {
 }
 .concert-photo {
   position: relative;
+}
+.concert-photo-play {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+.concert-play-icon {
+  position: absolute;
+  inset: auto 0 var(--space-6);
+  margin-inline: auto;
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 2px solid var(--color-paper);
+  background: color-mix(in srgb, var(--color-ink) 85%, transparent);
+  color: var(--color-paper);
+  font-size: 32px;
+}
+.concert-photo-caption {
+  margin-top: var(--space-4);
+  color: var(--color-paper);
+  font-size: 14px;
 }
 .concert-photo img {
   width: 100%;
@@ -543,7 +592,7 @@ p {
 }
 .inner-hero {
   padding-block: var(--space-20);
-  background: var(--color-pink);
+  background: var(--color-surface);
 }
 .inner-hero h1 {
   max-width: 13ch;
@@ -688,7 +737,7 @@ dd {
 }
 .contact-form {
   margin-top: var(--space-20);
-  background: var(--color-pink);
+  background: var(--color-surface);
   padding: var(--space-12);
   max-width: 960px;
 }
@@ -765,7 +814,7 @@ dd {
 }
 .support-options section {
   padding: var(--space-10);
-  background: var(--color-pink);
+  background: var(--color-surface);
 }
 .support-options section:first-child {
   grid-row: span 2;
@@ -1641,7 +1690,7 @@ dd {
 #main > * {
   grid-area: 1 / 1;
   min-width: 0;
-  background: var(--color-paper);
+  background: var(--color-background);
 }
 .page-enter-active {
   z-index: 1;

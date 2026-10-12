@@ -1,6 +1,10 @@
 <script setup lang="ts">
 const homepage = ref<HTMLElement | null>(null)
 const motionPaused = ref(false)
+const aftermovieOpen = ref(false)
+const { data: aftermovie } = await useAsyncData('home-aftermovie', () =>
+  queryCollection('videos').where('youtubeId', '=', '8BetgX2Dhu8').first(),
+)
 let revealObserver: IntersectionObserver | undefined
 
 onMounted(() => {
@@ -44,14 +48,6 @@ const hasConcertTickets = computed(
 const showConcert = computed(
   () => home.value?.visibility.concert && !!concert.value,
 )
-const concertLink = computed(() => {
-  const to = concert.value?.link.to || '/agenda'
-  if (!to.startsWith('/agenda/')) return to
-  const hashIndex = to.indexOf('#')
-  const path = hashIndex === -1 ? to : to.slice(0, hashIndex)
-  const hash = hashIndex === -1 ? '' : to.slice(hashIndex)
-  return `${path}${path.includes('?') ? '&' : '?'}from=home${hash}`
-})
 const headingTag = (section: 'hero' | 'about' | 'agenda' | 'join') => {
   const sections = ['concert', 'hero', 'about', 'agenda', 'join'] as const
   const firstVisible = sections.find((key) =>
@@ -114,18 +110,17 @@ useSeoMeta({
             class="button button-gold"
             >{{ copy.ticketLink }}<UIcon name="i-lucide-arrow-up-right"
           /></a>
-          <NuxtLink
-            class="button"
-            :class="
-              hasConcertTickets ? 'button-concert-secondary' : 'button-gold'
-            "
-            :to="concertLink"
-            >{{ concert.link.label }}<UIcon name="i-lucide-arrow-right"
-          /></NuxtLink>
         </div>
       </div>
       <div class="concert-photo">
-        <div class="concert-photo-viewport">
+        <component
+          :is="aftermovie ? 'button' : 'div'"
+          :type="aftermovie ? 'button' : undefined"
+          :aria-label="aftermovie ? 'Bekijk de aftermovie van 2025' : undefined"
+          class="concert-photo-viewport"
+          :class="{ 'concert-photo-play': aftermovie }"
+          @click="aftermovie && (aftermovieOpen = true)"
+        >
           <NuxtImg
             format="webp"
             fit="inside"
@@ -137,7 +132,13 @@ useSeoMeta({
             height="534"
             fetchpriority="high"
           />
-        </div>
+          <span v-if="aftermovie" class="concert-play-icon" aria-hidden="true">
+            <UIcon name="i-lucide-play" />
+          </span>
+        </component>
+        <p v-if="aftermovie" class="concert-photo-caption">
+          Proef de sfeer van onze kerstconcerten in 2025
+        </p>
       </div>
       <button
         class="motion-toggle"
@@ -149,7 +150,29 @@ useSeoMeta({
         {{ motionPaused ? home.motion.play : home.motion.pause }}
       </button>
     </section>
-    <section v-if="home.visibility.hero" class="home-hero page-pad">
+    <UModal
+      v-model:open="aftermovieOpen"
+      title="Aftermovie 2025"
+      :description="copy.youtubeNotice"
+      :ui="{ content: 'max-w-5xl' }"
+    >
+      <template #body>
+        <iframe
+          v-if="aftermovieOpen && aftermovie"
+          :src="`https://www.youtube-nocookie.com/embed/${aftermovie.youtubeId}?autoplay=1&rel=0`"
+          title="Amstel Gospel Choir — aftermovie 2025"
+          class="aftermovie-video"
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
+        />
+      </template>
+    </UModal>
+    <section
+      v-if="home.visibility.hero"
+      class="home-hero page-pad"
+      :class="{ 'home-hero-solo': !showConcert }"
+    >
       <div class="hero-copy" data-reveal>
         <p class="eyebrow"><span class="live-dot" />{{ home.hero.eyebrow }}</p>
         <component :is="headingTag('hero')">
@@ -162,7 +185,7 @@ useSeoMeta({
         </component>
         <p class="hero-intro">{{ home.hero.intro }}</p>
         <div class="hero-actions">
-          <NuxtLink class="button button-ink" :to="home.hero.primary.to"
+          <NuxtLink class="button button-gold" :to="home.hero.primary.to"
             >{{ home.hero.primary.label
             }}<UIcon name="i-lucide-arrow-up-right" /></NuxtLink
           ><NuxtLink class="text-link" :to="home.hero.secondary.to"
