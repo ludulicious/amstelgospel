@@ -239,8 +239,7 @@ p {
   gap: var(--space-12);
   padding-top: var(--space-16);
   padding-bottom: var(--space-20);
-  max-width: 1680px;
-  margin: auto;
+  width: 100%;
   align-items: center;
 }
 .home-hero-solo {
