@@ -131,8 +131,19 @@ useSeoMeta({
         ><VideoGallery /><MediaGallery
       /></template>
       <ContactForm
-        v-if="page.layout === 'join' || page.layout === 'booking'"
-        :purpose="page.layout === 'join' ? 'join' : 'booking'"
+        id="contact-form"
+        v-if="
+          page.layout === 'join' ||
+          page.layout === 'booking' ||
+          page.layout === 'support'
+        "
+        :purpose="
+          page.layout === 'join'
+            ? 'join'
+            : page.layout === 'support'
+              ? 'donate'
+              : 'booking'
+        "
       />
       <section
         v-if="

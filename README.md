@@ -24,7 +24,7 @@ pnpm format:check
 pnpm generate
 ```
 
-Deploy `.output/public` to a static host. `pnpm build` also supports conventional Nuxt server hosting. No environment variables, remote fonts, content database service or authentication are required. All content pages and concerts are automatically included in prerendering, including archived concerts and newly added Markdown files.
+Deploy the Nuxt server produced by `pnpm build` (or the Docker image) to support form delivery. A static-only export cannot send form submissions. Configure the environment variables described below. No remote fonts, content database service or authentication are required. All content pages and concerts are automatically included in prerendering, including archived concerts and newly added Markdown files.
 
 ## Image delivery
 
@@ -60,7 +60,7 @@ Marpos Studio opens GitHub repositories. Put this standalone project in its own 
 - The concert agenda separates upcoming and past events using Amsterdam dates. Multi-day concerts remain current through their last day. The browser refreshes the date after hydration, including on static exports.
 - The gallery contains the 30 original gallery images, category filters and a keyboard-accessible Nuxt UI modal. Four source background photographs are also included.
 - The eight original YouTube videos load only after the visitor presses play. Only one video is active at a time. No analytics are configured.
-- The validated Nuxt UI contact form creates an email draft. Visitors send it themselves through their email application; it is not a backend delivery service. A copyable fallback is provided.
+- Booking, membership and donation forms send email through Resend after server-side Cloudflare Turnstile verification. Each form has independently configured recipient and CC addresses.
 - The source currently announces a waiting list and ticket sales starting in early October. No ticket URL was published in the extracted source. Add `ticketUrl` and update `ticketStatus` when available.
 
 ## Source and maintenance
@@ -77,3 +77,19 @@ For a static-only deployment, configure equivalent HTTP 301 redirects at the hos
 [Source inventory](docs/sources.md) documents migrated facts and original URLs. [Image provenance](docs/media-sources.json) maps local assets to their source. Photography remains credited to its existing owners; no ownership or license is transferred by this project. Existing photo credits visible in source filenames are retained in the gallery.
 
 Rebuild after publishing content edits. Site navigation and footer links are editable in `content/7.settings/site.yml`; newly created pages can be added to navigation there.
+
+## Form configuration
+
+Copy `.env.example` to `.env` for local development and fill in all values. In production, set these variables on the Nuxt server; Node does not load `.env` automatically. For Docker, pass a production environment file to `docker run` with `--env-file`. Set `NUXT_TURNSTILE_HOSTNAMES=amstelgospel.nl` in production; do not use the local development hostname list.
+
+- `NUXT_RESEND_API_KEY`: Resend API key with email sending permission.
+- `NUXT_RESEND_FROM_EMAIL`: sender address on your verified Resend domain.
+- `NUXT_TURNSTILE_SECRET_KEY`: private secret for the existing Cloudflare widget. The public site key defaults to `0x4AAAAAAFVXTP1ufSmtL9UJ` and can be overridden with `NUXT_PUBLIC_TURNSTILE_SITE_KEY`.
+- `NUXT_TURNSTILE_HOSTNAMES`: comma-separated exact frontend hostnames. Defaults to `amstelgospel.nl`. For local development, use `localhost,127.0.0.1` with a widget allowing those hosts or Cloudflare test keys. Production rejects loopback hostnames. Siteverify must return `success: true`, the matching form action (`booking`, `join`, or `donate`), and an allowed hostname. Each submission attempt resets its widget because tokens are single-use.
+- `NUXT_CONTACT_BOOKING_TO` / `NUXT_CONTACT_BOOKING_CC`: booking recipient and CC.
+- `NUXT_CONTACT_JOIN_TO` / `NUXT_CONTACT_JOIN_CC`: membership recipient and CC.
+- `NUXT_CONTACT_DONATE_TO` / `NUXT_CONTACT_DONATE_CC`: donation recipient and CC.
+
+Each recipient is required. CC is optional: leave its variable unset or empty to send without a copy. Non-empty recipient and CC values must be individual email addresses. Recipients and credentials remain server-only. Replies go to the visitor. Missing credentials or recipient settings prevent delivery; Turnstile is required. The endpoint also checks consent, validates input lengths, rejects a hidden spam field, and limits submissions to five per 15 minutes per connection IP per server process. Configure trusted proxy rate limiting at the host for multi-instance deployments; forwarded IP headers are deliberately not trusted by the app.
+
+Implementation references: [Resend email API](https://resend.com/docs/api-reference/emails/send-email) and [Cloudflare server-side verification](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/).
