@@ -65,6 +65,15 @@ Marpos Studio opens GitHub repositories. Put this standalone project in its own 
 
 ## Source and maintenance
 
+Legacy `.html` pages use permanent (301) redirects in `nuxt.config.ts`.
+These cover the 13 old page URLs found across both Google `site:amstelgospel.nl`
+results pages on 13 October 2026, plus five URLs from the migration inventory.
+Redirects point directly to current pages; donation and sponsorship links target
+the relevant section on `/steun-ons`. The retired CD page points to the media
+page, which is the closest remaining content rather than a CD sales page.
+Deploy a rebuilt Nuxt server/Docker image to activate these redirects in production.
+For a static-only deployment, configure equivalent HTTP 301 redirects at the host.
+
 [Source inventory](docs/sources.md) documents migrated facts and original URLs. [Image provenance](docs/media-sources.json) maps local assets to their source. Photography remains credited to its existing owners; no ownership or license is transferred by this project. Existing photo credits visible in source filenames are retained in the gallery.
 
 Rebuild after publishing content edits. Site navigation and footer links are editable in `content/7.settings/site.yml`; newly created pages can be added to navigation there.
