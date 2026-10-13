@@ -1,8 +1,12 @@
-title: Amstel Gospel Choir live
-order: 7
+title: Kerstconcert 2025
+order: 8
 image:
   src: /images/gallery-07.jpg
   alt: Amstel Gospel Choir live — Amstel Gospel Choir
 categories:
-  - Concerten
+- Concerten
 credit: HJ Kaaks Photography
+visible: true
+thumbnail:
+  src: /images/gallery-07-thumbnail-6f0b625e6e43ba14.jpg
+  alt: Amstel Gospel Choir live — Amstel Gospel Choir
