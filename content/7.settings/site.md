@@ -55,7 +55,7 @@ copy:
   bookingSubject: 'Een optreden boeken'
   joinSubject: 'Een repetitie bezoeken'
   donationSubject: 'Donateur worden'
-  otherSubject: 'Een andere vraag'
+  otherSubject: 'Andere vraag'
   bookingMessageHint: 'Denk aan datum, locatie, soort evenement en de sfeer die je zoekt.'
   joinMessageHint: 'Vertel bijvoorbeeld wanneer je wilt komen en of je al zangervaring hebt.'
   copiedLabel: 'Bericht gekopieerd'

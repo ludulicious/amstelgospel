@@ -169,3 +169,15 @@ test('siteverify receives the token through a server-side form encoded request',
   assert.equal(calls[0].options.timeout, 10000)
   assert.equal(calls[0].options.retry, 0)
 })
+
+test('page recipients and CAPTCHA action stay the same for primary and other questions', async () => {
+  for (const purpose of ['booking', 'join', 'donate']) {
+    for (const subject of ['Pagina-specifieke vraag', 'Andere vraag']) {
+      const { handler, calls } = endpoint()
+      await handler({ ...valid, purpose, subject })
+      assert.equal(calls[1].options.body.to[0], purpose + '@example.com')
+      assert.equal(calls[1].options.body.cc[0], purpose + '-cc@example.com')
+      assert.ok(calls[1].options.body.subject.endsWith(subject))
+    }
+  }
+})

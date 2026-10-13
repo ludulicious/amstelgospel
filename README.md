@@ -90,6 +90,8 @@ Copy `.env.example` to `.env` for local development and fill in all values. In p
 - `NUXT_CONTACT_JOIN_TO` / `NUXT_CONTACT_JOIN_CC`: membership recipient and CC.
 - `NUXT_CONTACT_DONATE_TO` / `NUXT_CONTACT_DONATE_CC`: donation recipient and CC.
 
+The page determines the recipient, optional CC and Turnstile action. Each dropdown offers only its page-specific topic and “Andere vraag”; both choices go to the same page-specific recipients.
+
 Each recipient is required. CC is optional: leave its variable unset or empty to send without a copy. Non-empty recipient and CC values must be individual email addresses. Recipients and credentials remain server-only. Replies go to the visitor. Missing credentials or recipient settings prevent delivery; Turnstile is required. The endpoint also checks consent, validates input lengths, rejects a hidden spam field, and limits submissions to five per 15 minutes per connection IP per server process. Configure trusted proxy rate limiting at the host for multi-instance deployments; forwarded IP headers are deliberately not trusted by the app.
 
 Implementation references: [Resend email API](https://resend.com/docs/api-reference/emails/send-email) and [Cloudflare server-side verification](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/).

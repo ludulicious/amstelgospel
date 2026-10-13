@@ -11,25 +11,25 @@ const schema = z.object({
   name: z.string().trim().min(2, copy.nameError),
   email: z.email(copy.emailError),
   phone: z.string(),
-  subject: z.string().min(1, copy.subjectError),
+  subject: z.enum(['primary', 'other']),
   message: z.string().trim().min(10, copy.messageError),
   consent: z.boolean().refine(Boolean, copy.consentError),
 })
 type FormData = z.output<typeof schema>
+const primarySubject = {
+  booking: copy.bookingSubject,
+  join: copy.joinSubject,
+  donate: copy.donationSubject,
+}[props.purpose]
 const subjects = [
-  copy.bookingSubject,
-  copy.joinSubject,
-  copy.donationSubject,
-  copy.otherSubject,
+  { value: 'primary', label: primarySubject },
+  { value: 'other', label: copy.otherSubject },
 ]
 const state = reactive({
   name: '',
   email: '',
   phone: '',
-  subject:
-    subjects[
-      props.purpose === 'join' ? 1 : props.purpose === 'donate' ? 2 : 0
-    ]!,
+  subject: 'primary' as FormData['subject'],
   message: '',
   consent: false,
 })
@@ -40,6 +40,13 @@ const turnstile = useTemplateRef<{ reset: () => void }>('turnstile')
 const sending = ref(false)
 const sent = ref(false)
 const error = ref('')
+watch(
+  () => state.subject,
+  () => {
+    error.value = ''
+    sent.value = false
+  },
+)
 async function submit(event: FormSubmitEvent<FormData>) {
   if (sending.value) return
   error.value = ''
@@ -55,6 +62,8 @@ async function submit(event: FormSubmitEvent<FormData>) {
       body: {
         ...event.data,
         purpose: props.purpose,
+        subject: subjects.find((item) => item.value === event.data.subject)!
+          .label,
         honeypot: honeypot.value,
         turnstileToken: turnstileToken.value,
       },
@@ -107,7 +116,11 @@ async function submit(event: FormSubmitEvent<FormData>) {
             autocomplete="tel"
             size="xl" /></UFormField
         ><UFormField name="subject" :label="copy.subjectLabel"
-          ><USelect v-model="state.subject" :items="subjects" size="xl"
+          ><USelect
+            v-model="state.subject"
+            :items="subjects"
+            :disabled="sending"
+            size="xl"
         /></UFormField>
       </div>
       <UFormField
