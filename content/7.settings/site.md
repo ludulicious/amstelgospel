@@ -1,7 +1,7 @@
 ---
 title: Site instellingen
 name: Amstel Gospel Choir
-tagline: Maakt van je evenement een belevenis.
+tagline: Maakt van je evenement een belevenis
 email: amstelgospelchoir@gmail.com
 phone: 06 30 93 60 61
 phoneLink: '+31630936061'
