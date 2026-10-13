@@ -13,8 +13,25 @@ const contentRoutes = ['2.information', '3.events'].flatMap((folder) =>
 )
 
 export default defineNuxtConfig({
+  runtimeConfig: {
+    resendApiKey: '',
+    resendFromEmail: '',
+    turnstileSecretKey: '',
+    turnstileHostnames: 'amstelgospel.nl',
+    contactBookingTo: '',
+    contactBookingCc: '',
+    contactJoinTo: '',
+    contactJoinCc: '',
+    contactDonateTo: '',
+    contactDonateCc: '',
+    public: { turnstileSiteKey: '0x4AAAAAAFVXTP1ufSmtL9UJ' },
+  },
   compatibilityDate: '2026-09-01',
   routeRules: {
+    // Render forms at request time so Docker runtime Turnstile settings are used.
+    '/boeken': { prerender: false },
+    '/meezingen': { prerender: false },
+    '/steun-ons': { prerender: false },
     '/home.html': { redirect: { to: '/', statusCode: 301 } },
     '/videos.html': { redirect: { to: '/kijk-en-luister', statusCode: 301 } },
     '/fotos.html': { redirect: { to: '/kijk-en-luister', statusCode: 301 } },
