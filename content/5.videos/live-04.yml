@@ -1,8 +1,9 @@
 title: Amstel Gospel Choir — live-impressie 4
 youtubeId: ZJDfjjrdNIQ
 image:
-  src: /images/gallery-19.jpg
+  src: /images/gallery-04.jpeg
   alt: Amstel Gospel Choir live — Amstel Gospel Choir
 order: 4
 categories:
-  - Concerten
+- Concerten
+visible: true
