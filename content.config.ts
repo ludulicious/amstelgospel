@@ -259,6 +259,8 @@ export default defineContentConfig({
           privacyLink: z.string(),
           formSubmit: z.string(),
           formSuccess: z.string(),
+          formSuccessTitle: z.string(),
+          formSendAnother: z.string(),
           formSendError: z.string(),
           formVerificationError: z.string(),
           draftTitle: z.string(),

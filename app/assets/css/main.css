@@ -744,7 +744,7 @@ dd {
   font-size: 48px;
   margin: 0 0 var(--space-5);
 }
-.contact-form > p {
+.contact-form-content > p {
   max-width: 60ch;
   margin-bottom: var(--space-8);
 }
@@ -1780,4 +1780,29 @@ dd {
 }
 .event-copy .event-schedule {
   font-size: 14px;
+}
+
+.form-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+.form-confirmation-icon {
+  width: 3rem;
+  height: 3rem;
+}
+.form-confirmation p {
+  max-width: 42rem;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+.form-actions > :last-child:not(:first-child) {
+  margin-left: auto;
 }
