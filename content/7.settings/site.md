@@ -28,7 +28,7 @@ copy:
   questionLink: 'Stel een vraag'
   eventPrivateLabel: 'Besloten optreden'
   eventPublicLabel: 'Amstel Gospel Choir live'
-  formTitle: 'Vertel het ons.'
+  formTitle: 'Vertel het ons'
   formIntro: 'Vul je bericht in. We nemen zo snel mogelijk contact met je op.'
   privacyLink: 'Lees over je privacy'
   formSubmit: 'Verstuur mijn bericht'
@@ -67,7 +67,7 @@ copy:
   previousPhotoLabel: 'Vorige foto'
   nextPhotoLabel: 'Volgende foto'
   photosAllLabel: 'Alles'
-  videosTitle: 'Hoor ons gaan.'
+  videosTitle: 'Beleef het moment'
   videosSubtitle: 'Gospel, pop & soul'
   youtubeNotice: 'Speel een video af om YouTube te laden. Je maakt dan verbinding met YouTube.'
   videosFilterLabel: "Filter video's"
