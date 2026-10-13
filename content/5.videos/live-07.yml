@@ -3,7 +3,6 @@ youtubeId: 46ZEN9PtWks
 image:
   src: /images/gallery-08.jpg
   alt: Amstel Gospel Choir live — Amstel Gospel Choir
-order: 8
+order: 7
 categories:
-- Concerten
-visible: false
+  - Concerten

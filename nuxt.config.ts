@@ -73,6 +73,7 @@ export default defineNuxtConfig({
       scan: true,
       icons: [
         'lucide:shield',
+        'lucide:circle-check',
         'lucide:instagram',
         'lucide:facebook',
         'lucide:circle-help',

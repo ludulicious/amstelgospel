@@ -38,8 +38,27 @@ const turnstileToken = ref('')
 const honeypot = ref('')
 const turnstile = useTemplateRef<{ reset: () => void }>('turnstile')
 const sending = ref(false)
-const sent = ref(false)
+// Local visual preview only; never enabled in a production build.
+const sent = ref(import.meta.dev && useRoute().query.formPreview === 'success')
 const error = ref('')
+const confirmation = useTemplateRef<HTMLElement>('confirmation')
+const formSection = useTemplateRef<HTMLElement>('formSection')
+async function sendAnother() {
+  state.name = ''
+  state.email = ''
+  state.phone = ''
+  state.message = ''
+  state.consent = false
+  state.subject = 'primary'
+  honeypot.value = ''
+  error.value = ''
+  turnstileToken.value = ''
+  sent.value = false
+  await nextTick()
+  formSection.value
+    ?.querySelector<HTMLInputElement>('input:not([type=hidden])')
+    ?.focus()
+}
 watch(
   () => state.subject,
   () => {
@@ -69,11 +88,8 @@ async function submit(event: FormSubmitEvent<FormData>) {
       },
     })
     sent.value = true
-    state.name = ''
-    state.email = ''
-    state.phone = ''
-    state.message = ''
-    state.consent = false
+    await nextTick()
+    confirmation.value?.focus()
   } catch {
     error.value = copy.formSendError
   } finally {
@@ -84,87 +100,116 @@ async function submit(event: FormSubmitEvent<FormData>) {
 }
 </script>
 <template>
-  <section class="contact-form" :aria-labelledby="`contact-title-${purpose}`">
-    <h2 :id="`contact-title-${purpose}`">{{ copy.formTitle }}</h2>
-    <p>{{ copy.formIntro }}</p>
-    <UForm
-      :schema="schema"
-      :state="state"
-      novalidate
-      class="form-fields"
-      @submit="submit"
+  <section
+    ref="formSection"
+    class="contact-form"
+    :aria-labelledby="
+      sent ? `contact-success-${purpose}` : `contact-title-${purpose}`
+    "
+  >
+    <div
+      v-if="sent"
+      ref="confirmation"
+      class="form-confirmation"
+      role="status"
+      tabindex="-1"
     >
-      <div class="form-row">
-        <UFormField name="name" :label="copy.nameLabel" required
-          ><UInput
-            v-model="state.name"
-            autocomplete="name"
-            size="xl" /></UFormField
-        ><UFormField name="email" :label="copy.emailLabel" required
-          ><UInput
-            v-model="state.email"
-            type="email"
-            autocomplete="email"
-            size="xl"
-        /></UFormField>
-      </div>
-      <div class="form-row">
-        <UFormField name="phone" :label="copy.phoneLabel"
-          ><UInput
-            v-model="state.phone"
-            type="tel"
-            autocomplete="tel"
-            size="xl" /></UFormField
-        ><UFormField name="subject" :label="copy.subjectLabel"
-          ><USelect
-            v-model="state.subject"
-            :items="subjects"
-            :disabled="sending"
-            size="xl"
-        /></UFormField>
-      </div>
-      <UFormField
-        name="message"
-        :label="copy.messageLabel"
-        :description="
-          purpose === 'booking' ? copy.bookingMessageHint : copy.joinMessageHint
-        "
-        required
-        ><UTextarea v-model="state.message" :rows="5" autoresize size="xl"
-      /></UFormField>
-      <UFormField name="consent"
-        ><UCheckbox
-          v-model="state.consent"
-          :label="copy.consentLabel"
-        /><NuxtLink to="/privacy" class="privacy-link">{{
-          copy.privacyLink
-        }}</NuxtLink></UFormField
-      >
-      <div hidden aria-hidden="true">
-        <label
-          >Website<input
-            v-model="honeypot"
-            name="website"
-            tabindex="-1"
-            autocomplete="off"
-        /></label>
-      </div>
-      <ContactTurnstile
-        v-if="config.public.turnstileSiteKey"
-        :action="purpose"
-        ref="turnstile"
-        v-model="turnstileToken"
+      <UIcon
+        name="i-lucide-circle-check"
+        class="form-confirmation-icon"
+        aria-hidden="true"
       />
-      <p v-if="error" role="alert">{{ error }}</p>
-      <p v-if="sent" role="status">{{ copy.formSuccess }}</p>
-      <UButton
-        :loading="sending"
-        :disabled="sending || !config.public.turnstileSiteKey"
-        type="submit"
-        class="button button-ink"
-        trailing-icon="i-lucide-arrow-right"
-        >{{ copy.formSubmit }}</UButton
+      <h2 :id="`contact-success-${purpose}`">{{ copy.formSuccessTitle }}</h2>
+      <p>{{ copy.formSuccess }}</p>
+      <UButton type="button" class="button button-ink" @click="sendAnother">{{
+        copy.formSendAnother
+      }}</UButton>
+    </div>
+    <div v-else class="contact-form-content">
+      <h2 :id="`contact-title-${purpose}`">{{ copy.formTitle }}</h2>
+      <p>{{ copy.formIntro }}</p>
+      <UForm
+        :schema="schema"
+        :state="state"
+        novalidate
+        class="form-fields"
+        @submit="submit"
       >
-    </UForm>
+        <div class="form-row">
+          <UFormField name="name" :label="copy.nameLabel" required
+            ><UInput
+              v-model="state.name"
+              autocomplete="name"
+              size="xl" /></UFormField
+          ><UFormField name="email" :label="copy.emailLabel" required
+            ><UInput
+              v-model="state.email"
+              type="email"
+              autocomplete="email"
+              size="xl"
+          /></UFormField>
+        </div>
+        <div class="form-row">
+          <UFormField name="phone" :label="copy.phoneLabel"
+            ><UInput
+              v-model="state.phone"
+              type="tel"
+              autocomplete="tel"
+              size="xl" /></UFormField
+          ><UFormField name="subject" :label="copy.subjectLabel"
+            ><USelect
+              v-model="state.subject"
+              :items="subjects"
+              :disabled="sending"
+              size="xl"
+          /></UFormField>
+        </div>
+        <UFormField
+          name="message"
+          :label="copy.messageLabel"
+          :description="
+            purpose === 'booking'
+              ? copy.bookingMessageHint
+              : copy.joinMessageHint
+          "
+          required
+          ><UTextarea v-model="state.message" :rows="5" autoresize size="xl"
+        /></UFormField>
+        <UFormField name="consent"
+          ><UCheckbox
+            v-model="state.consent"
+            :label="copy.consentLabel"
+          /><NuxtLink to="/privacy" class="privacy-link">{{
+            copy.privacyLink
+          }}</NuxtLink></UFormField
+        >
+        <div hidden aria-hidden="true">
+          <label
+            >Website<input
+              v-model="honeypot"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+          /></label>
+        </div>
+        <p v-if="error" role="alert">{{ error }}</p>
+        <div class="form-actions">
+          <UButton
+            :loading="sending"
+            :disabled="sending || !config.public.turnstileSiteKey"
+            type="submit"
+            class="button button-ink"
+            trailing-icon="i-lucide-arrow-right"
+            >{{ copy.formSubmit }}</UButton
+          >
+          <ContactTurnstile
+            v-if="config.public.turnstileSiteKey"
+            :action="purpose"
+            ref="turnstile"
+            v-model="turnstileToken"
+          />
+        </div>
+      </UForm>
+    </div>
   </section>
 </template>
