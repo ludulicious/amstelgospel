@@ -3,6 +3,7 @@ youtubeId: akz7f4MFwtU
 image:
   src: /images/gallery-13.jpg
   alt: Kerstconcert 2025 — Amstel Gospel Choir
-order: 3
+order: 4
 categories:
-  - Concerten
+- Concerten
+visible: false

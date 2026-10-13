@@ -6,7 +6,7 @@ schedule:
   time: '14.00'
 location: Zonnehuis
 city: Amstelveen
-access: public
+access: private
 ticketStatus: ''
 image:
   src: /images/gallery-01.jpg
