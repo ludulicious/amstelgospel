@@ -5,5 +5,4 @@ image:
   alt: Amstel Gospel Choir live — Amstel Gospel Choir
 order: 7
 categories:
-- Concerten
-visible: false
+  - Concerten

@@ -19,11 +19,12 @@ image:
 video:
   src: https://www.youtube-nocookie.com/embed/8BetgX2Dhu8?rel=0
 ---
-## A Season of Kindness
+
+## A Season of Kindness.
 
 De kerstconcerten van Amstel Gospel Choir komen terug naar de Urbanuskerk in Amstelveen. Zet **18 en 19 december 2026** alvast in je agenda.
 
-- **Vrijdag 18 december:** avondconcert om 20.00 uur
-- **Zaterdag 19 december:** matinee om 14.00 uur en avondconcert om 20.00 uur
+- **Vrijdag 18 december:** avondconcert om 20.00 uur.
+- **Zaterdag 19 december:** matinee om 14.00 uur en avondconcert om 20.00 uur.
 
 De kaartverkoop is gestart. Bestel nu je tickets via de knop op deze pagina. Volg ons ook op [Instagram](https://instagram.com/amstelgospelchoir) en [Facebook](https://www.facebook.com/amstelgospelchoir/) voor nieuws over de concerten.
