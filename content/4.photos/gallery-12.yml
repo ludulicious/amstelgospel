@@ -1,8 +1,12 @@
-title: Amstel Gospel Choir live
+title: Amstel Gospel Choir live (foto R. Hoefsloot)
 order: 13
 image:
   src: /images/gallery-12.jpg
   alt: Amstel Gospel Choir live — Amstel Gospel Choir
 categories:
-  - Concerten
+- Concerten
 credit: Roeland Hoefsloot
+visible: true
+thumbnail:
+  src: /images/gallery-12-thumbnail-845b3c22d09d4937.jpg
+  alt: Amstel Gospel Choir live — Amstel Gospel Choir

@@ -1,8 +1,12 @@
-title: Kerstconcert 2025
+title: Kerstconcert 2025 (foto H. Kaaks)
 order: 28
 image:
   src: /images/gallery-25.jpg
   alt: Kerstconcert 2025 — Amstel Gospel Choir
 categories:
-  - Concerten
+- Concerten
 credit: HJ Kaaks Photography
+visible: true
+thumbnail:
+  src: /images/gallery-25-thumbnail-2fc31415f1de3832.jpg
+  alt: Kerstconcert 2025 — Amstel Gospel Choir

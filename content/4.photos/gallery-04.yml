@@ -1,8 +1,12 @@
-title: Amstel Gospel Choir live
+title: Amstel Gospel Choir live opname
 order: 5
 image:
   src: /images/gallery-04.jpeg
-  alt: Amstel Gospel Choir live — Amstel Gospel Choir
+  alt: Amstel Gospel Choir
 categories:
-  - Concerten
+- Concerten
 credit: ''
+visible: true
+thumbnail:
+  src: /images/gallery-04-thumbnail-c284542a85d49130.jpeg
+  alt: Amstel Gospel Choir

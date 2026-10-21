@@ -1,8 +1,12 @@
-title: Nemo Amsterdam
+title: Nemo Amsterdam 2025
 order: 24
 image:
   src: /images/gallery-22.jpeg
   alt: Nemo Amsterdam — Amstel Gospel Choir
 categories:
-  - Samen
+- Samen
 credit: ''
+visible: true
+thumbnail:
+  src: /images/gallery-22-thumbnail-215553de45a3c8c4.jpeg
+  alt: Nemo Amsterdam — Amstel Gospel Choir
