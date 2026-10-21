@@ -1,8 +1,12 @@
-title: Amstel Gospel Choir live
+title: Amstel Gospel Choir kerstconcert 2019
 order: 9
 image:
   src: /images/gallery-08.jpg
   alt: Amstel Gospel Choir live — Amstel Gospel Choir
 categories:
-  - Concerten
+- Concerten
 credit: Roeland Hoefsloot
+visible: true
+thumbnail:
+  src: /images/gallery-08-thumbnail-5518499c14b61a00.jpg
+  alt: Amstel Gospel Choir live — Amstel Gospel Choir
