@@ -1,2 +1,5 @@
 title: Events
 icon: i-lucide-calendar-days
+studio:
+  linkFields:
+    - ticketUrl

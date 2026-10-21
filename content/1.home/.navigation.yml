@@ -3,3 +3,12 @@ icon: i-lucide-house
 studio:
   view: list
   previewUrl: /
+  linkFields:
+    - items.*.to
+    - action.to
+    - hero.primary.to
+    - hero.secondary.to
+    - agenda.link.to
+    - about.link.to
+    - join.link.to
+    - concert.link.to

@@ -1,5 +1,6 @@
-
 studio:
   libraries:
     images: 4.photos
     videos: 5.videos
+  linkFields:
+    - action.to
