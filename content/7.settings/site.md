@@ -1,12 +1,12 @@
 ---
 title: Site instellingen
 name: Amstel Gospel Choir
-tagline: Maakt van je evenement een belevenis
+tagline: Maak van je evenement een belevenis
 email: amstelgospelchoir@gmail.com
 phone: 06 30 93 60 61
 phoneLink: '+31630936061'
 contactName: Corine Dijst
-footerTitle: Maakt van je evenement een belevenis
+footerTitle: Maak van je evenement een belevenis
 footerText: Wil je ons boeken, heb je een vraag, een idee of zin om mee te zingen? We horen graag van je.
 copy:
   bookingEyebrow: 'Even overleggen?'
