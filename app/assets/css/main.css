@@ -338,13 +338,11 @@ p {
 }
 .intro-photo {
   position: relative;
-  transform: rotate(-3deg);
   margin-inline: var(--space-4);
 }
 .intro-photo img {
   width: 100%;
   aspect-ratio: 1.25;
-  border: 10px solid var(--color-pink);
 }
 .intro-copy :is(h1, h2) {
   margin: var(--space-4) 0 var(--space-6);
@@ -1470,11 +1468,11 @@ dd {
 @keyframes photo-entrance {
   from {
     opacity: 0.25;
-    transform: translateY(22px) rotate(-3deg);
+    transform: translateY(22px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) rotate(-3deg);
+    transform: translateY(0);
   }
 }
 @media (max-width: 600px) {
