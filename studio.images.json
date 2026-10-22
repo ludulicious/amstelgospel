@@ -1,0 +1,7 @@
+{
+  "sizes": [
+    { "value": "compact", "label": "Compact" },
+    { "value": "normal", "label": "Normaal" },
+    { "value": "wide", "label": "Breed" }
+  ]
+}

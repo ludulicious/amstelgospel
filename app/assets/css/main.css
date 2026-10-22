@@ -1811,3 +1811,30 @@ dd {
 .form-actions > :last-child:not(:first-child) {
   margin-left: auto;
 }
+
+/* Markdown image formats: Studio stores names, this website defines dimensions. */
+.prose-content .prose-image {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin-inline: auto;
+}
+.prose-content .prose-image[data-size='compact'] {
+  max-width: 360px;
+}
+.prose-content .prose-image[data-size='normal'] {
+  max-width: 520px;
+}
+.prose-content .prose-image[data-size='wide'] {
+  max-width: 100%;
+}
+.prose-content .prose-image[data-align='center'] {
+  margin-inline: auto;
+}
+.prose-content .prose-image[data-align='left'] {
+  margin-left: 0;
+}
+.prose-content .prose-image[data-align='right'] {
+  margin-right: 0;
+}

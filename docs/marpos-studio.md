@@ -100,3 +100,11 @@ Voor een volgende pagina: voeg de gewenste `studio.blocks` toe, declareer eventu
 **Home** heeft tabs voor **Concert**, **Introductie**, **Muziekstrook**, **Over het koor**, **Agenda**, **Meezingen**, **Zichtbaarheid** en **Animaties**. De bijbehorende velden staan per sectie bij elkaar. Introductie bevat ook de foto, knoppen, fotolabels en stickertekst. Meezingen bevat de decoratieve woorden. Details bevat de paginatitel en omschrijving voor zoekmachines.
 
 De tab **Concert** bevat de concertpromotie, met velden en een Markdowneditor in dezelfde tab. Via **Home → Zichtbaarheid → concert** toon of verberg je deze sectie.
+
+## Markdown-afbeeldingen
+
+Studio biedt drie breedtemodi: **Default**, **Format** en **Custom width**. Er is steeds één actief: de standaard heeft geen breedteattribuut, een formaat gebruikt bijvoorbeeld `![Het koor](/images/gallery-10.jpg){size="compact"}`, een aangepaste breedte gebruikt `{width="50%"}` of `{width="360px"}`. Wisselen verwijdert de vorige breedte-instelling; uitlijning, alt-tekst en andere attributen blijven behouden.
+
+`studio.images.json` bepaalt de beschikbare formaatnamen en labels in Studio. De website definieert de afmetingen in `app/assets/css/main.css` via `.prose-image[data-size='compact']` enzovoort. Standaard en `normal` zijn maximaal 520 px breed, `compact` 360 px en `wide` de tekstbreedte. Alle afbeeldingen passen binnen het scherm en behouden hun verhouding. Een onbekend formaat gebruikt de standaard; bij handmatig ingevoerde conflicterende attributen krijgt een geldige aangepaste breedte voorrang. De Studio-editor toont de afbeelding; controleer de exacte websiteafmetingen in de paginavoorvertoning.
+
+Zonder `size` of geldige `width` wordt expliciet `normal` gebruikt: 100% van de beschikbare breedte, met een maximum van 520 px. Links, midden en rechts uitlijnen worden ondersteund, net als alt-tekst, titel en een klikbare afbeelding. Aangepaste breedtes worden begrensd op de tekstbreedte; de beeldverhouding blijft behouden.
