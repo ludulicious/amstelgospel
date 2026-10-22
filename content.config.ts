@@ -206,7 +206,7 @@ export default defineContentConfig({
         visible: z.boolean().default(true),
         categories: z.array(z.string().trim().min(1)).default([]),
         youtubeId: z.string().regex(/^[A-Za-z0-9_-]{11}$/),
-        image,
+        image: image.optional(),
       }),
     }),
     faq: defineCollection({

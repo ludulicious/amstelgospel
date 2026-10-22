@@ -57,6 +57,7 @@ watch(category, () => {
           @click="active = video.youtubeId"
         >
           <NuxtImg
+            v-if="video.image?.src"
             format="webp"
             fit="inside"
             sizes="xs:100vw sm:50vw md:50vw lg:50vw xl:50vw"
@@ -66,7 +67,18 @@ watch(category, () => {
             loading="lazy"
             width="800"
             height="533"
-          /><span class="play-circle"><UIcon name="i-lucide-play" /></span>
+          />
+          <img
+            v-else
+            class="youtube-thumbnail"
+            :src="`https://i.ytimg.com/vi/${video.youtubeId}/hqdefault.jpg`"
+            :alt="video.title"
+            loading="lazy"
+            referrerpolicy="no-referrer"
+            width="480"
+            height="360"
+          />
+          <span class="play-circle"><UIcon name="i-lucide-play" /></span>
         </button>
         <p>{{ video.title }}</p>
       </div>

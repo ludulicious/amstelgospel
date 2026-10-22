@@ -61,7 +61,7 @@ Maak elk item als een afzonderlijk document in zijn collectie. Het veld `order` 
 
 Voeg categorieën rechtstreeks toe aan het veld `categories` in **Photos** of **Videos**. Dit is een lijst met vrij in te vullen namen, bijvoorbeeld `Concerten` en `Repetities`; elk item kan meerdere categorieën hebben. Gebruik dezelfde naam om items samen te groeperen. De website maakt de filterknoppen automatisch uit de gebruikte namen, in volgorde van hun eerste voorkomen. Een lege lijst toont het item alleen bij **Alles**. Er is geen aparte categoriecollectie.
 
-Een video gebruikt het elf tekens lange YouTube-ID, niet de complete URL. Afbeeldingen en alt-teksten blijven via de media-velden aanpasbaar.
+Een video gebruikt het elf tekens lange YouTube-ID, niet de complete URL. De voorbeeldfoto is optioneel; zonder eigen foto wordt automatisch de YouTube-thumbnail geladen. Afbeeldingen en alt-teksten blijven via de media-velden aanpasbaar.
 
 Bij een FAQ-document is `title` de vraag en `content` het antwoord. Kies bij `category` uit **Inhuren**, **Meezingen**, **Optredens** en **Algemeen**. Met `visible` bepaal je of een vraag op de website verschijnt. De algemene FAQ-pagina toont alle zichtbare vragen met categorieknoppen. De boekingspagina toont alleen **Inhuren**; de meezingenpagina alleen **Meezingen**.
 
@@ -100,3 +100,11 @@ Voor een volgende pagina: voeg de gewenste `studio.blocks` toe, declareer eventu
 **Home** heeft tabs voor **Concert**, **Introductie**, **Muziekstrook**, **Over het koor**, **Agenda**, **Meezingen**, **Zichtbaarheid** en **Animaties**. De bijbehorende velden staan per sectie bij elkaar. Introductie bevat ook de foto, knoppen, fotolabels en stickertekst. Meezingen bevat de decoratieve woorden. Details bevat de paginatitel en omschrijving voor zoekmachines.
 
 De tab **Concert** bevat de concertpromotie, met velden en een Markdowneditor in dezelfde tab. Via **Home → Zichtbaarheid → concert** toon of verberg je deze sectie.
+
+## Markdown-afbeeldingen
+
+Studio biedt drie breedtemodi: **Default**, **Format** en **Custom width**. Er is steeds één actief: de standaard heeft geen breedteattribuut, een formaat gebruikt bijvoorbeeld `![Het koor](/images/gallery-10.jpg){size="compact"}`, een aangepaste breedte gebruikt `{width="50%"}` of `{width="360px"}`. Wisselen verwijdert de vorige breedte-instelling; uitlijning, alt-tekst en andere attributen blijven behouden.
+
+`studio.images.json` bepaalt de beschikbare formaatnamen en labels in Studio. De website definieert de afmetingen in `app/assets/css/main.css` via `.prose-image[data-size='compact']` enzovoort. Standaard en `normal` zijn maximaal 520 px breed, `compact` 360 px en `wide` de tekstbreedte. Alle afbeeldingen passen binnen het scherm en behouden hun verhouding. Een onbekend formaat gebruikt de standaard; bij handmatig ingevoerde conflicterende attributen krijgt een geldige aangepaste breedte voorrang. De Studio-editor toont de afbeelding; controleer de exacte websiteafmetingen in de paginavoorvertoning.
+
+Zonder `size` of geldige `width` wordt expliciet `normal` gebruikt: 100% van de beschikbare breedte, met een maximum van 520 px. Links, midden en rechts uitlijnen worden ondersteund, net als alt-tekst, titel en een klikbare afbeelding. Aangepaste breedtes worden begrensd op de tekstbreedte; de beeldverhouding blijft behouden.
