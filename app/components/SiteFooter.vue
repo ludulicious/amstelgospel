@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
+const { settingsOpen } = useAnalyticsConsent()
 const { copy } = await useInterfaceCopy()
 const { data: site } = await useChoir()
 const { data: menu } = await useMainMenu()
@@ -54,6 +55,13 @@ const action = computed(() => menu.value?.action)
           <UIcon v-if="item.icon" :name="item.icon" aria-hidden="true" />
           {{ item.label }}
         </NuxtLink>
+        <button
+          type="button"
+          class="footer-menu-link"
+          @click="settingsOpen = true"
+        >
+          {{ copy.cookieSettingsLabel }}
+        </button>
       </nav>
       <span class="copyright">{{
         formatCopy(copy.copyrightText, { year: new Date().getFullYear() })

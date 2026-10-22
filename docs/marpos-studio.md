@@ -77,6 +77,8 @@ node /pad/naar/marpos-studio/scripts/inspect-project.mjs /pad/naar/amstelgospelc
 
 Een automatische inspectie bevestigt het contentcontract; de uiteindelijke GitHub-verbinding wordt in jouw Marpos Studio-account gemaakt.
 
+De cookiebanner is te wijzigen via **Pages → Settings → Site → copy**: `cookieTitle`, `cookieText`, `cookieAcceptLabel`, `cookieRejectLabel`, `cookiePrivacyLabel` en `cookieSettingsLabel`. De privacytekst staat onder **Pages → Information → Privacy**.
+
 Gedeelde paginacopy (boekingszijblok, galerijen, agenda, formulieren en navigatielabels) staat in `content/7.settings/site.md`. Laat placeholders zoals `{count}`, `{minimum}` en `{phone}` intact.
 
 ## Steun ons bewerken

@@ -16,5 +16,6 @@ useHead({
     <NuxtRouteAnnouncer />
     <main id="main"><NuxtPage /></main>
     <SiteFooter v-if="showSiteChrome" />
+    <CookieConsent />
   </UApp>
 </template>
