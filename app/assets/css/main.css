@@ -857,6 +857,8 @@ dd {
   display: block;
   position: relative;
   width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--color-lavender);
   cursor: pointer;
 }
 .video-item img,
@@ -864,6 +866,9 @@ dd {
   width: 100%;
   aspect-ratio: 16/9;
   border: 0;
+}
+.video-item .youtube-thumbnail {
+  object-fit: cover;
 }
 .video-item p {
   font-size: 13px;

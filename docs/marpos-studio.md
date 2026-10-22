@@ -61,7 +61,7 @@ Maak elk item als een afzonderlijk document in zijn collectie. Het veld `order` 
 
 Voeg categorieën rechtstreeks toe aan het veld `categories` in **Photos** of **Videos**. Dit is een lijst met vrij in te vullen namen, bijvoorbeeld `Concerten` en `Repetities`; elk item kan meerdere categorieën hebben. Gebruik dezelfde naam om items samen te groeperen. De website maakt de filterknoppen automatisch uit de gebruikte namen, in volgorde van hun eerste voorkomen. Een lege lijst toont het item alleen bij **Alles**. Er is geen aparte categoriecollectie.
 
-Een video gebruikt het elf tekens lange YouTube-ID, niet de complete URL. Afbeeldingen en alt-teksten blijven via de media-velden aanpasbaar.
+Een video gebruikt het elf tekens lange YouTube-ID, niet de complete URL. De voorbeeldfoto is optioneel; zonder eigen foto wordt automatisch de YouTube-thumbnail geladen. Afbeeldingen en alt-teksten blijven via de media-velden aanpasbaar.
 
 Bij een FAQ-document is `title` de vraag en `content` het antwoord. Kies bij `category` uit **Inhuren**, **Meezingen**, **Optredens** en **Algemeen**. Met `visible` bepaal je of een vraag op de website verschijnt. De algemene FAQ-pagina toont alle zichtbare vragen met categorieknoppen. De boekingspagina toont alleen **Inhuren**; de meezingenpagina alleen **Meezingen**.
 
