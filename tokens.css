@@ -4,6 +4,7 @@
   --color-ink: oklch(25% 0.045 310);
   --color-muted: oklch(45% 0.035 310);
   --color-accent: oklch(80% 0.135 85);
+  --color-info-box: #d5c5e1;
   --color-gold-light: oklch(93% 0.075 88);
   --color-gold-deep: oklch(70% 0.125 78);
   --color-gold-dust: oklch(80% 0.135 85 / 0.22);
