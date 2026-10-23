@@ -18,6 +18,7 @@ declare global {
           callback: (token: string) => void
           'expired-callback'?: () => void
           'error-callback'?: () => void
+          'timeout-callback'?: () => void
           theme?: 'light' | 'dark' | 'auto'
         },
       ) => string
@@ -82,6 +83,9 @@ function renderWidget() {
       model.value = ''
     },
     'error-callback': () => {
+      model.value = ''
+    },
+    'timeout-callback': () => {
       model.value = ''
     },
   })
