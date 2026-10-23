@@ -2,7 +2,7 @@
 const { copy } = await useInterfaceCopy()
 import { z } from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
-import { ageGroups, voiceParts } from '../../shared/contact'
+import { ageGroups, voiceParts } from '#shared/contact'
 const props = withDefaults(
   defineProps<{ purpose?: 'booking' | 'join' | 'donate' }>(),
   { purpose: 'booking' },
