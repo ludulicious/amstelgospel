@@ -21,6 +21,9 @@ const valid = {
   name: 'Visitor',
   email: 'visitor@example.com',
   phone: '',
+  choirExperience: 'yes',
+  voicePart: 'Alt',
+  ageGroup: '31-40',
   subject: 'Aanvraag',
   message: 'Een bericht voor het koor.',
   consent: true,
@@ -100,6 +103,63 @@ test('invalid input, missing consent, spam and failed CAPTCHA never send email',
   const { handler, calls } = endpoint({}, false)
   await assert.rejects(handler(valid), { statusCode: 400 })
   assert.equal(calls.length, 1)
+})
+test('joining requires choir experience and a valid voice part before sending', async () => {
+  for (const patch of [
+    { choirExperience: undefined },
+    { voicePart: undefined },
+    { choirExperience: 'maybe' },
+    { voicePart: 'Invalid' },
+    { ageGroup: undefined },
+    { ageGroup: 'Invalid' },
+  ]) {
+    const { handler, calls } = endpoint()
+    await assert.rejects(handler({ ...valid, purpose: 'join', ...patch }), {
+      statusCode: 400,
+    })
+    assert.equal(calls.length, 0)
+  }
+})
+test('joining emails include every supported voice part and both experience answers', async () => {
+  for (const voicePart of shared.voiceParts) {
+    for (const choirExperience of ['yes', 'no']) {
+      const { handler, calls } = endpoint()
+      await handler({ ...valid, purpose: 'join', voicePart, choirExperience })
+      assert.ok(calls[1].options.body.text.includes(`Stempartij: ${voicePart}`))
+      assert.ok(
+        calls[1].options.body.text.includes(
+          `Koorervaring: ${choirExperience === 'yes' ? 'Ja' : 'Nee'}`,
+        ),
+      )
+    }
+  }
+})
+test('other forms do not require or include the joining fields', async () => {
+  for (const purpose of ['booking', 'donate']) {
+    const { handler, calls } = endpoint()
+    await handler({
+      ...valid,
+      purpose,
+      choirExperience: undefined,
+      voicePart: undefined,
+      ageGroup: undefined,
+    })
+    assert.equal(calls[1].options.body.text.includes('Koorervaring:'), false)
+    assert.equal(calls[1].options.body.text.includes('Stempartij:'), false)
+    assert.equal(
+      calls[1].options.body.text.includes('Leeftijdscategorie:'),
+      false,
+    )
+  }
+})
+test('joining emails include every supported age group', async () => {
+  for (const ageGroup of shared.ageGroups) {
+    const { handler, calls } = endpoint()
+    await handler({ ...valid, purpose: 'join', ageGroup })
+    assert.ok(
+      calls[1].options.body.text.includes(`Leeftijdscategorie: ${ageGroup}`),
+    )
+  }
 })
 test('missing secret or recipients fail closed', async () => {
   for (const patch of [

@@ -758,6 +758,15 @@ dd {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-6);
 }
+.form-join-column {
+  display: grid;
+  gap: var(--space-6);
+}
+.form-radio-control {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
 .privacy-link {
   display: inline-block;
   text-decoration: underline;

@@ -2,19 +2,48 @@
 const { copy } = await useInterfaceCopy()
 import { z } from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
+import { ageGroups, voiceParts } from '../../shared/contact'
 const props = withDefaults(
   defineProps<{ purpose?: 'booking' | 'join' | 'donate' }>(),
   { purpose: 'booking' },
 )
 
-const schema = z.object({
-  name: z.string().trim().min(2, copy.nameError),
-  email: z.email(copy.emailError),
-  phone: z.string(),
-  subject: z.enum(['primary', 'other']),
-  message: z.string().trim().min(10, copy.messageError),
-  consent: z.boolean().refine(Boolean, copy.consentError),
-})
+const schema = z
+  .object({
+    name: z.string().trim().min(2, copy.nameError),
+    email: z.email(copy.emailError),
+    phone: z.string(),
+    choirExperience: z.enum(['yes', 'no']).optional(),
+    voicePart: z.enum(voiceParts).optional(),
+    ageGroup: z.enum(ageGroups).optional(),
+    subject: z.enum(['primary', 'other']),
+    message: z.string().trim().min(10, copy.messageError),
+    consent: z.boolean().refine(Boolean, copy.consentError),
+  })
+  .superRefine((data, ctx) => {
+    if (props.purpose !== 'join') return
+    if (!data.choirExperience) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['choirExperience'],
+        message: copy.choirExperienceError,
+      })
+    }
+    if (!data.voicePart) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['voicePart'],
+        message: copy.voicePartError,
+      })
+    }
+    if (!data.ageGroup) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['ageGroup'],
+        message: copy.ageGroupError,
+      })
+    }
+  })
 type FormData = z.output<typeof schema>
 const primarySubject = {
   booking: copy.bookingSubject,
@@ -29,6 +58,9 @@ const state = reactive({
   name: '',
   email: '',
   phone: '',
+  choirExperience: undefined as FormData['choirExperience'],
+  voicePart: undefined as FormData['voicePart'],
+  ageGroup: undefined as FormData['ageGroup'],
   subject: 'primary' as FormData['subject'],
   message: '',
   consent: false,
@@ -47,6 +79,9 @@ async function sendAnother() {
   state.name = ''
   state.email = ''
   state.phone = ''
+  state.choirExperience = undefined
+  state.voicePart = undefined
+  state.ageGroup = undefined
   state.message = ''
   state.consent = false
   state.subject = 'primary'
@@ -163,6 +198,46 @@ async function submit(event: FormSubmitEvent<FormData>) {
               :disabled="sending"
               size="xl"
           /></UFormField>
+        </div>
+        <div v-if="purpose === 'join'" class="form-row">
+          <div class="form-join-column">
+            <UFormField name="voicePart" :label="copy.voicePartLabel" required>
+              <USelect
+                v-model="state.voicePart"
+                :items="[...voiceParts]"
+                :placeholder="copy.voicePartPlaceholder"
+                :disabled="sending"
+                size="xl"
+              />
+            </UFormField>
+            <UFormField
+              name="choirExperience"
+              :label="copy.choirExperienceLabel"
+              required
+            >
+              <div class="form-radio-control">
+                <URadioGroup
+                  v-model="state.choirExperience"
+                  :items="[
+                    { value: 'yes', label: copy.choirExperienceYes },
+                    { value: 'no', label: copy.choirExperienceNo },
+                  ]"
+                  orientation="horizontal"
+                  :disabled="sending"
+                  size="xl"
+                />
+              </div>
+            </UFormField>
+          </div>
+          <UFormField name="ageGroup" :label="copy.ageGroupLabel" required>
+            <USelect
+              v-model="state.ageGroup"
+              :items="[...ageGroups]"
+              :placeholder="copy.ageGroupPlaceholder"
+              :disabled="sending"
+              size="xl"
+            />
+          </UFormField>
         </div>
         <UFormField
           name="message"

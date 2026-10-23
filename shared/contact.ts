@@ -1,21 +1,44 @@
 import { z } from 'zod'
 
-export const contactSchema = z.object({
-  purpose: z.enum(['booking', 'join', 'donate']),
-  name: z.string().trim().min(2).max(200),
-  email: z.email().max(254),
-  phone: z.string().trim().max(100),
-  subject: z
-    .string()
-    .trim()
-    .min(1)
-    .max(200)
-    .regex(/^[^\r\n]+$/),
-  message: z.string().trim().min(10).max(10000),
-  consent: z.literal(true),
-  honeypot: z.string().max(1000).default(''),
-  turnstileToken: z.string().min(1).max(2048),
-})
+export const ageGroups = ['16-30', '31-40', '41-50', '51-60', '61+'] as const
+
+export const voiceParts = [
+  'Alt',
+  'Sopraan mezzo',
+  'Sopraan hoog',
+  'Tenor',
+  'Bas',
+  'Onbekend',
+] as const
+
+export const contactSchema = z
+  .object({
+    purpose: z.enum(['booking', 'join', 'donate']),
+    name: z.string().trim().min(2).max(200),
+    email: z.email().max(254),
+    phone: z.string().trim().max(100),
+    choirExperience: z.enum(['yes', 'no']).optional(),
+    voicePart: z.enum(voiceParts).optional(),
+    ageGroup: z.enum(ageGroups).optional(),
+    subject: z
+      .string()
+      .trim()
+      .min(1)
+      .max(200)
+      .regex(/^[^\r\n]+$/),
+    message: z.string().trim().min(10).max(10000),
+    consent: z.literal(true),
+    honeypot: z.string().max(1000).default(''),
+    turnstileToken: z.string().min(1).max(2048),
+  })
+  .superRefine((data, ctx) => {
+    if (data.purpose !== 'join') return
+    for (const field of ['choirExperience', 'voicePart', 'ageGroup'] as const) {
+      if (!data[field]) {
+        ctx.addIssue({ code: 'custom', path: [field], message: 'Required' })
+      }
+    }
+  })
 
 export const contactLabels = {
   booking: 'Boeking',
@@ -40,6 +63,13 @@ export function contactEmail(
       `Naam: ${data.name}`,
       `E-mail: ${data.email}`,
       `Telefoon: ${data.phone || 'Niet opgegeven'}`,
+      ...(data.purpose === 'join'
+        ? [
+            `Koorervaring: ${data.choirExperience === 'yes' ? 'Ja' : 'Nee'}`,
+            `Stempartij: ${data.voicePart}`,
+            `Leeftijdscategorie: ${data.ageGroup}`,
+          ]
+        : []),
       `Onderwerp: ${data.subject}`,
       'Toestemming om deze aanvraag te beantwoorden: ja',
       '',
