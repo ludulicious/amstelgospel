@@ -1,5 +1,14 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
 
+const pageName = z
+  .string()
+  .trim()
+  .optional()
+  .editor({ label: 'Name' })
+  .describe(
+    'Internal name shown in Studio; does not change the website heading or URL',
+  )
+
 const image = z.object({
   src: z.string().editor({ input: 'media' }),
   alt: z.string(),
@@ -29,6 +38,7 @@ export default defineContentConfig({
       type: 'page',
       source: '1.home/1.home.md',
       schema: z.object({
+        pageName,
         title: z.string(),
         description: z.string(),
         visibility: z.object({
@@ -82,6 +92,7 @@ export default defineContentConfig({
       type: 'page',
       source: '1.home/2.menu.md',
       schema: z.object({
+        pageName,
         title: z.string(),
         action: link.extend({
           icon: z.string().min(1),
@@ -110,6 +121,7 @@ export default defineContentConfig({
         prefix: '/',
       },
       schema: z.object({
+        pageName,
         title: z.string(),
         tagline: z.string().optional(),
         description: z.string(),
@@ -156,6 +168,7 @@ export default defineContentConfig({
       type: 'page',
       source: { include: '3.events/*.md', prefix: '/agenda' },
       schema: z.object({
+        pageName,
         title: z.string(),
         tagline: z.string().optional(),
         description: z.string(),
@@ -188,6 +201,7 @@ export default defineContentConfig({
       type: 'data',
       source: { include: '4.photos/*.yml', exclude: ['**/.navigation.yml'] },
       schema: z.object({
+        pageName,
         title: z.string().min(1),
         visible: z.boolean().default(true),
         order: sortOrder,
@@ -201,6 +215,7 @@ export default defineContentConfig({
       type: 'data',
       source: { include: '5.videos/*.yml', exclude: ['**/.navigation.yml'] },
       schema: z.object({
+        pageName,
         title: z.string().min(1),
         order: sortOrder,
         visible: z.boolean().default(true),
@@ -213,6 +228,7 @@ export default defineContentConfig({
       type: 'data',
       source: { include: '6.faq/*.yml', exclude: ['**/.navigation.yml'] },
       schema: z.object({
+        pageName,
         title: z.string().min(1),
         content: z.string().min(1),
         order: sortOrder,
@@ -226,6 +242,7 @@ export default defineContentConfig({
       type: 'page',
       source: '7.settings/site.md',
       schema: z.object({
+        pageName,
         name: z.string(),
         tagline: z.string(),
         email: z.string(),

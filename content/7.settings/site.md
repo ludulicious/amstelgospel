@@ -1,4 +1,5 @@
 ---
+pageName: "Site-instellingen"
 title: Site instellingen
 name: Amstel Gospel Choir
 tagline: Maak van je evenement een belevenis
