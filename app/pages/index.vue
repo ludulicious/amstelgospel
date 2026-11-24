@@ -121,15 +121,9 @@ useSeoMeta({
           :class="{ 'concert-photo-play': aftermovie }"
           @click="aftermovie && (aftermovieOpen = true)"
         >
-          <NuxtImg
-            format="webp"
-            fit="inside"
-            sizes="xs:100vw sm:50vw md:50vw lg:50vw xl:50vw"
-            densities="1x 2x"
-            :src="concert.image.src"
-            :alt="concert.image.alt"
-            width="800"
-            height="534"
+          <PlacementPhoto
+            :photo="concert.image"
+            default-display="Vul het kader"
             fetchpriority="high"
           />
           <span v-if="aftermovie" class="concert-play-icon" aria-hidden="true">
@@ -195,15 +189,9 @@ useSeoMeta({
       </div>
       <div class="hero-photo-wrap" data-reveal>
         <div class="hero-photo">
-          <NuxtImg
-            format="webp"
-            fit="inside"
-            sizes="xs:100vw sm:50vw md:50vw lg:50vw xl:50vw"
-            densities="1x 2x"
-            :src="home.hero.src"
-            :alt="home.hero.alt"
-            width="800"
-            height="533"
+          <PlacementPhoto
+            :photo="home.hero"
+            default-display="Vul het kader"
             :loading="showConcert ? 'lazy' : 'eager'"
             :fetchpriority="showConcert ? 'auto' : 'high'"
           />
@@ -230,15 +218,9 @@ useSeoMeta({
     </div>
     <section v-if="home.visibility.about" class="intro-section page-pad">
       <div class="intro-photo" data-reveal>
-        <NuxtImg
-          format="webp"
-          fit="inside"
-          sizes="xs:100vw sm:50vw md:50vw lg:50vw xl:50vw"
-          densities="1x 2x"
-          :src="home.about.image.src"
-          :alt="home.about.image.alt"
-          width="800"
-          height="533"
+        <PlacementPhoto
+          :photo="home.about.image"
+          default-display="Vul het kader"
           loading="lazy"
         />
       </div>

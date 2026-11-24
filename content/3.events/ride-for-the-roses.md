@@ -12,6 +12,7 @@ ticketStatus: Dit optreden heeft plaatsgevonden.
 image:
   src: /images/gallery-32.jpg
   alt: Een openluchtoptreden van Amstel Gospel Choir
+  weergave: Hele foto
 ---
 
 Op 27 september 2026 traden we op bij **Ride for the Roses** in Aalsmeer, tussen circa 09.00 en 11.00 uur, aan de Dreef 7 naast zwembad De Waterlelie.

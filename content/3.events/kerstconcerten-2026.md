@@ -17,6 +17,7 @@ ticketUrl: https://www.ticketkantoor.nl/shop/amstelgospel
 image:
   src: /images/gallery-10.jpg
   alt: De feestelijke sfeer van een kerstconcert van Amstel Gospel Choir
+  weergave: Hele foto
 video:
   src: https://www.youtube-nocookie.com/embed/8BetgX2Dhu8?rel=0
 ---

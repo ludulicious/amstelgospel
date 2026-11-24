@@ -302,6 +302,11 @@ p {
   overflow: clip;
   background: var(--color-ink);
 }
+.hero-photo:has(.photo-whole) {
+  height: auto;
+  aspect-ratio: auto;
+  background: transparent;
+}
 .hero-photo img {
   height: 100%;
   width: 100%;

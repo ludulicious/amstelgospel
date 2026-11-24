@@ -83,16 +83,9 @@ const schedule = computed(() => groupedEventSchedule(event.value?.schedule))
         playsinline
         preload="metadata"
       />
-      <NuxtImg
-        format="webp"
-        fit="inside"
-        sizes="xs:100vw sm:50vw md:50vw lg:50vw xl:50vw"
-        densities="1x 2x"
+      <PlacementPhoto
         v-else-if="event.image?.src"
-        :src="event.image.src"
-        :alt="event.image.alt"
-        width="800"
-        height="533"
+        :photo="event.image"
         fetchpriority="high"
       />
     </header>

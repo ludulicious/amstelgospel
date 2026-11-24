@@ -12,5 +12,6 @@ ticketStatus: ''
 image:
   src: /images/gallery-01.jpg
   alt: Amstel Gospel Choir mooie zangeres
+  weergave: Hele foto
 ---
 Een besloten optreden, mede mogelijk gemaakt door de Vriendenloterij

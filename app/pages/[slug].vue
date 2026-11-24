@@ -66,20 +66,13 @@ useSeoMeta({
         <h1>{{ page.tagline || page.title }}</h1>
         <p class="inner-description">{{ page.description }}</p>
       </div>
-      <NuxtImg
-        format="webp"
-        fit="inside"
-        sizes="xs:100vw sm:50vw md:50vw lg:50vw xl:50vw"
-        densities="1x 2x"
+      <PlacementPhoto
         v-if="
           ['story', 'join', 'booking', 'support', 'agenda', 'media'].includes(
             page.layout || 'story',
           )
         "
-        :src="page.image.src"
-        :alt="page.image.alt"
-        width="800"
-        height="533"
+        :photo="page.image"
         fetchpriority="high"
       />
     </header>

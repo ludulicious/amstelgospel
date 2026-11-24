@@ -13,6 +13,30 @@ const image = z.object({
   src: z.string().editor({ input: 'media' }),
   alt: z.string(),
 })
+const photoDisplay = z.enum(['Hele foto', 'Vul het kader'])
+const photoFocus = z
+  .enum([
+    'Midden',
+    'Linksboven',
+    'Boven',
+    'Rechtsboven',
+    'Links',
+    'Rechts',
+    'Linksonder',
+    'Onder',
+    'Rechtsonder',
+  ])
+  .optional()
+  .describe('Bij Vul het kader blijft dit deel van de foto in beeld.')
+
+const headerPhoto = image.extend({
+  weergave: photoDisplay.default('Hele foto'),
+  focuspunt: photoFocus,
+})
+const homePhoto = headerPhoto.extend({
+  weergave: photoDisplay.default('Vul het kader'),
+})
+
 const link = z.object({ label: z.string(), to: z.string() })
 const studioBlocks = z
   .object({
@@ -53,11 +77,11 @@ export default defineContentConfig({
           title: z.string().min(1),
           description: z.string(),
           eyebrow: z.string(),
-          image,
+          image: homePhoto,
           link,
         }),
         studio: studioBlocks,
-        hero: image.extend({
+        hero: homePhoto.extend({
           eyebrow: z.string(),
           headline: z.array(z.string()),
           intro: z.string(),
@@ -77,7 +101,7 @@ export default defineContentConfig({
           eyebrow: z.string(),
           title: z.string(),
           text: z.string(),
-          image,
+          image: homePhoto,
           link,
         }),
         join: z.object({
@@ -126,7 +150,7 @@ export default defineContentConfig({
         tagline: z.string().optional(),
         description: z.string(),
         eyebrow: z.string(),
-        image,
+        image: headerPhoto,
         action: link.optional(),
         studio: studioBlocks,
         information: z
@@ -189,7 +213,7 @@ export default defineContentConfig({
         access: z.enum(['public', 'private']),
         ticketStatus: z.string(),
         ticketUrl: z.string().optional(),
-        image: image.optional(),
+        image: headerPhoto.optional(),
         video: z
           .object({
             src: z.string().editor({ input: 'media' }),
