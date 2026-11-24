@@ -11,4 +11,5 @@ ticketStatus: ''
 image:
   src: /images/image00046-f442b37dd0916082.jpeg
   alt: Het koor treedt op
+  weergave: Hele foto
 ---

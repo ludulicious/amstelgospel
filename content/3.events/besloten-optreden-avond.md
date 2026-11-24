@@ -11,4 +11,5 @@ ticketStatus: Besloten
 image:
   alt: het koor treedt op, swingt
   src: /images/image00047-a92a064386da6ef4.jpeg
+  weergave: Hele foto
 ---

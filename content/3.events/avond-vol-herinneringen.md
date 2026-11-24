@@ -12,6 +12,7 @@ ticketStatus: Besloten optreden
 image:
   src: /images/gallery-32.jpg
   alt: Amstel Gospel Choir tijdens een optreden
+  weergave: Hele foto
 ---
 
 Op 2 oktober zingen we bij **Inloophuis 't Anker in Mijdrecht**, tijdens een avond vol herinneringen. Dit is een besloten optreden.
